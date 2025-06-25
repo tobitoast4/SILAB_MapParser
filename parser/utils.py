@@ -31,6 +31,26 @@ def vector_from_angle(angle_rad, distance=1.0):
     dy = np.sin(angle_rad) * distance
     return np.array([dx, dy])
 
+
+def angle_from_vector(vector, degrees=True):
+    """
+    Calculate the angle (in degrees) of a 2D vector from the positive x-axis.
+
+    Parameters:
+        vector: tuple or array-like (vx, vy)
+
+    Returns:
+        float: angle in degrees, in range (-180, 180]
+    """
+    vx, vy = vector
+    angle_rad = np.arctan2(vy, vx)  # returns angle in radians
+    if degrees:
+        angle_deg = np.degrees(angle_rad)
+        return angle_deg
+    else:
+        return angle_rad
+
+
 def translate_perpendicular(point, direction_vector, distance):
     """
     Translates a 2D point by a given distance perpendicular to a direction vector.
@@ -57,3 +77,45 @@ def translate_perpendicular(point, direction_vector, distance):
     # Translate the point
     new_point = point + distance * perp
     return new_point
+
+
+def translate(point, offset):
+    """
+    Translate a 2D point by a given offset.
+
+    Parameters:
+        point: tuple (x, y)
+        offset: tuple (dx, dy)
+
+    Returns:
+        tuple: translated point
+    """
+    return (point[0] + offset[0], point[1] + offset[1])
+
+
+def rotate_around(point, center, angle_degrees):
+    """
+    Rotate a 2D point around another point.
+
+    Parameters:
+        point: tuple (x, y)
+        center: tuple (cx, cy)
+        angle_degrees: float, rotation angle in degrees (counter-clockwise)
+
+    Returns:
+        tuple: rotated point
+    """
+    angle_rad = np.radians(angle_degrees)
+    x, y = point
+    cx, cy = center
+
+    # Translate point back to origin:
+    x -= cx
+    y -= cy
+
+    # Rotate point
+    x_new = x * np.cos(angle_rad) - y * np.sin(angle_rad)
+    y_new = x * np.sin(angle_rad) + y * np.cos(angle_rad)
+
+    # Translate point back
+    return (x_new + cx, y_new + cy)
