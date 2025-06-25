@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+import utils
+
 NUM_POINTS = 100
 SHOW_LABELS = True
 
@@ -11,6 +13,27 @@ class StraightAED:
         self.y0 = y0 
         self.x1 = x1 
         self.y1 = y1
+
+    def translate(self, offset):
+        """Translate all points of the Straight by a given offset.
+
+        Parameters:
+            offset: tuple (dx, dy)
+        """
+        self.x0, self.y0 = utils.translate((self.x0, self.y0), offset)
+        self.x1, self.y1 = utils.translate((self.x1, self.y1), offset)
+        return self
+
+    def rotate(self, center, angle_deg):
+        """Rotate all points of the Straight around a given center by given angle.
+
+        Parameters:
+            center: tuple (x, y)
+            angle_deg: angle in degrees
+        """
+        self.x0, self.y0 = utils.rotate_around((self.x0, self.y0), center, angle_deg)
+        self.x1, self.y1 = utils.rotate_around((self.x1, self.y1), center, angle_deg)
+        return self
 
     def draw(self, ax=None):
         line, = ax.plot([self.x0, self.x1], [self.y0, self.y1], color='blue')
@@ -30,6 +53,29 @@ class CircularArcAED:
         # Normalize angles to ensure correct sweep direction
         if self.angle1 < self.angle0:
             self.angle1 += 2 * np.pi
+
+    def translate(self, offset):
+        """Translate all points of the Straight by a given offset.
+
+        Parameters:
+            offset: tuple (dx, dy)
+        """
+        
+        self.x0, self.y0 = utils.translate((self.x0, self.y0), offset)
+        return self
+
+    def rotate(self, center, angle_deg):
+        """Rotate all points of the Straight around a given center by given angle.
+
+        Parameters:
+            center: tuple (x, y)
+            angle_deg: angle in degrees
+        """
+        self.x0, self.y0 = utils.rotate_around((self.x0, self.y0), center, angle_deg)
+        angle_rad = utils.convert_angle(angle_deg, to="radians")
+        self.angle0 += angle_rad
+        self.angle1 += angle_rad
+        return self
 
     def draw(self, ax=None):
         # Generate the points (we dont need them now for drwaing, but later)
@@ -57,6 +103,30 @@ class HermiteSplineAED:
         self.x1 = x1
         self.y1 = y1
         self.angle1 = angle1
+
+    def translate(self, offset):
+        """Translate all points of the Straight by a given offset.
+
+        Parameters:
+            offset: tuple (dx, dy)
+        """
+        self.x0, self.y0 = utils.translate((self.x0, self.y0), offset)
+        self.x1, self.y1 = utils.translate((self.x1, self.y1), offset)
+        return self
+
+    def rotate(self, center, angle_deg):
+        """Rotate all points of the Straight around a given center by given angle.
+
+        Parameters:
+            center: tuple (x, y)
+            angle_deg: angle in degrees
+        """
+        self.x0, self.y0 = utils.rotate_around((self.x0, self.y0), center, angle_deg)
+        self.x1, self.y1 = utils.rotate_around((self.x1, self.y1), center, angle_deg)
+        angle_rad = utils.convert_angle(angle_deg, to="radians")
+        self.angle0 += angle_rad
+        self.angle1 += angle_rad
+        return self
 
     def draw(self, ax=None):
         tangent_scale=1  # we assume this to be 1 (TODO: maybe clarify if this is correct)

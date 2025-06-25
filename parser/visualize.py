@@ -54,10 +54,7 @@ for i, element in enumerate(elements):
         x0, y0 = translate_perpendicular([x0, y0], vec, d0)
         x1, y1 = translate_perpendicular([x1, y1], vec, d1)
 
-        if TRANSLATION_ROTATION:
-            x0, y0 = rotate_around(translate((x0, y0), offset), (x_t, y_t), angle_deg)
-            x1, y1 = rotate_around(translate((x1, y1), offset), (x_t, y_t), angle_deg)
-        line = StraightAED(x0, y0, x1, y1, name).draw(ax=ax)
+        line = StraightAED(x0, y0, x1, y1, name).translate(offset).rotate((x_t, y_t), angle_deg).draw(ax=ax)
 
     elif element["type"] == "Bezier":
         x0 = v["x0"]; y0 = v["y0"]; x1 = v["x1"]; y1 = v["y1"]
@@ -68,12 +65,7 @@ for i, element in enumerate(elements):
         # vec1 = vector_from_angle(angle1)
         # x0, y0 = translate_perpendicular([x0, y0], vec0, d0)
         # x1, y1 = translate_perpendicular([x1, y1], vec1, d1)
-        if TRANSLATION_ROTATION:
-            x0, y0 = rotate_around(translate((x0, y0), offset), (x_t, y_t), angle_deg)
-            x1, y1 = rotate_around(translate((x1, y1), offset), (x_t, y_t), angle_deg)
-            angle0 += angle_rad
-            angle1 += angle_rad
-        line = HermiteSplineAED(x0, y0, angle0, x1, y1, angle1, name).draw(ax=ax)
+        line = HermiteSplineAED(x0, y0, angle0, x1, y1, angle1, name).translate(offset).rotate((x_t, y_t), angle_deg).draw(ax=ax)
 
     elif element["type"] == "CircularArc":
         x0 = v["x0"]; y0 = v["y0"]; angle0 = v["Angle0"]; angle1 = v["Angle1"]; r = v["r"]
@@ -81,12 +73,7 @@ for i, element in enumerate(elements):
 
         if d0 != d1:
             raise ValueError("This should not happen, I guess??")
-
-        if TRANSLATION_ROTATION:
-            x0, y0 = rotate_around(translate((x0, y0), offset), (x_t, y_t), angle_deg)
-            angle0 += angle_rad
-            angle1 += angle_rad
-        line = CircularArcAED(x0, y0, angle0, angle1, r + d0).draw(ax=ax)
+        line = CircularArcAED(x0, y0, angle0, angle1, r + d0).translate(offset).rotate((x_t, y_t), angle_deg).draw(ax=ax)
     lines.append(line)
 
 
