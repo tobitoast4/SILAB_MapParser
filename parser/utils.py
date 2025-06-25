@@ -1,4 +1,25 @@
 import numpy as np
+import math
+
+
+def convert_angle(value, to='degrees'):
+    """
+    Convert an angle between radians and degrees.
+
+    Parameters:
+        value (float): The angle value to convert.
+        to (str): Either 'degrees' or 'radians'.
+
+    Returns:
+        float: Converted angle.
+    """
+    if to == 'degrees':
+        return math.degrees(value)
+    elif to == 'radians':
+        return math.radians(value)
+    else:
+        raise ValueError("Parameter 'to' must be either 'degrees' or 'radians'.")
+
 
 def vector_from_points(p1, p2):
     """
