@@ -1,6 +1,11 @@
 import numpy as np
-import math
 import matplotlib.pyplot as plt
+import math
+
+try:
+    from draw import utils
+except:
+    import utils
 
 NUM_POINTS = 100
 SHOW_LABELS = True
@@ -25,8 +30,28 @@ class StraightCourse:
         self.y0 = y0
         self.x1 = None
         self.y1 = None
-        self.angle0 = angle
-        self.angle1 = angle
+        self.angle0 = angle  # in degrees
+        self.angle1 = angle  # in degrees
+
+    def translate(self, offset):
+        """Translate all points of the Straight by a given offset.
+
+        Parameters:
+            offset: tuple (dx, dy)
+        """
+        self.x0, self.y0 = utils.translate((self.x0, self.y0), offset)
+        return self
+
+    def rotate(self, center, angle_deg):
+        """Rotate all points of the Straight around a given center by given angle.
+
+        Parameters:
+            center: tuple (x, y)
+            angle_deg: angle in degrees
+        """
+        self.angle0 += angle_deg
+        self.angle1 += angle_deg
+        return self
 
     def calculate(self, ax=None):
         """
@@ -77,6 +102,28 @@ class CurveCourse:
         self.y1 = None
         self.angle0 = angle0      # in degrees
         self.angle1 = None        # in degrees
+
+    def translate(self, offset):
+        """Translate all points of the Straight by a given offset.
+
+        Parameters:
+            offset: tuple (dx, dy)
+        """
+        
+        self.x0, self.y0 = utils.translate((self.x0, self.y0), offset)
+        return self
+
+    def rotate(self, center, angle_deg):
+        """Rotate all points of the Straight around a given center by given angle.
+
+        Parameters:
+            center: tuple (x, y)
+            angle_deg: angle in degrees
+        """
+        self.x0, self.y0 = utils.rotate_around((self.x0, self.y0), center, angle_deg)
+        self.angle0 += angle_deg
+        self.angle1 += angle_deg
+        return self
 
     def calculate(self, ax=None):
         """

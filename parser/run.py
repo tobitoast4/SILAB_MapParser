@@ -101,8 +101,8 @@ def create_connection(objX, anchorX, objY, anchorY):
         value = 0
     else:  # "End"
         value = 1
-    if getattr(objX, attribute_name) != None:
-        print("TODO: This might be worth noting")
+    # if getattr(objX, attribute_name) != None:
+    #     print("TODO: This might be worth noting")
     setattr(objX, attribute_name, (objY, value))
 
 for connection in map_content["Connections"]:
@@ -143,6 +143,7 @@ for connection in map_content["CustomConnections"]:
     angle_difference = angle_t - angle_c
     for other_obj in obj1.parent.parts:
         other_obj.translate(offset).rotate((x_t, y_t), angle_difference)
+        other_obj.calculate()  # re-calculate attributes
 
 
 ## Visualize

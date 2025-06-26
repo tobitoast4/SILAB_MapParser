@@ -52,6 +52,8 @@ class StraightAED:
         """
         self.x0, self.y0 = utils.rotate_around((self.x0, self.y0), center, angle_deg)
         self.x1, self.y1 = utils.rotate_around((self.x1, self.y1), center, angle_deg)
+        self.angle0 += angle_deg
+        self.angle1 += angle_deg
         return self
 
     def calculate(self, ax=None):
