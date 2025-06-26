@@ -60,7 +60,10 @@ for element in map_content["elements"]:
 
             if c_type == "Straight":
                 x0 = v["x0"]; y0 = v["y0"]; x1 = v["x1"]; y1 = v["y1"]
-                # d0 = v["DistToRef0"]; d1 = v["DistToRef1"]  # apparently for Straight, this is the correct offset
+                d0 = v["DistToRef0"]; d1 = v["DistToRef1"]  # apparently for Straight, this is the correct offset
+                vector = utils.vector_from_points((x0, y0), (x1, y1))
+                x0, y0 = utils.translate_perpendicular((x0, y0), vector, d0)
+                x1, y1 = utils.translate_perpendicular((x1, y1), vector, d1)
                 line = StraightAED(x0, y0, x1, y1, id=c_id, parent=area)
                 line.calculate()
                 objects.append(line)
