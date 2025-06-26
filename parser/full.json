@@ -4,20 +4,20 @@
             "type": "Course",
             "id": "c1",
             "elements": [
-                ["cp1", "Straight", 100],
-                ["cp2", "Bend", 157, 100],
-                ["cp3", "Bend", 157, -100],
-                ["cp4", "Straight", 300],
-                ["cp5", "Bend",  1500, -500],
-                ["cp6", "Bend",  340, -200],
-                ["cp7", "Straight", 3000]
+                ["cp1", "Straight", 10],
+                ["cp2", "Bend", 15, 10],
+                ["cp3", "Bend", 17, -10],
+                ["cp4", "Straight", 30],
+                ["cp5", "Bend",  150, -50],
+                ["cp6", "Bend",  34, -20],
+                ["cp7", "Straight", 30]
             ]
         },
         {
             "type": "Course",
             "id": "c2",
             "elements": [
-                ["cp8", "Straight", 200],
+                ["cp8", "Straight", 100],
                 ["cp9", "Bend", 157, 200]  
             ]
         },
@@ -1006,5 +1006,8 @@
 		["lc11.l53.End", "lc18.l70.Begin"],
 		["lc17.l62.Begin", "lc11.l69.End"],
 		["lc11.l69.End", "lc18.l70.Begin"]	
+    ],
+    "CustomConnections": [
+		["cp7.End", "lc18.l70.Begin"]	
     ]
 }

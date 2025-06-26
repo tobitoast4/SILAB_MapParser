@@ -2,6 +2,9 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
+NUM_POINTS = 100
+
+
 
 class Course:
     def __init__(self, id=""):
@@ -13,8 +16,8 @@ class StraightCourse:
     def __init__(self, length, x0, y0, angle, id="", parent=None):
         self.id = id
         self.parent = parent
-        self.connectionStart = None
-        self.connectionEnd = None
+        self.connection0 = None
+        self.connection1 = None
         self.length = length
         self.x0 = x0
         self.y0 = y0
@@ -36,26 +39,24 @@ class StraightCourse:
         Returns:
             (end_x, end_y): End coordinates
         """
-        if ax is None:
-            ax = plt.gca()
-        
         angle_rad = np.radians(self.angle0)
         
         self.x1 = self.x0 + self.length * np.cos(angle_rad)
         self.y1 = self.y0 + self.length * np.sin(angle_rad)
         
         if ax:
-            ax.plot([self.x0, self.x1], [self.y0, self.y1], color='green')
-        
-        return self.x1, self.y1
+            line, = ax.plot([self.x0, self.x1], [self.y0, self.y1], color='green')
+            return line
+        else:
+            return self.x1, self.y1
 
 
 class CurveCourse:
     def __init__(self, length, radius, x0=0, y0=0, angle0=0, id="", parent=None):
         self.id = id
         self.parent = parent
-        self.connectionStart = None
-        self.connectionEnd = None
+        self.connection0 = None
+        self.connection1 = None
         self.length = length
         self.radius = radius
         if radius < 0:
@@ -83,8 +84,7 @@ class CurveCourse:
             arc_angle_rad = -arc_angle_rad
 
         # Generate theta values
-        num_points = 10
-        thetas = np.linspace(0, arc_angle_rad, num_points)
+        thetas = np.linspace(0, arc_angle_rad, NUM_POINTS)
 
         # Start angle in radians
         start_angle_rad = np.radians(self.angle0)
@@ -100,15 +100,18 @@ class CurveCourse:
             arc_x = cx + abs(r) * np.cos(thetas - (np.pi/2 - start_angle_rad))
             arc_y = cy + abs(r) * np.sin(thetas - (np.pi/2 - start_angle_rad))
 
-        if ax:
-            ax.plot(cx, cy, marker='o', color='red', markersize=1)
-            ax.plot(arc_x, arc_y, color='red')
 
         # Return final position and angle
         self.angle1 = self.angle0 + np.degrees(arc_angle_rad)
         self.x1 = arc_x[-1]
         self.y1 = arc_y[-1]
-        return self.x1, self.y1, self.angle1
+
+        if ax:
+            ax.plot(cx, cy, marker='o', color='red', markersize=1)
+            line, = ax.plot(arc_x, arc_y, color='red')
+            return line
+        else:
+            return self.x1, self.y1, self.angle1
 
 
 if __name__ == "__main__":

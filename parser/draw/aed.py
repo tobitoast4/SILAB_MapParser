@@ -21,8 +21,8 @@ class StraightAED:
     def __init__(self, x0, y0, x1, y1, id="", parent=None):
         self.id = id 
         self.parent = parent
-        self.connectionStart = None
-        self.connectionEnd = None
+        self.connection0 = None
+        self.connection1 = None
         self.x0 = x0 
         self.y0 = y0 
         self.x1 = x1 
@@ -59,15 +59,15 @@ class StraightAED:
             
             if SHOW_LABELS:
                 ax.text((self.x0+self.x1)//2, (self.y0+self.y1)//2, self.id, color='blue', va='center', fontsize=7)
-        return line
+            return line
     
 
 class CircularArcAED:
     def __init__(self, x0, y0, angle0, angle1, r, id="", parent=None):
         self.id = id 
         self.parent = parent
-        self.connectionStart = None
-        self.connectionEnd = None
+        self.connection0 = None
+        self.connection1 = None
         self.x0 = x0
         self.y0 = y0
         self.x1 = None
@@ -108,6 +108,9 @@ class CircularArcAED:
         arc_x = self.x0 + self.r * np.cos(angles)
         arc_y = self.y0 + self.r * np.sin(angles)
 
+        self.x1 = arc_x[len(arc_x)-1]
+        self.y1 = arc_y[len(arc_y)-1]
+
         # Plot the arc
         if ax:
             line, = ax.plot(arc_x, arc_y, 'b-')
@@ -115,20 +118,18 @@ class CircularArcAED:
                 ax.text(arc_x[len(arc_x)//2], arc_y[len(arc_y)//2], self.id, color='blue', va='center', fontsize=7)
             ax.plot(self.x0, self.y0, 'k+')  # center
         
-        ## Optionally: Plot start and end of circular arc
-        # ax.plot(arc_x[0], arc_y[0], 'go')
-        # ax.plot(arc_x[-1], arc_y[-1], 'ro')
-        self.x1 = arc_x[len(arc_x)-1]
-        self.y1 = arc_y[len(arc_y)-1]
-        return line
+            ## Optionally: Plot start and end of circular arc
+            # ax.plot(arc_x[0], arc_y[0], 'go')
+            # ax.plot(arc_x[-1], arc_y[-1], 'ro')
+            return line
 
 
 class HermiteSplineAED:
     def __init__(self, x0, y0, angle0, x1, y1, angle1, id="", parent=None):
         self.id = id 
         self.parent = parent
-        self.connectionStart = None
-        self.connectionEnd = None
+        self.connection0 = None
+        self.connection1 = None
         self.x0 = x0
         self.y0 = y0
         self.x1 = x1
@@ -202,10 +203,10 @@ class HermiteSplineAED:
             line, = ax.plot(curve[:, 0], curve[:, 1], color='purple')
             if SHOW_LABELS:
                 ax.text(curve[len(curve)//2][0], curve[len(curve)//2][1], self.id, color='purple', va='center', fontsize=7)
-        # ax.plot([x0, x1], [y0, y1], 'ro--', label='Endpoints')
-        # ax.quiver(x0, y0, T0[0], T0[1], angles='xy', scale_units='xy', scale=1, color='green')  # label='Start Tangent'
-        # ax.quiver(x1, y1, T1[0], T1[1], angles='xy', scale_units='xy', scale=1, color='purple') # label='End Tangent'
-        return line
+            # ax.plot([x0, x1], [y0, y1], 'ro--', label='Endpoints')
+            # ax.quiver(x0, y0, T0[0], T0[1], angles='xy', scale_units='xy', scale=1, color='green')  # label='Start Tangent'
+            # ax.quiver(x1, y1, T1[0], T1[1], angles='xy', scale_units='xy', scale=1, color='purple') # label='End Tangent'
+            return line
 
 
 
