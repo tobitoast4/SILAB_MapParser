@@ -23,7 +23,7 @@ class StraightCourse:
         self.angle0 = angle
         self.angle1 = angle
 
-    def draw(self, ax=None):
+    def calculate(self, ax=None):
         """
         Draws a straight line of the given length and direction.
         
@@ -44,7 +44,8 @@ class StraightCourse:
         self.x1 = self.x0 + self.length * np.cos(angle_rad)
         self.y1 = self.y0 + self.length * np.sin(angle_rad)
         
-        ax.plot([self.x0, self.x1], [self.y0, self.y1], color='green')
+        if ax:
+            ax.plot([self.x0, self.x1], [self.y0, self.y1], color='green')
         
         return self.x1, self.y1
 
@@ -68,7 +69,7 @@ class CurveCourse:
         self.angle0 = angle0      # in degrees
         self.angle1 = None        # in degrees
 
-    def draw(self, ax=None):
+    def calculate(self, ax=None):
         """
         Draws a circular arc with a given length and radius.
         - direction: 'right' or 'left'
@@ -98,8 +99,10 @@ class CurveCourse:
             cy = self.y0 + math.sin(np.pi/2 + start_angle_rad) * r
             arc_x = cx + abs(r) * np.cos(thetas - (np.pi/2 - start_angle_rad))
             arc_y = cy + abs(r) * np.sin(thetas - (np.pi/2 - start_angle_rad))
-        ax.plot(cx, cy, marker='o', color='red', markersize=1)
-        ax.plot(arc_x, arc_y, color='red')
+
+        if ax:
+            ax.plot(cx, cy, marker='o', color='red', markersize=1)
+            ax.plot(arc_x, arc_y, color='red')
 
         # Return final position and angle
         self.angle1 = self.angle0 + np.degrees(arc_angle_rad)
@@ -130,13 +133,13 @@ if __name__ == "__main__":
         road_type = road[1]
         if road_type == "Straight":
             length = road[2]
-            x, y = StraightCourse(length, x0=x, y0=y, angle=angle).draw(ax=ax)
+            x, y = StraightCourse(length, x0=x, y0=y, angle=angle).calculate(ax=ax)
             pass
         elif road_type == "Bend":
             length = road[2]
             radius = road[3]
             x, y, angle = CurveCourse(length=length, radius=radius, x0=x, y0=y, 
-                                    angle0=angle).draw(ax=ax)
+                                    angle0=angle).calculate(ax=ax)
             pass
         else:
             raise ValueError("Road type not valid")
