@@ -10,8 +10,9 @@ class Course:
 
 
 class StraightCourse:
-    def __init__(self, length, x0, y0, angle, id=""):
+    def __init__(self, length, x0, y0, angle, id="", parent=None):
         self.id = id
+        self.parent = parent
         self.connectionStart = None
         self.connectionEnd = None
         self.length = length
@@ -49,8 +50,9 @@ class StraightCourse:
 
 
 class CurveCourse:
-    def __init__(self, length, radius, x0=0, y0=0, angle0=0, id=""):
+    def __init__(self, length, radius, x0=0, y0=0, angle0=0, id="", parent=None):
         self.id = id
+        self.parent = parent
         self.connectionStart = None
         self.connectionEnd = None
         self.length = length

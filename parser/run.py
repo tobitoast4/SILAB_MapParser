@@ -15,6 +15,47 @@ with open('parser\elements.json', 'r') as f:
 elements = map_content["elements"]
 
 
+objects = []
+
+# initial settings for Course
+angle = 90
+x = 0
+y = 0
+
+# Create objects
+for element in elements:
+    e_type = element["type"]
+    e_id = element["id"]
+
+    if e_type == "Course":
+        course = Course(e_id)
+        for child in element["elements"]:
+            c_type = child["type"]
+            c_id = child["id"]
+            if road_type == "Straight":
+                length = road[2]
+                x, y = StraightCourse(length, x0=x, y0=y, angle=angle, 
+                                      id=c_id, parent=course)
+            elif road_type == "Bend":
+                length = road[2]
+                radius = road[3]
+                x, y, angle = CurveCourse(length=length, radius=radius, x0=x, y0=y, angle0=angle, 
+                                          id=c_id, parent=course)
+            else:
+                raise ValueError("Road type not valid")
+    elif e_type == "Area2":
+        pass
+    else: 
+        raise ValueError("Type not valid")
+
+
+# Create connections
+
+
+# Transform elements
+
+
+# Visualize
 
 
 

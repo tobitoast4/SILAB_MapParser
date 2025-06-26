@@ -17,8 +17,8 @@
             "type": "Course",
             "id": "c2",
             "elements": [
-                ["cp8", "Straight", 100],
-                ["cp9", "Bend", 157, 100]  
+                ["cp8", "Straight", 200],
+                ["cp9", "Bend", 157, 200]  
             ]
         },
         {

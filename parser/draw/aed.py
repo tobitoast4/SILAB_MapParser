@@ -18,8 +18,9 @@ class Area2:
 
 
 class StraightAED:
-    def __init__(self, x0, y0, x1, y1, id=""):
+    def __init__(self, x0, y0, x1, y1, id="", parent=None):
         self.id = id 
+        self.parent = parent
         self.connectionStart = None
         self.connectionEnd = None
         self.x0 = x0 
@@ -60,8 +61,9 @@ class StraightAED:
         return line
     
 class CircularArcAED:
-    def __init__(self, x0, y0, angle0, angle1, r, id=""):
+    def __init__(self, x0, y0, angle0, angle1, r, id="", parent=None):
         self.id = id 
+        self.parent = parent
         self.connectionStart = None
         self.connectionEnd = None
         self.x0 = x0
@@ -118,8 +120,9 @@ class CircularArcAED:
         return line
 
 class HermiteSplineAED:
-    def __init__(self, x0, y0, angle0, x1, y1, angle1, id=""):
+    def __init__(self, x0, y0, angle0, x1, y1, angle1, id="", parent=None):
         self.id = id 
+        self.parent = parent
         self.connectionStart = None
         self.connectionEnd = None
         self.x0 = x0
