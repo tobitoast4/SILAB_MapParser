@@ -3,7 +3,7 @@ from collections import defaultdict
 from matplotlib.widgets import CheckButtons
 
 from draw.aed import *
-from draw.basic import *
+from draw.course import *
 from parse import *
 from draw import utils
 
@@ -22,7 +22,7 @@ if TRANSLATION_ROTATION:
     ## Perform Translation and Rotation
     # Target point & angle
     angle_t = 90; x_t = 0; y_t = 0
-    x_t, y_t = StraightBasic(100, start_x=x_t, start_y=y_t, angle_deg=angle_t).draw(ax=ax)
+    x_t, y_t = StraightCourse(100, start_x=x_t, start_y=y_t, angle_deg=angle_t).draw(ax=ax)
 
     # Current point & angle (of AED)
     filtered = [e for e in elements if e['name'] == "l49"]

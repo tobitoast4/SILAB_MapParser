@@ -12,8 +12,11 @@ roads = [
     ["Straight", 3000],
 ]
 
-class StraightBasic:
-    def __init__(self, length, start_x, start_y, angle_deg):
+class StraightCourse:
+    def __init__(self, length, start_x, start_y, angle_deg, id=""):
+        self.id = id
+        self.connectionStart = None
+        self.connectionEnd = None
         self.length = length
         self.start_x = start_x
         self.start_y = start_y
@@ -45,8 +48,11 @@ class StraightBasic:
         return end_x, end_y
 
 
-class CurveBasic:
-    def __init__(self, length, radius, start_x=0, start_y=0, start_angle_deg=0):
+class CurveCourse:
+    def __init__(self, length, radius, start_x=0, start_y=0, start_angle_deg=0, id=""):
+        self.id = id
+        self.connectionStart = None
+        self.connectionEnd = None
         self.length = length
         self.radius = radius
         if radius < 0:
@@ -107,12 +113,12 @@ if __name__ == "__main__":
         road_type = road[0]
         if road_type == "Straight":
             length = road[1]
-            x, y = StraightBasic(length, start_x=x, start_y=y, angle_deg=angle).draw(ax=ax)
+            x, y = StraightCourse(length, start_x=x, start_y=y, angle_deg=angle).draw(ax=ax)
             pass
         elif road_type == "Bend":
             length = road[1]
             radius = road[2]
-            x, y, angle = CurveBasic(length=length, radius=radius, start_x=x, start_y=y, 
+            x, y, angle = CurveCourse(length=length, radius=radius, start_x=x, start_y=y, 
                                     start_angle_deg=angle).draw(ax=ax)
             pass
         else:
