@@ -96,37 +96,38 @@ class CurveBasic:
         return arc_x[-1], arc_y[-1], end_angle_deg
 
 
-# fig, ax = plt.subplots()
+if __name__ == "__main__":
+    fig, ax = plt.subplots()
 
-# angle = 90
-# x = 0
-# y = 0
+    angle = 90
+    x = 0
+    y = 0
 
-# for road in roads:
-#     road_type = road[0]
-#     if road_type == "Straight":
-#         length = road[1]
-#         x, y = StraightBasic(length, start_x=x, start_y=y, angle_deg=angle).draw(ax=ax)
-#         pass
-#     elif road_type == "Bend":
-#         length = road[1]
-#         radius = road[2]
-#         x, y, angle = CurveBasic(length=length, radius=radius, start_x=x, start_y=y, 
-#                                  start_angle_deg=angle).draw(ax=ax)
-#         pass
-#     else:
-#         raise ValueError("Road type not valid")
+    for road in roads:
+        road_type = road[0]
+        if road_type == "Straight":
+            length = road[1]
+            x, y = StraightBasic(length, start_x=x, start_y=y, angle_deg=angle).draw(ax=ax)
+            pass
+        elif road_type == "Bend":
+            length = road[1]
+            radius = road[2]
+            x, y, angle = CurveBasic(length=length, radius=radius, start_x=x, start_y=y, 
+                                    start_angle_deg=angle).draw(ax=ax)
+            pass
+        else:
+            raise ValueError("Road type not valid")
 
 
-# ## TEST for seeing one Straight and a laft and right curve
-# # angle = 90; x = 0; y = 0
-# # x, y = draw_straight(100, start_x=x, start_y=y, angle_deg=angle, ax=ax)
-# # draw_curve(length=97, radius=-100, direction="right", start_x=x, start_y=y, start_angle_deg=angle, ax=ax)
-# # draw_curve(length=47, radius=-100, direction="left", start_x=x, start_y=y, start_angle_deg=angle, ax=ax)
+    ## TEST for seeing one Straight and a laft and right curve
+    # angle = 90; x = 0; y = 0
+    # x, y = draw_straight(100, start_x=x, start_y=y, angle_deg=angle, ax=ax)
+    # draw_curve(length=97, radius=-100, direction="right", start_x=x, start_y=y, start_angle_deg=angle, ax=ax)
+    # draw_curve(length=47, radius=-100, direction="left", start_x=x, start_y=y, start_angle_deg=angle, ax=ax)
 
-# # Final formatting
-# ax.set_aspect('equal')
-# ax.grid(True)
-# ax.legend()
-# plt.title("SILAB Map")
-# plt.show()
+    # Final formatting
+    ax.set_aspect('equal')
+    ax.grid(True)
+    ax.legend()
+    plt.title("SILAB Map")
+    plt.show()

@@ -5,7 +5,7 @@ from matplotlib.widgets import CheckButtons
 from draw.aed import *
 from draw.basic import *
 from parse import *
-from utils import *
+from draw import utils
 
 
 with open('./parser/res/kvk_Area2.cfg', 'r') as f:
@@ -15,6 +15,9 @@ parser = Parser()
 tokens = parser.tokenize(raw_text)
 nested_lists = parser.parse_to_nested_lists(tokens)
 elements = parser.get_lane_elements(nested_lists)
+
+with open("elements.json", "w") as json_file:
+    json.dump(elements, json_file, indent=4)
 
 
 fig, ax = plt.subplots()
@@ -31,13 +34,13 @@ if TRANSLATION_ROTATION:
     assert len(filtered) == 1
     el = filtered[0]
     x0 = el["values"]["x0"]; y0 = el["values"]["y0"]; x1 = el["values"]["x1"]; y1 = el["values"]["y1"]
-    angle_c = angle_from_vector(vector_from_points((x1, y1), (x0, y0)), degrees=True)
+    angle_c = utils.angle_from_vector(utils.vector_from_points((x1, y1), (x0, y0)), degrees=True)
     x_c = x1
     y_c = y1
 
     offset = (x_t - x_c, y_t - y_c)
     angle_deg = angle_t - angle_c
-    angle_rad = convert_angle(angle_deg, to='radians')
+    angle_rad = utils.convert_angle(angle_deg, to='radians')
 
 
 names = []
@@ -50,9 +53,9 @@ for i, element in enumerate(elements):
     if element["type"] == "Straight":
         x0 = v["x0"]; y0 = v["y0"]; x1 = v["x1"]; y1 = v["y1"]
         d0 = v["DistToRef0"]; d1 = v["DistToRef1"]  # apparently for Straight, this is the correct offset
-        vec = vector_from_points([x0, y0], [x1, y1])
-        x0, y0 = translate_perpendicular([x0, y0], vec, d0)
-        x1, y1 = translate_perpendicular([x1, y1], vec, d1)
+        vec = utils.vector_from_points([x0, y0], [x1, y1])
+        x0, y0 = utils.translate_perpendicular([x0, y0], vec, d0)
+        x1, y1 = utils.translate_perpendicular([x1, y1], vec, d1)
 
         line = StraightAED(x0, y0, x1, y1, name).translate(offset).rotate((x_t, y_t), angle_deg).draw(ax=ax)
 

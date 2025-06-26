@@ -103,3 +103,16 @@ class Parser:
                         })
                 self.get_lane_elements(element)
         return self.elements
+
+
+if __name__ == "__main__":
+    with open('./parser/res/kvk_Area2.cfg', 'r') as f:
+        raw_text = f.read()
+
+    parser = Parser()
+    tokens = parser.tokenize(raw_text)
+    nested_lists = parser.parse_to_nested_lists(tokens)
+    elements = parser.get_lane_elements(nested_lists)
+
+    with open("./parser/elements.json", "w") as json_file:
+        json.dump(elements, json_file, indent=4)

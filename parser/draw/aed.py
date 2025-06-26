@@ -1,7 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-import utils
+try:
+    from draw import utils
+except:
+    import utils
 
 NUM_POINTS = 100
 SHOW_LABELS = True
@@ -176,42 +179,29 @@ class HermiteSplineAED:
 
 
 
-# fig, ax = plt.subplots()
+if __name__ == "__main__":
+    fig, ax = plt.subplots()
 
-# x0 = -38.0111
-# y0 = 51.1016
-# x1 = -30.1935
-# y1 = 39.8262
-# StraightAED(x0, y0, x1, y1).draw(ax=ax)
+    x0 = -38.0111
+    y0 = 51.1016
+    x1 = -30.1935
+    y1 = 39.8262
+    StraightAED(x0, y0, x1, y1).draw(ax=ax)
 
-# x0 = 1.01226
-# y0 = -5.37267
-# angle0 = 2.82934
-# angle1 = 1.59937
-# r = 18.3512
-# CircularArcAED(x0, y0, angle0, angle1, r).draw(ax=ax)
+    x0 = 1.01226
+    y0 = -5.37267
+    angle0 = 2.82934
+    angle1 = 1.59937
+    r = 18.3512
+    CircularArcAED(x0, y0, angle0, angle1, r).draw(ax=ax)
 
-# x0 = 1.01226
-# y0 = -5.37267
-# Angle0 = -1.52143
-# Angle1 = -2.67153
-# r = 18.3512
-# CircularArcAED(x0, y0, angle0, angle1, r).draw(ax=ax)
-
-# x0 = 1.01226
-# y0 = -5.37267
-# Angle0 = -0.336225
-# Angle1 = -1.52143
-# r = 18.3512
-# CircularArcAED(x0, y0, angle0, angle1, r).draw(ax=ax)
-
-# # Example usage with your data:
-# HermiteSplineAED( x0=0, y0=0, angle0=0, x1=25, y1=25, angle1=3.1415/2).draw(ax=ax)
+    HermiteSplineAED( x0=0, y0=0, angle0=0, x1=25, y1=25, angle1=3.1415/2).draw(ax=ax)
+    HermiteSplineAED( x0=50, y0=50, angle0=0, x1=75, y1=75, angle1=0).draw(ax=ax)
 
 
-# # Final formatting
-# ax.set_aspect('equal')
-# ax.grid(True)
-# ax.legend()
-# plt.title("SILAB Map")
-# plt.show()
+    # Final formatting
+    ax.set_aspect('equal')
+    ax.grid(True)
+    ax.legend()
+    plt.title("SILAB Map")
+    plt.show()
