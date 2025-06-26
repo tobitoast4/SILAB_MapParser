@@ -100,7 +100,7 @@ class Parser:
                             except: pass
                         self.elements.append({
                             "type": element_split[0],
-                            "name": element_split[1],
+                            "id": element_split[1],
                             "parent": last_lane,
                             "values": values_dict
                         })

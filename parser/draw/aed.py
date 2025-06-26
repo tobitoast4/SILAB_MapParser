@@ -18,6 +18,10 @@ class StraightAED:
         self.y0 = y0 
         self.x1 = x1 
         self.y1 = y1
+        v1 = utils.vector_from_points((x0, y0), (x1, y1))
+        angle = utils.angle_from_vector(v1)
+        self.angle0 = angle
+        self.angle1 = angle
 
     def translate(self, offset):
         """Translate all points of the Straight by a given offset.
@@ -54,6 +58,8 @@ class CircularArcAED:
         self.connectionEnd = None
         self.x0 = x0
         self.y0 = y0
+        self.x1 = None
+        self.y1 = None
         self.angle0 = angle0
         self.angle1 = angle1
         self.r = r
@@ -99,6 +105,8 @@ class CircularArcAED:
         ## Optionally: Plot start and end of circular arc
         # ax.plot(arc_x[0], arc_y[0], 'go')
         # ax.plot(arc_x[-1], arc_y[-1], 'ro')
+        self.x1 = arc_x[len(arc_x)-1]
+        self.y1 = arc_y[len(arc_y)-1]
         return line
 
 class HermiteSplineAED:
@@ -108,9 +116,9 @@ class HermiteSplineAED:
         self.connectionEnd = None
         self.x0 = x0
         self.y0 = y0
-        self.angle0 = angle0
         self.x1 = x1
         self.y1 = y1
+        self.angle0 = angle0
         self.angle1 = angle1
 
     def translate(self, offset):

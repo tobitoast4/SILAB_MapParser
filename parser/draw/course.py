@@ -13,14 +13,17 @@ roads = [
 ]
 
 class StraightCourse:
-    def __init__(self, length, start_x, start_y, angle_deg, id=""):
+    def __init__(self, length, x0, y0, angle, id=""):
         self.id = id
         self.connectionStart = None
         self.connectionEnd = None
         self.length = length
-        self.start_x = start_x
-        self.start_y = start_y
-        self.angle_deg = angle_deg
+        self.x0 = x0
+        self.y0 = y0
+        self.x1 = None
+        self.y1 = None
+        self.angle0 = angle
+        self.angle1 = angle
 
     def draw(self, ax=None):
         """
@@ -29,7 +32,7 @@ class StraightCourse:
         Parameters:
             length: Length of the straight segment
             start_x, start_y: Starting coordinates
-            angle_deg: Direction in degrees (0 = right, 90 = up)
+            angle: Direction in degrees (0 = right, 90 = up)
             ax: Matplotlib axis (optional)
         
         Returns:
@@ -38,18 +41,18 @@ class StraightCourse:
         if ax is None:
             ax = plt.gca()
         
-        angle_rad = np.radians(self.angle_deg)
+        angle_rad = np.radians(self.angle0)
         
-        end_x = self.start_x + self.length * np.cos(angle_rad)
-        end_y = self.start_y + self.length * np.sin(angle_rad)
+        self.x1 = self.x0 + self.length * np.cos(angle_rad)
+        self.y1 = self.y0 + self.length * np.sin(angle_rad)
         
-        ax.plot([self.start_x, end_x], [self.start_y, end_y], color='green')
+        ax.plot([self.x0, self.x1], [self.y0, self.y1], color='green')
         
-        return end_x, end_y
+        return self.x1, self.y1
 
 
 class CurveCourse:
-    def __init__(self, length, radius, start_x=0, start_y=0, start_angle_deg=0, id=""):
+    def __init__(self, length, radius, x0=0, y0=0, angle0=0, id=""):
         self.id = id
         self.connectionStart = None
         self.connectionEnd = None
@@ -59,9 +62,12 @@ class CurveCourse:
             self.direction = "left"
         else: 
             self.direction = "right"
-        self.start_x = start_x
-        self.start_y = start_y
-        self.start_angle_deg = start_angle_deg
+        self.x0 = x0
+        self.y0 = y0
+        self.x1 = None
+        self.y1 = None
+        self.angle0 = angle0      # in degrees
+        self.angle1 = None        # in degrees
 
     def draw(self, ax=None):
         """
@@ -81,25 +87,26 @@ class CurveCourse:
         thetas = np.linspace(0, arc_angle_rad, num_points)
 
         # Start angle in radians
-        start_angle_rad = np.radians(self.start_angle_deg)
+        start_angle_rad = np.radians(self.angle0)
 
         if self.direction == "right":
-            cx = self.start_x - math.cos(np.pi/2 + start_angle_rad) * r
-            cy = self.start_y - math.sin(np.pi/2 + start_angle_rad) * r
+            cx = self.x0 - math.cos(np.pi/2 + start_angle_rad) * r
+            cy = self.y0 - math.sin(np.pi/2 + start_angle_rad) * r
             arc_x = cx + abs(r) * np.cos(thetas + start_angle_rad + np.pi/2)
             arc_y = cy + abs(r) * np.sin(thetas + start_angle_rad + np.pi/2)
         else:
-            cx = self.start_x + math.cos(np.pi/2 + start_angle_rad) * r
-            cy = self.start_y + math.sin(np.pi/2 + start_angle_rad) * r
+            cx = self.x0 + math.cos(np.pi/2 + start_angle_rad) * r
+            cy = self.y0 + math.sin(np.pi/2 + start_angle_rad) * r
             arc_x = cx + abs(r) * np.cos(thetas - (np.pi/2 - start_angle_rad))
             arc_y = cy + abs(r) * np.sin(thetas - (np.pi/2 - start_angle_rad))
-        ax.plot(cx, cy, color='red', marker='o', markersize=1)
-
-        ax.plot(arc_x, arc_y)
+        ax.plot(cx, cy, marker='o', color='red', markersize=1)
+        ax.plot(arc_x, arc_y, color='red')
 
         # Return final position and angle
-        end_angle_deg = self.start_angle_deg + np.degrees(arc_angle_rad)
-        return arc_x[-1], arc_y[-1], end_angle_deg
+        self.angle1 = self.angle0 + np.degrees(arc_angle_rad)
+        self.x1 = arc_x[-1]
+        self.y1 = arc_y[-1]
+        return self.x1, self.y1, self.angle1
 
 
 if __name__ == "__main__":
@@ -113,13 +120,13 @@ if __name__ == "__main__":
         road_type = road[0]
         if road_type == "Straight":
             length = road[1]
-            x, y = StraightCourse(length, start_x=x, start_y=y, angle_deg=angle).draw(ax=ax)
+            x, y = StraightCourse(length, x0=x, y0=y, angle=angle).draw(ax=ax)
             pass
         elif road_type == "Bend":
             length = road[1]
             radius = road[2]
-            x, y, angle = CurveCourse(length=length, radius=radius, start_x=x, start_y=y, 
-                                    start_angle_deg=angle).draw(ax=ax)
+            x, y, angle = CurveCourse(length=length, radius=radius, x0=x, y0=y, 
+                                    angle0=angle).draw(ax=ax)
             pass
         else:
             raise ValueError("Road type not valid")

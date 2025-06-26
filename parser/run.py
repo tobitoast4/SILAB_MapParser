@@ -15,6 +15,11 @@ with open('parser\elements.json', 'r') as f:
 elements = map_content["elements"]
 
 
+
+
+
+
+
 fig, ax = plt.subplots()
 
 TRANSLATION_ROTATION = True
@@ -22,7 +27,7 @@ if TRANSLATION_ROTATION:
     ## Perform Translation and Rotation
     # Target point & angle
     angle_t = 90; x_t = 0; y_t = 0
-    x_t, y_t = StraightCourse(100, start_x=x_t, start_y=y_t, angle_deg=angle_t).draw(ax=ax)
+    x_t, y_t = StraightCourse(100, x0=x_t, y0=y_t, angle=angle_t).draw(ax=ax)
 
     # Current point & angle (of AED)
     filtered = [e for e in elements if e['name'] == "l49"]
@@ -39,7 +44,7 @@ if TRANSLATION_ROTATION:
 
 
 names = []
-lines = []
+objects = []
 for i, element in enumerate(elements):
     v = element["values"]
     name = element["name"]
@@ -72,7 +77,7 @@ for i, element in enumerate(elements):
         if d0 != d1:
             raise ValueError("This should not happen, I guess??")
         line = CircularArcAED(x0, y0, angle0, angle1, r + d0).translate(offset).rotate((x_t, y_t), angle_deg).draw(ax=ax)
-    lines.append(line)
+    objects.append(line)
 
 
 # Make lines dynamically hidden / visible
@@ -80,7 +85,7 @@ def toggle_visibility(label):
     for i, name in enumerate(names):
         if name == label:
             break
-    line = lines[i]
+    line = objects[i]
     line.set_visible(not line.get_visible())
     plt.draw()
 
