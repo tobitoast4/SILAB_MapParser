@@ -3,6 +3,8 @@ import math
 import matplotlib.pyplot as plt
 
 NUM_POINTS = 100
+SHOW_LABELS = True
+FONT_SIZE = 9
 
 
 
@@ -46,6 +48,12 @@ class StraightCourse:
         
         if ax:
             line, = ax.plot([self.x0, self.x1], [self.y0, self.y1], color='green')
+            # Optionally: Plot start and end
+            # if self.id == "cp7":
+            #     ax.plot(self.x0, self.y0, marker='o', color='black', markersize=5)
+            #     ax.plot(self.x1, self.y1, marker='x', color='red', markersize=5)
+            if SHOW_LABELS:
+                ax.text((self.x0+self.x1)//2, (self.y0+self.y1)//2, self.id, color='blue', va='center', fontsize=FONT_SIZE)
             return line
         else:
             return self.x1, self.y1
@@ -100,7 +108,6 @@ class CurveCourse:
             arc_x = cx + abs(r) * np.cos(thetas - (np.pi/2 - start_angle_rad))
             arc_y = cy + abs(r) * np.sin(thetas - (np.pi/2 - start_angle_rad))
 
-
         # Return final position and angle
         self.angle1 = self.angle0 + np.degrees(arc_angle_rad)
         self.x1 = arc_x[-1]
@@ -109,6 +116,8 @@ class CurveCourse:
         if ax:
             ax.plot(cx, cy, marker='o', color='red', markersize=1)
             line, = ax.plot(arc_x, arc_y, color='red')
+            if SHOW_LABELS:
+                ax.text(arc_x[len(arc_x)//2], arc_y[len(arc_y)//2], self.id, color='blue', va='center', fontsize=FONT_SIZE)
             return line
         else:
             return self.x1, self.y1, self.angle1

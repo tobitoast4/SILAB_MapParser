@@ -31,12 +31,15 @@ for element in map_content["elements"]:
         for road in element["elements"]:
             c_type = road[1]
             c_id = road[0]
+
             if c_type == "Straight":
                 length = road[2]
                 straight = StraightCourse(length, x0=x, y0=y, angle=angle, 
                                       id=c_id, parent=course)
                 x, y = straight.calculate()
                 objects.append(straight)
+                course.parts.append(straight)
+
             elif c_type == "Bend":
                 length = road[2]
                 radius = road[3]
@@ -44,6 +47,8 @@ for element in map_content["elements"]:
                                           id=c_id, parent=course)
                 x, y, angle = curve.calculate()
                 objects.append(curve)
+                course.parts.append(curve)
+
             else:
                 raise ValueError("Road type not valid")
     elif e_type == "Area2":
@@ -52,12 +57,14 @@ for element in map_content["elements"]:
             c_type = road["type"]
             c_id = road["id"]
             v = road["values"]
+
             if c_type == "Straight":
                 x0 = v["x0"]; y0 = v["y0"]; x1 = v["x1"]; y1 = v["y1"]
-                d0 = v["DistToRef0"]; d1 = v["DistToRef1"]  # apparently for Straight, this is the correct offset
+                # d0 = v["DistToRef0"]; d1 = v["DistToRef1"]  # apparently for Straight, this is the correct offset
                 line = StraightAED(x0, y0, x1, y1, id=c_id, parent=area)
                 line.calculate()
                 objects.append(line)
+                area.parts.append(line)
         
             elif c_type == "Bezier":
                 x0 = v["x0"]; y0 = v["y0"]; x1 = v["x1"]; y1 = v["y1"]
@@ -65,6 +72,7 @@ for element in map_content["elements"]:
                 spline = HermiteSplineAED(x0, y0, angle0, x1, y1, angle1, id=c_id, parent=area)
                 spline.calculate()
                 objects.append(spline)
+                area.parts.append(spline)
 
             elif c_type == "CircularArc":
                 x0 = v["x0"]; y0 = v["y0"]; angle0 = v["Angle0"]; angle1 = v["Angle1"]; r = v["r"]
@@ -75,6 +83,8 @@ for element in map_content["elements"]:
                 arc = CircularArcAED(x0, y0, angle0, angle1, r + d0, id=c_id, parent=area)
                 arc.calculate()
                 objects.append(arc)
+                area.parts.append(arc)
+                
             else:
                 raise ValueError("Road type not valid")
     else: 
@@ -82,31 +92,57 @@ for element in map_content["elements"]:
 
 
 ## Create connections
-def create_connection(objX, connX_split, objY, connY_split):
-    if connX_split[2] ==  "Begin":
+def create_connection(objX, anchorX, objY, anchorY):
+    if anchorX ==  "Begin":
         attribute_name = "connection0"
     else:  # "End"
         attribute_name = "connection1"
-    if connY_split[2] == "Begin":
+    if anchorY == "Begin":
         value = 0
     else:  # "End"
         value = 1
+    if getattr(objX, attribute_name) != None:
+        print("TODO: This might be worth noting")
     setattr(objX, attribute_name, (objY, value))
 
 for connection in map_content["Connections"]:
-    conn0 = connection[0]
-    conn1 = connection[1]
-    conn0_split = conn0.split(".")
-    conn1_split = conn1.split(".")
+    conn0_split = connection[0].split(".")
+    conn1_split = connection[1].split(".")
     conn0_id = conn0_split[1]
     conn1_id = conn1_split[1]
     obj0 = [obj for obj in objects if obj.id == conn0_id][0]
     obj1 = [obj for obj in objects if obj.id == conn1_id][0]
-    create_connection(obj0, conn0_split, obj1, conn1_split)
-    create_connection(obj1, conn1_split, obj0, conn0_split)
+    create_connection(obj0, conn0_split[2], obj1, conn1_split[2])
+    create_connection(obj1, conn1_split[2], obj0, conn1_split[2])
 
+    
+## Transform elements  appling the CustomConnections
+# Order of CustomConnections should match order of how objects appear !!!  TODO: Change that
+for connection in map_content["CustomConnections"]:
+    conn0_split = connection[0].split(".")
+    conn1_split = connection[1].split(".")
+    conn0_id = conn0_split[0]
+    conn1_id = conn1_split[0]
+    obj0 = [obj for obj in objects if obj.id == conn0_id][0]
+    obj1 = [obj for obj in objects if obj.id == conn1_id][0]
+    create_connection(obj0, conn0_split[1], obj1, conn1_split[1])
+    create_connection(obj1, conn1_split[1], obj0, conn0_split[1])
 
-## Transform elements
+    # Target point & angle (of obj0)
+    if conn0_split[1] == "Begin":
+        angle_t = obj0.angle0; x_t = obj0.x0; y_t = obj0.y0
+    else:  # "End"
+        angle_t = obj0.angle1; x_t = obj0.x1; y_t = obj0.y1
+    # Current point & angle (of obj1)
+    if conn1_split[1] == "Begin":
+        angle_c = obj1.angle0; x_c = obj1.x0; y_c = obj1.y0
+    else:  # "End"
+        angle_c = obj1.angle1; x_c = obj1.x1; y_c = obj1.y1
+    #Calculate difference
+    offset = (x_t - x_c, y_t - y_c)
+    angle_difference = angle_t - angle_c
+    for other_obj in obj1.parent.parts:
+        other_obj.translate(offset).rotate((x_t, y_t), angle_difference)
 
 
 ## Visualize
@@ -115,7 +151,7 @@ names = []
 lines = []
 for obj in objects: 
     lines.append(obj.calculate(ax=ax))
-    names.append(obj.id)
+    names.append(f"{obj.id} {type(obj).__name__[:5]}")
     
 
 

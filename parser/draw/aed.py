@@ -8,6 +8,7 @@ except:
 
 NUM_POINTS = 100
 SHOW_LABELS = True
+FONT_SIZE = 9
 
 
 
@@ -58,7 +59,11 @@ class StraightAED:
             line, = ax.plot([self.x0, self.x1], [self.y0, self.y1], color='blue')
             
             if SHOW_LABELS:
-                ax.text((self.x0+self.x1)//2, (self.y0+self.y1)//2, self.id, color='blue', va='center', fontsize=7)
+                ax.text((self.x0+self.x1)//2, (self.y0+self.y1)//2, self.id, color='blue', va='center', fontsize=FONT_SIZE)
+                # Optionally: Plot start and end
+                if self.id == "l49":
+                    ax.plot(self.x0, self.y0, marker='o', color='black', markersize=5)
+                    ax.plot(self.x1, self.y1, marker='x', color='red', markersize=5)
             return line
     
 
@@ -115,7 +120,7 @@ class CircularArcAED:
         if ax:
             line, = ax.plot(arc_x, arc_y, 'b-')
             if SHOW_LABELS:
-                ax.text(arc_x[len(arc_x)//2], arc_y[len(arc_y)//2], self.id, color='blue', va='center', fontsize=7)
+                ax.text(arc_x[len(arc_x)//2], arc_y[len(arc_y)//2], self.id, color='blue', va='center', fontsize=FONT_SIZE)
             ax.plot(self.x0, self.y0, 'k+')  # center
         
             ## Optionally: Plot start and end of circular arc
@@ -202,7 +207,7 @@ class HermiteSplineAED:
         if ax:
             line, = ax.plot(curve[:, 0], curve[:, 1], color='purple')
             if SHOW_LABELS:
-                ax.text(curve[len(curve)//2][0], curve[len(curve)//2][1], self.id, color='purple', va='center', fontsize=7)
+                ax.text(curve[len(curve)//2][0], curve[len(curve)//2][1], self.id, color='purple', va='center', fontsize=FONT_SIZE)
             # ax.plot([x0, x1], [y0, y1], 'ro--', label='Endpoints')
             # ax.quiver(x0, y0, T0[0], T0[1], angles='xy', scale_units='xy', scale=1, color='green')  # label='Start Tangent'
             # ax.quiver(x1, y1, T1[0], T1[1], angles='xy', scale_units='xy', scale=1, color='purple') # label='End Tangent'
