@@ -1,4 +1,4 @@
-# Parser to Parse SILAB Maps
+# Parser for SILAB Map conversion
 
 NOTE: This code is not complete! Some manual adjustmenst might be needed.
 
