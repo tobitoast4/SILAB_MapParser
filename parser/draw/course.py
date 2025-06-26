@@ -11,6 +11,8 @@ NUM_POINTS = 100
 SHOW_LABELS = True
 FONT_SIZE = 9
 
+DISTANCE_BETWEEN_LANES = 7
+
 
 
 class Course:
@@ -20,11 +22,12 @@ class Course:
 
 
 class StraightCourse:
-    def __init__(self, length, x0, y0, angle, id="", parent=None):
+    def __init__(self, length, x0, y0, angle, id="", parent=None, lanes=2):
         self.id = id
         self.parent = parent
         self.connection0 = None
         self.connection1 = None
+        self.lanes = lanes
         self.length = length
         self.x0 = x0
         self.y0 = y0
@@ -85,11 +88,12 @@ class StraightCourse:
 
 
 class CurveCourse:
-    def __init__(self, length, radius, x0=0, y0=0, angle0=0, id="", parent=None):
+    def __init__(self, length, radius, x0=0, y0=0, angle0=0, id="", parent=None, lanes=2):
         self.id = id
         self.parent = parent
         self.connection0 = None
         self.connection1 = None
+        self.lanes = lanes
         self.length = length
         self.radius = radius
         if radius < 0:
@@ -192,13 +196,16 @@ if __name__ == "__main__":
         road_type = road[1]
         if road_type == "Straight":
             length = road[2]
-            x, y = StraightCourse(length, x0=x, y0=y, angle=angle).calculate(ax=ax)
-            pass
+            straight = StraightCourse(length, x0=x, y0=y, angle=angle)
+            x, y = straight.calculate()
+            straight.calculate(ax=ax)
         elif road_type == "Bend":
             length = road[2]
             radius = road[3]
-            x, y, angle = CurveCourse(length=length, radius=radius, x0=x, y0=y, 
-                                    angle0=angle).calculate(ax=ax)
+            curve = CurveCourse(length=length, radius=radius, x0=x, y0=y, 
+                                angle0=angle)
+            x, y, angle = curve.calculate()
+            curve.calculate(ax=ax)
             pass
         else:
             raise ValueError("Road type not valid")
