@@ -117,5 +117,9 @@ if __name__ == "__main__":
     nested_lists = parser.parse_to_nested_lists(tokens)
     elements = parser.get_lane_elements(nested_lists)
 
-    with open("./parser/elements.json", "w") as json_file:
-        json.dump({"elements": elements}, json_file, indent=4)
+    with open("./parser/aed.json", "w") as json_file:
+        json.dump({
+            "type": "Area2", 
+            "id": "aed1",
+            "elements": elements
+        }, json_file, indent=4)

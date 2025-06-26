@@ -9,6 +9,14 @@ except:
 NUM_POINTS = 100
 SHOW_LABELS = True
 
+
+
+class Area2:
+    def __init__(self, id=""):
+        self.id = id
+        self.parts = []
+
+
 class StraightAED:
     def __init__(self, x0, y0, x1, y1, id=""):
         self.id = id 

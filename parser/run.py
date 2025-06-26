@@ -19,7 +19,6 @@ elements = map_content["elements"]
 
 
 
-
 fig, ax = plt.subplots()
 
 TRANSLATION_ROTATION = True
@@ -30,7 +29,7 @@ if TRANSLATION_ROTATION:
     x_t, y_t = StraightCourse(100, x0=x_t, y0=y_t, angle=angle_t).draw(ax=ax)
 
     # Current point & angle (of AED)
-    filtered = [e for e in elements if e['name'] == "l49"]
+    filtered = [e for e in elements if e['id'] == "l49"]
     assert len(filtered) == 1
     el = filtered[0]
     x0 = el["values"]["x0"]; y0 = el["values"]["y0"]; x1 = el["values"]["x1"]; y1 = el["values"]["y1"]
@@ -46,8 +45,10 @@ if TRANSLATION_ROTATION:
 names = []
 objects = []
 for i, element in enumerate(elements):
+    if element["type"] == "Course":
+        continue
     v = element["values"]
-    name = element["name"]
+    name = element["id"]
     names.append(element["type"] + " " + name)
 
     if element["type"] == "Straight":

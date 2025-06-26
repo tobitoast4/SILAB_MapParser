@@ -2,15 +2,12 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
-roads = [
-    ["Straight", 100],
-    ["Bend", 157, 100],
-    ["Bend", 157, -100],
-    ["Straight", 300],
-    ["Bend",  1500, -500],
-    ["Bend",  340, -200],
-    ["Straight", 3000],
-]
+
+class Course:
+    def __init__(self, id=""):
+        self.id = id
+        self.parts = []
+
 
 class StraightCourse:
     def __init__(self, length, x0, y0, angle, id=""):
@@ -110,6 +107,17 @@ class CurveCourse:
 
 
 if __name__ == "__main__":
+    roads = [
+        # id   # type  # parameters from silab
+        ["cp1", "Straight", 100],
+        ["cp2", "Bend", 157, 100],
+        ["cp3", "Bend", 157, -100],
+        ["cp4", "Straight", 300],
+        ["cp5", "Bend",  1500, -500],
+        ["cp6", "Bend",  340, -200],
+        ["cp7", "Straight", 3000] 
+    ]
+
     fig, ax = plt.subplots()
 
     angle = 90
@@ -117,14 +125,14 @@ if __name__ == "__main__":
     y = 0
 
     for road in roads:
-        road_type = road[0]
+        road_type = road[1]
         if road_type == "Straight":
-            length = road[1]
+            length = road[2]
             x, y = StraightCourse(length, x0=x, y0=y, angle=angle).draw(ax=ax)
             pass
         elif road_type == "Bend":
-            length = road[1]
-            radius = road[2]
+            length = road[2]
+            radius = road[3]
             x, y, angle = CurveCourse(length=length, radius=radius, x0=x, y0=y, 
                                     angle0=angle).draw(ax=ax)
             pass

@@ -1,26 +1,7 @@
 {
+    "type": "Area2",
+    "id": "aed1",
     "elements": [
-        {
-            "type": "Course",
-            "id": "c1",
-            "elements": [
-                ["Straight", 100],
-                ["Bend", 157, 100],
-                ["Bend", 157, -100],
-                ["Straight", 300],
-                ["Bend",  1500, -500],
-                ["Bend",  340, -200],
-                ["Straight", 3000]      
-            ]
-        },
-        {
-            "type": "Course",
-            "id": "c2",
-            "elements": [
-                ["Straight", 100],
-                ["Bend", 157, 100]  
-            ]
-        },
         {
             "type": "Bezier",
             "id": "l3",
@@ -957,48 +938,5 @@
                 "# Length": 22.5714
             }
         }
-    ],
-    
-    "Connections": [
-		["lc2.l9.Begin", "lc14.l66.End"],
-		["lc2.l10.End", "lc14.l58.Begin"],
-		["lc1.l3.Begin", "lc2.l9.End"],
-		["lc1.l4.End", "lc2.l10.Begin"],
-		["lc4.l17.Begin", "lc15.l59.End"],
-		["lc4.l18.End", "lc16.l60.Begin"],
-		["lc6.l25.Begin", "lc17.l62.End"],
-		["lc6.l26.End", "lc18.l63.Begin"],
-		["lc8.l39.Begin", "lc12.l64.End"],
-		["lc8.l40.End", "lc12.l65.Begin"],
-		["lc7.l29.End", "lc9.l43.Begin"],
-		["lc7.l30.Begin", "lc9.l44.End"],
-		["lc5.l21.End", "lc10.l49.Begin"],
-		["lc5.l22.Begin", "lc10.l50.End"],
-		["lc3.l13.Begin", "lc4.l17.End"],
-		["lc3.l14.End", "lc4.l18.Begin"],
-		["lc5.l21.Begin", "lc6.l25.End"],
-		["lc5.l22.End", "lc6.l26.Begin"],
-		["lc7.l29.Begin", "lc8.l39.End"],
-		["lc7.l30.End", "lc8.l40.Begin"],
-		["lc12.l55.End", "lc13.l56.Begin"],
-		["lc13.l56.Begin", "lc12.l65.End"],
-		["lc13.l56.End", "lc14.l66.Begin"],
-		["lc13.l56.End", "lc14.l67.Begin"],
-		["lc14.l58.End", "lc15.l59.Begin"],
-		["lc14.l58.End", "lc16.l68.Begin"],
-		["lc15.l59.Begin", "lc14.l67.End"],
-		["lc14.l67.End", "lc16.l68.Begin"],
-		["lc12.l55.Begin", "lc18.l63.End"],
-		["lc12.l55.Begin", "lc18.l70.End"],
-		["lc18.l63.End", "lc12.l64.Begin"],
-		["lc12.l64.Begin", "lc18.l70.End"],
-		["lc11.l53.Begin", "lc16.l60.End"],
-		["lc11.l53.Begin", "lc16.l68.End"],
-		["lc16.l60.End", "lc11.l69.Begin"],
-		["lc16.l68.End", "lc11.l69.Begin"],
-		["lc11.l53.End", "lc17.l62.Begin"],
-		["lc11.l53.End", "lc18.l70.Begin"],
-		["lc17.l62.Begin", "lc11.l69.End"],
-		["lc11.l69.End", "lc18.l70.Begin"]	
     ]
 }
