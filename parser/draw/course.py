@@ -11,7 +11,7 @@ NUM_POINTS = 100
 SHOW_LABELS = True
 FONT_SIZE = 9
 
-DISTANCE_BETWEEN_LANES = 7
+DISTANCE_BETWEEN_LANES = 3.5
 
 
 
@@ -75,7 +75,11 @@ class StraightCourse:
         self.y1 = self.y0 + self.length * np.sin(angle_rad)
         
         if ax:
-            line, = ax.plot([self.x0, self.x1], [self.y0, self.y1], color='green')
+            for l in range(self.lanes):
+                vector = utils.vector_from_points((self.x0, self.y0), (self.x1, self.y1))
+                x0, y0 = utils.translate_perpendicular((self.x0, self.y0), vector, DISTANCE_BETWEEN_LANES * -l)
+                x1, y1 = utils.translate_perpendicular((self.x1, self.y1), vector, DISTANCE_BETWEEN_LANES * -l)
+                line, = ax.plot([x0, x1], [y0, y1], color='green')
             # Optionally: Plot start and end
             # if self.id == "cp7":
             #     ax.plot(self.x0, self.y0, marker='o', color='black', markersize=5)
@@ -136,39 +140,54 @@ class CurveCourse:
         - start_angle_deg: initial heading angle in degrees (0 = pointing right)
         Returns the end (x, y) and new heading angle.
         """
-        # Arc angle in radians: arc_length = radius * angle
-        r = abs(self.radius)
-        arc_angle_rad = self.length / r
-        if self.direction == 'right':
-            arc_angle_rad = -arc_angle_rad
+        for l in range(self.lanes):
+            # Arc angle in radians: arc_length = radius * angle
+            r = abs(self.radius)
+            arc_angle_rad = self.length / r
+            if self.direction == 'right':
+                arc_angle_rad = -arc_angle_rad
 
-        # Generate theta values
-        thetas = np.linspace(0, arc_angle_rad, NUM_POINTS)
+            # Generate theta values
+            thetas = np.linspace(0, arc_angle_rad, NUM_POINTS)
 
-        # Start angle in radians
-        start_angle_rad = np.radians(self.angle0)
+            # Start angle in radians
+            start_angle_rad = np.radians(self.angle0)
+            if l == 0:  # We want to store the values of the first lane
+                self.angle1 = self.angle0 + np.degrees(arc_angle_rad)
 
-        if self.direction == "right":
-            cx = self.x0 - math.cos(np.pi/2 + start_angle_rad) * r
-            cy = self.y0 - math.sin(np.pi/2 + start_angle_rad) * r
-            arc_x = cx + abs(r) * np.cos(thetas + start_angle_rad + np.pi/2)
-            arc_y = cy + abs(r) * np.sin(thetas + start_angle_rad + np.pi/2)
-        else:
-            cx = self.x0 + math.cos(np.pi/2 + start_angle_rad) * r
-            cy = self.y0 + math.sin(np.pi/2 + start_angle_rad) * r
-            arc_x = cx + abs(r) * np.cos(thetas - (np.pi/2 - start_angle_rad))
-            arc_y = cy + abs(r) * np.sin(thetas - (np.pi/2 - start_angle_rad))
+            if self.direction == "right":
+                cx = self.x0 - math.cos(np.pi/2 + start_angle_rad) * r
+                cy = self.y0 - math.sin(np.pi/2 + start_angle_rad) * r
+                arc_x = cx + abs(r) * np.cos(thetas + start_angle_rad + np.pi/2)
+                arc_y = cy + abs(r) * np.sin(thetas + start_angle_rad + np.pi/2)
+            else:
+                cx = self.x0 + math.cos(np.pi/2 + start_angle_rad) * r
+                cy = self.y0 + math.sin(np.pi/2 + start_angle_rad) * r
+                arc_x = cx + abs(r) * np.cos(thetas - (np.pi/2 - start_angle_rad))
+                arc_y = cy + abs(r) * np.sin(thetas - (np.pi/2 - start_angle_rad))
+            
+            for p in range(len(arc_x)):
+                x = arc_x[p]
+                y = arc_y[p]
+                try: 
+                    x_n = arc_x[p+1]
+                    y_n = arc_y[p+1]
+                    vector = utils.vector_from_points((x, y), (x_n, y_n))
+                except:
+                    vector = utils.vector_from_angle(utils.convert_angle(self.angle1, to='radians'))
+                arc_x[p], arc_y[p] = utils.translate_perpendicular((x, y), vector, DISTANCE_BETWEEN_LANES * -l)
 
-        # Return final position and angle
-        self.angle1 = self.angle0 + np.degrees(arc_angle_rad)
-        self.x1 = arc_x[-1]
-        self.y1 = arc_y[-1]
+            # Return final position and angle
+            if l == 0:  # We want to store the values of the first lane
+                self.x1 = arc_x[-1]
+                self.y1 = arc_y[-1]
 
+            if ax:
+                ax.plot(cx, cy, marker='o', color='red', markersize=1)
+                line, = ax.plot(arc_x, arc_y, color='red')
+                if SHOW_LABELS:
+                    ax.text(arc_x[len(arc_x)//2], arc_y[len(arc_y)//2], self.id, color='blue', va='center', fontsize=FONT_SIZE)
         if ax:
-            ax.plot(cx, cy, marker='o', color='red', markersize=1)
-            line, = ax.plot(arc_x, arc_y, color='red')
-            if SHOW_LABELS:
-                ax.text(arc_x[len(arc_x)//2], arc_y[len(arc_y)//2], self.id, color='blue', va='center', fontsize=FONT_SIZE)
             return line
         else:
             return self.x1, self.y1, self.angle1
