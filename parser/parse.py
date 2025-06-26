@@ -71,12 +71,14 @@ class Parser:
     #         return
     #     return new_obj
 
-    def get_lane_elements(self, data, parent=None):
+    def get_lane_elements(self, data, last_lane=None):
         if isinstance(data, dict):
             raise SyntaxError("Only list should be passed")
         elif isinstance(data, list):
             for i in range(len(data)):
                 element = data[i]
+                if str(element).startswith("LaneCell"):
+                    last_lane = element
                 if i < len(data)-2:
                     expected_curly_brace = data[i+1]
                     values = data[i+2]
@@ -99,9 +101,10 @@ class Parser:
                         self.elements.append({
                             "type": element_split[0],
                             "name": element_split[1],
+                            "parent": last_lane,
                             "values": values_dict
                         })
-                self.get_lane_elements(element)
+                self.get_lane_elements(element, last_lane)
         return self.elements
 
 
@@ -115,4 +118,4 @@ if __name__ == "__main__":
     elements = parser.get_lane_elements(nested_lists)
 
     with open("./parser/elements.json", "w") as json_file:
-        json.dump(elements, json_file, indent=4)
+        json.dump({"elements": elements}, json_file, indent=4)

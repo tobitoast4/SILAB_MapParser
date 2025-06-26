@@ -8,16 +8,11 @@ from parse import *
 from draw import utils
 
 
-with open('./parser/res/kvk_Area2.cfg', 'r') as f:
-    raw_text = f.read()
+with open('parser\elements.json', 'r') as f:
+    file_content = f.read()
+    map_content = json.loads(file_content)
 
-parser = Parser()
-tokens = parser.tokenize(raw_text)
-nested_lists = parser.parse_to_nested_lists(tokens)
-elements = parser.get_lane_elements(nested_lists)
-
-with open("elements.json", "w") as json_file:
-    json.dump(elements, json_file, indent=4)
+elements = map_content["elements"]
 
 
 fig, ax = plt.subplots()
