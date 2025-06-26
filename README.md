@@ -2,7 +2,7 @@
 
 NOTE: This code is not complete! Some manual adjustmenst might be needed.
 
-How to convert a SILAB map into a plot?
+## How to convert a SILAB map into a plot?
 
 1. SILAB maps consist of Courses and Area2 (-Edits). To retrieve all relevant lane structure data
 from the latter, one can use `parser\parse.py`, which writes the important data of a `*_Area2.cfg` 
@@ -20,7 +20,9 @@ in your `*_Area2.cfg` (see example `parser\full_example.json`; key `"Connections
 
 5. Run `parser\run.py` to view the results. 
 
-Example: 
+## Example
+
+Plot created using `parser\full_example.json`:
 
 ![Plot made with matplotlib](example_plot.png)
 
