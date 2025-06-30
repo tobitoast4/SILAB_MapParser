@@ -11,7 +11,10 @@ NUM_POINTS = 100
 SHOW_LABELS = True
 FONT_SIZE = 9
 
-DISTANCE_BETWEEN_LANES = 3.5
+# Lane#1 will be at 0, LANE_POSITIONS[0], Lane#2 will be LANE_POSITIONS[1] meters from Lane#1, 
+# Lane#3 will be LANE_POSITIONS[2] meters from Lane#1, ...
+LANE_POSITIONS = [0, 3.5]
+
 
 
 
@@ -22,12 +25,19 @@ class Course:
 
 
 class StraightCourse:
-    def __init__(self, length, x0, y0, angle, id="", parent=None, lanes=2):
+    class Lane:
+        def __init__(self, lane_id, x0, y0, x1, y1):
+            self.lane_id = lane_id
+            self.x0 = x0
+            self.y0 = y0
+            self.x1 = x1
+            self.y1 = y1
+
+    def __init__(self, length, x0, y0, angle, id="", parent=None):
         self.id = id
         self.parent = parent
         self.connection0 = None
         self.connection1 = None
-        self.lanes = lanes
         self.length = length
         self.x0 = x0
         self.y0 = y0
@@ -35,6 +45,11 @@ class StraightCourse:
         self.y1 = None
         self.angle0 = angle  # in degrees
         self.angle1 = angle  # in degrees
+        self.lanes = []
+
+    def add_or_update_lane(self, new_lane: Lane):
+        self.lanes = [lane for lane in self.lanes if lane.lane_id != new_lane.lane_id]  # remove old lane
+        self.lanes.append(new_lane)
 
     def translate(self, offset):
         """Translate all points of the Straight by a given offset.
@@ -75,10 +90,11 @@ class StraightCourse:
         self.y1 = self.y0 + self.length * np.sin(angle_rad)
         
         if ax:
-            for l in range(self.lanes):
+            for l in range(len(LANE_POSITIONS)):
                 vector = utils.vector_from_points((self.x0, self.y0), (self.x1, self.y1))
-                x0, y0 = utils.translate_perpendicular((self.x0, self.y0), vector, DISTANCE_BETWEEN_LANES * -l)
-                x1, y1 = utils.translate_perpendicular((self.x1, self.y1), vector, DISTANCE_BETWEEN_LANES * -l)
+                x0, y0 = utils.translate_perpendicular((self.x0, self.y0), vector, -LANE_POSITIONS[l])
+                x1, y1 = utils.translate_perpendicular((self.x1, self.y1), vector, -LANE_POSITIONS[l])
+                self.add_or_update_lane(StraightCourse.Lane(l, x0, y0, x1, y1))
                 line, = ax.plot([x0, x1], [y0, y1], color='green')
             # Optionally: Plot start and end
             # if self.id == "cp7":
@@ -92,12 +108,19 @@ class StraightCourse:
 
 
 class CurveCourse:
-    def __init__(self, length, radius, x0=0, y0=0, angle0=0, id="", parent=None, lanes=2):
+    class Lane:
+        def __init__(self, lane_id, x0, y0, x1, y1):
+            self.lane_id = lane_id
+            self.x0 = x0
+            self.y0 = y0
+            self.x1 = x1
+            self.y1 = y1
+
+    def __init__(self, length, radius, x0=0, y0=0, angle0=0, id="", parent=None):
         self.id = id
         self.parent = parent
         self.connection0 = None
         self.connection1 = None
-        self.lanes = lanes
         self.length = length
         self.radius = radius
         if radius < 0:
@@ -110,6 +133,11 @@ class CurveCourse:
         self.y1 = None
         self.angle0 = angle0      # in degrees
         self.angle1 = None        # in degrees
+        self.lanes = []
+
+    def add_or_update_lane(self, new_lane: Lane):
+        self.lanes = [lane for lane in self.lanes if lane.lane_id != new_lane.lane_id]  # remove old lane
+        self.lanes.append(new_lane)
 
     def translate(self, offset):
         """Translate all points of the Straight by a given offset.
@@ -140,7 +168,7 @@ class CurveCourse:
         - start_angle_deg: initial heading angle in degrees (0 = pointing right)
         Returns the end (x, y) and new heading angle.
         """
-        for l in range(self.lanes):
+        for l in range(len(LANE_POSITIONS)):
             # Arc angle in radians: arc_length = radius * angle
             r = abs(self.radius)
             arc_angle_rad = self.length / r
@@ -175,7 +203,7 @@ class CurveCourse:
                     vector = utils.vector_from_points((x, y), (x_n, y_n))
                 except:
                     vector = utils.vector_from_angle(utils.convert_angle(self.angle1, to='radians'))
-                arc_x[p], arc_y[p] = utils.translate_perpendicular((x, y), vector, DISTANCE_BETWEEN_LANES * -l)
+                arc_x[p], arc_y[p] = utils.translate_perpendicular((x, y), vector, -LANE_POSITIONS[l])
 
             # Return final position and angle
             if l == 0:  # We want to store the values of the first lane
@@ -183,6 +211,7 @@ class CurveCourse:
                 self.y1 = arc_y[-1]
 
             if ax:
+                self.add_or_update_lane(CurveCourse.Lane(l, self.x0, self.y0, self.x1, self.y1))
                 ax.plot(cx, cy, marker='o', color='red', markersize=1)
                 line, = ax.plot(arc_x, arc_y, color='red')
                 if SHOW_LABELS:

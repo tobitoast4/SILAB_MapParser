@@ -108,15 +108,15 @@ def create_connection(objX, anchorX, objY, anchorY):
     #     print("TODO: This might be worth noting")
     setattr(objX, attribute_name, (objY, value))
 
-for connection in map_content["Connections"]:
-    conn0_split = connection[0].split(".")
-    conn1_split = connection[1].split(".")
-    conn0_id = conn0_split[1]
-    conn1_id = conn1_split[1]
-    obj0 = [obj for obj in objects if obj.id == conn0_id][0]
-    obj1 = [obj for obj in objects if obj.id == conn1_id][0]
-    create_connection(obj0, conn0_split[2], obj1, conn1_split[2])
-    create_connection(obj1, conn1_split[2], obj0, conn1_split[2])
+# for connection in map_content["Connections"]:
+#     conn0_split = connection[0].split(".")
+#     conn1_split = connection[1].split(".")
+#     conn0_id = conn0_split[1]
+#     conn1_id = conn1_split[1]
+#     obj0 = [obj for obj in objects if obj.id == conn0_id][0]
+#     obj1 = [obj for obj in objects if obj.id == conn1_id][0]
+#     create_connection(obj0, conn0_split[2], obj1, conn1_split[2])
+#     create_connection(obj1, conn1_split[2], obj0, conn1_split[2])
 
     
 ## Transform elements  appling the CustomConnections

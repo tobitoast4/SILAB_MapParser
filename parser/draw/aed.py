@@ -63,9 +63,9 @@ class StraightAED:
             if SHOW_LABELS:
                 ax.text((self.x0+self.x1)//2, (self.y0+self.y1)//2, self.id, color='blue', va='center', fontsize=FONT_SIZE)
                 # Optionally: Plot start and end
-                if self.id == "l49":
-                    ax.plot(self.x0, self.y0, marker='o', color='black', markersize=5)
-                    ax.plot(self.x1, self.y1, marker='x', color='red', markersize=5)
+                # if self.id == "l49":
+                #     ax.plot(self.x0, self.y0, marker='o', color='black', markersize=5)
+                #     ax.plot(self.x1, self.y1, marker='x', color='red', markersize=5)
             return line
     
 
