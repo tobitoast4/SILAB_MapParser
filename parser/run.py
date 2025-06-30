@@ -1,6 +1,7 @@
 import re, json
 from collections import defaultdict
 from matplotlib.widgets import CheckButtons
+from matplotlib.widgets import Button
 
 from draw.aed import *
 from draw.course import *
@@ -215,6 +216,17 @@ for obj in objects:
 #     objects.append(line)
 
 
+
+## Create button for export
+def export_map(event):
+    print("TODO: Implement me!")
+
+button_ax = plt.axes([0.85, 0.9, 0.1, 0.05])
+button = Button(button_ax, 'Export Map')
+button.on_clicked(export_map)
+
+
+## Create legend for hiding / showing lines
 # Make lines dynamically hidden / visible
 def toggle_visibility(label):
     for i, name in enumerate(names):
@@ -225,9 +237,12 @@ def toggle_visibility(label):
     plt.draw()
 
 # Make lines dynamically hidden / visible
-check_ax = plt.axes([0.05, 0.1, 0.2, 0.65])
+check_ax = plt.axes([0.05, 0.2, 0.2, 0.65])
 check = CheckButtons(check_ax, names, [True for _ in range(len(names))])
 check.on_clicked(toggle_visibility)
+
+
+
 
 ax.set_aspect('equal')
 ax.grid(True)
