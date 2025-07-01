@@ -95,7 +95,8 @@ class StraightCourse:
                 x0, y0 = utils.translate_perpendicular((self.x0, self.y0), vector, -LANE_POSITIONS[l])
                 x1, y1 = utils.translate_perpendicular((self.x1, self.y1), vector, -LANE_POSITIONS[l])
                 self.add_or_update_lane(StraightCourse.Lane(l, x0, y0, x1, y1))
-                line, = ax.plot([x0, x1], [y0, y1], color='green')
+                line, = ax.plot([x0, x1], [y0, y1], color='green', picker=2)
+                line.parent = self
             # Optionally: Plot start and end
             # if self.id == "cp7":
             #     ax.plot(self.x0, self.y0, marker='o', color='black', markersize=5)
@@ -213,7 +214,8 @@ class CurveCourse:
             if ax:
                 self.add_or_update_lane(CurveCourse.Lane(l, self.x0, self.y0, self.x1, self.y1))
                 ax.plot(cx, cy, marker='o', color='red', markersize=1)
-                line, = ax.plot(arc_x, arc_y, color='red')
+                line, = ax.plot(arc_x, arc_y, color='red', picker=2)
+                line.parent = self
                 if SHOW_LABELS:
                     ax.text(arc_x[len(arc_x)//2], arc_y[len(arc_y)//2], self.id, color='blue', va='center', fontsize=FONT_SIZE)
         if ax:

@@ -6,7 +6,9 @@ from matplotlib.widgets import Button
 from draw.aed import *
 from draw.course import *
 from parse import *
-from draw import utils
+import draw.utils
+import export.utils
+import export.xml
 
 
 with open('parser/full.json', 'r') as f:
@@ -62,9 +64,9 @@ for element in map_content["elements"]:
             if c_type == "Straight":
                 x0 = v["x0"]; y0 = v["y0"]; x1 = v["x1"]; y1 = v["y1"]
                 d0 = v["DistToRef0"]; d1 = v["DistToRef1"]  # apparently for Straight, this is the correct offset
-                vector = utils.vector_from_points((x0, y0), (x1, y1))
-                x0, y0 = utils.translate_perpendicular((x0, y0), vector, d0)
-                x1, y1 = utils.translate_perpendicular((x1, y1), vector, d1)
+                vector = draw.utils.vector_from_points((x0, y0), (x1, y1))
+                x0, y0 = draw.utils.translate_perpendicular((x0, y0), vector, d0)
+                x1, y1 = draw.utils.translate_perpendicular((x1, y1), vector, d1)
                 line = StraightAED(x0, y0, x1, y1, id=c_id, parent=area)
                 line.calculate()
                 objects.append(line)
@@ -162,6 +164,30 @@ for obj in objects:
 
 ## Create button for export
 def export_map(event):
+    xml_writer = export.xml.XmlWriter()
+
+    position = 0  # first, we want to search at x0, y0
+    x=0; y=0
+    point = export.utils.get_points_in_range(objects, x, y)[0]
+    xml_writer.add_node(point.id, point.x, point.y, point.angle)
+    for _ in range(10):
+        if point.pos == 0:  # we added the start point, so now we search the end point
+            x = point.obj.x1
+            y = point.obj.y1
+        else:               # we added the end point, so now we search the start point
+            x = point.obj.x0
+            y = point.obj.y0
+        new_points = export.utils.get_points_in_range(objects, x, y)
+        if len(new_points) == 2:
+            new_point = new_points[0]
+            xml_writer.add_node(new_point.id, new_point.x, new_point.y, new_point.angle)
+            link = xml_writer.add_link(new_point.obj.id, point.id, new_point.id)
+            xml_writer.link_type_straight(link)
+            point = new_points[1]  # now we used point 2
+        # else:
+
+
+
     print("TODO: Implement me!")
 
 button_ax = plt.axes([0.85, 0.9, 0.1, 0.05])
@@ -185,6 +211,18 @@ check = CheckButtons(check_ax, names, [True for _ in range(len(names))])
 check.on_clicked(toggle_visibility)
 
 
+# Make lines clickable
+def on_click_line(event):
+    line = event.artist
+    if line.get_visible():
+        draw.utils.blink_line(fig, line)
+        print(f'Line clicked at: {event.mouseevent.xdata:.2f}, {event.mouseevent.ydata:.2f}')
+        print(f"    {type(line.parent).__name__}: {line.parent.id}")
+        print(f"    x0={line.parent.x0}; y0={line.parent.y0}")
+        print(f"    x1={line.parent.x1}; y1={line.parent.y1}")
+        print()
+
+fig.canvas.mpl_connect('pick_event', on_click_line)
 
 
 ax.set_aspect('equal')

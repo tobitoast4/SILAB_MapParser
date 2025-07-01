@@ -2,12 +2,31 @@ import numpy as np
 import math
 
 
-def get_point_in_range(objects, x, y, range=0.1):
+class Point:
+    def __init__(self, x, y, angle, obj, pos):
+        self.id = f"{obj.id}-{pos}"
+        self.x = x
+        self.y = y
+        self.angle = angle
+        self.obj = obj
+        self.pos = pos  # indicates where the note has been found (0 -> start of the line; 1 -> end of the line)
+
+def get_points_in_range(objects, x, y, range=0.1):
     points_found = []
     for obj in objects:
         if abs(obj.x0 - x) <= range and  abs(obj.y0 - y) <= range:
-            points_found.append([obj.x0, obj.y0, obj])
+            points_found.append(Point(obj.x0, obj.y0, obj.angle0, obj, 0))
         if abs(obj.x1 - x) <= range and  abs(obj.y1 - y) <= range:
-            points_found.append([obj.x1, obj.y1, obj])
-
+            points_found.append(Point(obj.x1, obj.y1, obj.angle1, obj, 1))
+    # if len(points_found) > 1:
+    #     raise LookupError("More than 1 point found! Maybe decrese the range?")
     return points_found
+
+def get_common_prefix(str1: str, str2: str):
+    result = ""
+    for c1, c2 in zip(str1, str2):
+        if c1 == c2:
+            result += c1
+        else:
+            break
+    return result

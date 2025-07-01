@@ -140,3 +140,25 @@ def rotate_around(point, center, angle_degrees):
 
     # Translate point back
     return (x_new + cx, y_new + cy)
+
+
+def blink_line(fig, line, blinks=9, interval=30):
+    """Make a line blink by toggling its visibility."""
+    visible = True
+    count = 0
+
+    def toggle_visibility():
+        nonlocal visible, count
+        if count >= blinks:
+            timer.stop()
+            line.set_visible(True)
+            fig.canvas.draw()
+            return
+        visible = not visible
+        line.set_visible(visible)
+        fig.canvas.draw()
+        count += 1
+
+    timer = fig.canvas.new_timer(interval=interval)
+    timer.add_callback(toggle_visibility)
+    timer.start()

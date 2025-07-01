@@ -58,7 +58,8 @@ class StraightAED:
 
     def calculate(self, ax=None):
         if ax:
-            line, = ax.plot([self.x0, self.x1], [self.y0, self.y1], color='blue')
+            line, = ax.plot([self.x0, self.x1], [self.y0, self.y1], color='blue', picker=2)
+            line.parent = self
             
             if SHOW_LABELS:
                 ax.text((self.x0+self.x1)//2, (self.y0+self.y1)//2, self.id, color='blue', va='center', fontsize=FONT_SIZE)
@@ -120,7 +121,8 @@ class CircularArcAED:
 
         # Plot the arc
         if ax:
-            line, = ax.plot(arc_x, arc_y, 'b-')
+            line, = ax.plot(arc_x, arc_y, 'b-', picker=2)
+            line.parent = self
             if SHOW_LABELS:
                 ax.text(arc_x[len(arc_x)//2], arc_y[len(arc_y)//2], self.id, color='blue', va='center', fontsize=FONT_SIZE)
             ax.plot(self.x0, self.y0, 'k+')  # center
@@ -207,7 +209,8 @@ class HermiteSplineAED:
 
         # Plotting
         if ax:
-            line, = ax.plot(curve[:, 0], curve[:, 1], color='purple')
+            line, = ax.plot(curve[:, 0], curve[:, 1], color='purple', picker=2)
+            line.parent = self
             if SHOW_LABELS:
                 ax.text(curve[len(curve)//2][0], curve[len(curve)//2][1], self.id, color='purple', va='center', fontsize=FONT_SIZE)
             # ax.plot([x0, x1], [y0, y1], 'ro--', label='Endpoints')
