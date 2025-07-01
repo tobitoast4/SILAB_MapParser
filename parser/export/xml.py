@@ -3,12 +3,6 @@ import export.utils
 from enum import Enum
 
 
-class LaneLayout(Enum):
-    TWOLANE = "2LANE"
-    LEFT = "1LEFT"
-    RIGHT = "1RIGHT"
-
-
 class XmlWriter:
     def __init__(self):
         self.network= ET.Element("ots:Network")
@@ -21,15 +15,15 @@ class XmlWriter:
         """ <ots:Node Coordinate="(15.9460,-8.5808)" Direction="417.0623 deg(E)" Id="SB" />
         """
         coords = (round(float(point.x), 4), round(float(point.y), 4))
-        node = ET.SubElement(self.network, "ots:Link", {
+        node = ET.SubElement(self.network, "ots:Node", {
             "Id": point.id,
             "Coordinate": str(coords),
-            "NodDirectioneStart": f"{point.angle} deg(E)"
+            "Direction": f"{round(float(point.angle), 4)} deg(E)"
         })
         self.points.append(point)
         return node
 
-    def add_link(self, link_id, point0: export.utils.Point, point1: export.utils.Point, lane_layout: LaneLayout = LaneLayout.RIGHT):
+    def add_link(self, link_id, point0: export.utils.Point, point1: export.utils.Point, lane_layout="RIGHT"):
         """ <ots:Link Id="EEP" NodeEnd="EP" NodeStart="E" OffsetEnd="-5.25m" OffsetStart="-5.25m" Type="URBAN">
                 <ots:DefinedLayout>1RIGHT</ots:DefinedLayout>
             </ots:Link>
@@ -42,24 +36,25 @@ class XmlWriter:
         })
         # Add child elements
         def_layout = ET.SubElement(link, "ots:DefinedLayout")
-        def_layout.text = lane_layout.value
+        def_layout.text = lane_layout
         return link
 
     def link_type_straight(self, parent):
-        ET.SubElement(parent, "ots:Straight")
+        parent.insert(0, ET.Element("ots:Straight"))  # insert at the top
 
     def link_type_bezier(self, parent):
-        ET.SubElement(parent, "ots:Bezier")
+        parent.insert(0, ET.Element("ots:Bezier"))  # insert at the top
 
     def link_type_arc(self, parent, radius, direction):
         if direction == "right":
             direction = "R"
         if direction == "left":
             direction = "L"
-        ET.SubElement(parent, "ots:Arc", {
+        element = ET.Element("ots:Arc", {
             "Direction": direction,  # expects either "L" or "R" (I guess)
-            "Radius": f"{round(float(radius), 4)} m"
+            "Radius": f"{round(float(abs(radius)), 4)} m"
         })
+        parent.insert(0, element)  # insert at the top
 
     def find_point(self, x, y, range=0.1):
         points_found = []
