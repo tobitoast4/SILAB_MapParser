@@ -5,7 +5,7 @@ from enum import Enum
 
 class XmlWriter:
     def __init__(self, inverse=False):
-        self.inverse = inverse
+        self.inverse = inverse  # use inverse=True, if the lane direction is wrong
         self.network= ET.Element("ots:Network")
         # Define namespaces if needed
         # ET.register_namespace('ots', "http://example.com/ots")  # optional
