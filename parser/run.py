@@ -16,7 +16,8 @@ with open('parser/full.json', 'r') as f:
     map_content = json.loads(file_content)
 
 
-objects = []
+objects = []  # contains all instances of StraightCourse, CurveCourse, StraightAED, HermiteSplineAED, CircularArcAED
+              # note that StraightCourse and CurveCourse themselves again can contain multiple lanes 
 
 # initial settings for Course
 angle = 90
@@ -166,29 +167,51 @@ for obj in objects:
 def export_map(event):
     xml_writer = export.xml.XmlWriter()
 
-    position = 0  # first, we want to search at x0, y0
-    x=0; y=0
-    point = export.utils.get_points_in_range(objects, x, y)[0]
-    xml_writer.add_node(point.id, point.x, point.y, point.angle)
-    for _ in range(10):
-        if point.pos == 0:  # we added the start point, so now we search the end point
-            x = point.obj.x1
-            y = point.obj.y1
-        else:               # we added the end point, so now we search the start point
-            x = point.obj.x0
-            y = point.obj.y0
-        new_points = export.utils.get_points_in_range(objects, x, y)
-        if len(new_points) == 2:
-            new_point = new_points[0]
-            xml_writer.add_node(new_point.id, new_point.x, new_point.y, new_point.angle)
-            link = xml_writer.add_link(new_point.obj.id, point.id, new_point.id)
+    ## Add all points. If there are two points, only add one of them 
+    for obj in objects:
+        if isinstance(obj, CircularArcAED):
+            continue  # these might be to complicated, esp. in roundabouts (TODO: Implement solution for this)
+        points0 = export.utils.get_points_in_range(objects, obj.x0, obj.y0)
+        if len(points0) == 1:
+            point = points0[0]
+            xml_writer.add_point(point)
+        elif len(points0) == 2:
+            if not(any([p.pos == 0 for p in points0]) and any([p.pos == 0 for p in points0])):
+                raise LookupError
+            # add point 1
+            point = [p for p in points0 if p.pos == 1][0]
+            xml_writer.add_point(point)
+        else:
+            raise LookupError("Too many")
+        
+        points1 = export.utils.get_points_in_range(objects, obj.x1, obj.y1)
+        if len(points1) == 1:
+            point = points1[0]
+            xml_writer.add_point(point)
+        elif len(points1) == 2:
+            if not(any([p.pos == 0 for p in points1]) and any([p.pos == 0 for p in points1])):
+                raise LookupError
+            # do nothing, the should habe been added already
+        else:
+            raise LookupError("Too many")
+        
+    ## Add all links
+    for obj in objects:
+        if isinstance(obj, CircularArcAED):
+            continue  # these might be to complicated, esp. in roundabouts (TODO: Implement solution for this)
+        p0 = xml_writer.find_point(obj.x0, obj.y0)
+        p1 = xml_writer.find_point(obj.x1, obj.y1)
+        link = xml_writer.add_link(obj.id, p0, p1)
+
+        if isinstance(obj, StraightCourse):
             xml_writer.link_type_straight(link)
-            point = new_points[1]  # now we used point 2
-        # else:
-
-
-
-    print("TODO: Implement me!")
+        if isinstance(obj, CurveCourse):
+            xml_writer.link_type_arc(link, obj.radius, obj.direction)
+        if isinstance(obj, StraightAED):
+            xml_writer.link_type_straight(link)
+        if isinstance(obj, HermiteSplineAED):
+            xml_writer.link_type_bezier(link)
+    xml_writer.write(to_file=True)
 
 button_ax = plt.axes([0.85, 0.9, 0.1, 0.05])
 button = Button(button_ax, 'Export Map')
@@ -218,8 +241,8 @@ def on_click_line(event):
         draw.utils.blink_line(fig, line)
         print(f'Line clicked at: {event.mouseevent.xdata:.2f}, {event.mouseevent.ydata:.2f}')
         print(f"    {type(line.parent).__name__}: {line.parent.id}")
-        print(f"    x0={line.parent.x0}; y0={line.parent.y0}")
-        print(f"    x1={line.parent.x1}; y1={line.parent.y1}")
+        print(f"    x0={round(float(line.parent.x0), 4)}; y0={round(float(line.parent.y0), 4)}")
+        print(f"    x1={round(float(line.parent.x1), 4)}; y1={round(float(line.parent.y1), 4)}")
         print()
 
 fig.canvas.mpl_connect('pick_event', on_click_line)
