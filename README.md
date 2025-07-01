@@ -20,6 +20,8 @@ in your `*_Area2.cfg` (see example `parser\full_example.json`; key `"Connections
 
 5. Run `parser\run.py` to view the results. 
 
+6. Click "Export Map" to generate your output file. Currently this the XML file `output.xml` which can be read by [OTS](https://github.com/averbraeck/opentrafficsim/tree/main/ots-animation). 
+
 ## Example
 
 Plot created using `parser\full_example.json`:
@@ -27,3 +29,5 @@ Plot created using `parser\full_example.json`:
 ![Plot made with matplotlib](example_plot.png)
 
 --> Contains two normal Courses and one Area2 -> the roundabout. 
+
+Hint: Click lines in the canvas to show info about them in the console output.
