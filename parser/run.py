@@ -125,32 +125,33 @@ def create_connection(objX, anchorX, objY, anchorY):
     
 ## Transform elements  appling the CustomConnections
 # Order of CustomConnections should match order of how objects appear !!!  TODO: Change that
-for connection in map_content["CustomConnections"]:
-    conn0_split = connection[0].split(".")
-    conn1_split = connection[1].split(".")
-    conn0_id = conn0_split[0]
-    conn1_id = conn1_split[0]
-    obj0 = [obj for obj in objects if obj.id == conn0_id][0]
-    obj1 = [obj for obj in objects if obj.id == conn1_id][0]
-    create_connection(obj0, conn0_split[1], obj1, conn1_split[1])
-    create_connection(obj1, conn1_split[1], obj0, conn0_split[1])
+if "CustomConnections" in map_content:
+    for connection in map_content["CustomConnections"]:
+        conn0_split = connection[0].split(".")
+        conn1_split = connection[1].split(".")
+        conn0_id = conn0_split[0]
+        conn1_id = conn1_split[0]
+        obj0 = [obj for obj in objects if obj.id == conn0_id][0]
+        obj1 = [obj for obj in objects if obj.id == conn1_id][0]
+        create_connection(obj0, conn0_split[1], obj1, conn1_split[1])
+        create_connection(obj1, conn1_split[1], obj0, conn0_split[1])
 
-    # Target point & angle (of obj0)
-    if conn0_split[1] == "Begin":
-        angle_t = obj0.angle0; x_t = obj0.x0; y_t = obj0.y0
-    else:  # "End"
-        angle_t = obj0.angle1; x_t = obj0.x1; y_t = obj0.y1
-    # Current point & angle (of obj1)
-    if conn1_split[1] == "Begin":
-        angle_c = obj1.angle0; x_c = obj1.x0; y_c = obj1.y0
-    else:  # "End"
-        angle_c = obj1.angle1; x_c = obj1.x1; y_c = obj1.y1
-    #Calculate difference
-    offset = (x_t - x_c, y_t - y_c)
-    angle_difference = angle_t - angle_c
-    for other_obj in obj1.parent.parts:
-        other_obj.translate(offset).rotate((x_t, y_t), angle_difference)
-        other_obj.calculate()  # re-calculate attributes
+        # Target point & angle (of obj0)
+        if conn0_split[1] == "Begin":
+            angle_t = obj0.angle0; x_t = obj0.x0; y_t = obj0.y0
+        else:  # "End"
+            angle_t = obj0.angle1; x_t = obj0.x1; y_t = obj0.y1
+        # Current point & angle (of obj1)
+        if conn1_split[1] == "Begin":
+            angle_c = obj1.angle0; x_c = obj1.x0; y_c = obj1.y0
+        else:  # "End"
+            angle_c = obj1.angle1; x_c = obj1.x1; y_c = obj1.y1
+        #Calculate difference
+        offset = (x_t - x_c, y_t - y_c)
+        angle_difference = angle_t - angle_c
+        for other_obj in obj1.parent.parts:
+            other_obj.translate(offset).rotate((x_t, y_t), angle_difference)
+            other_obj.calculate()  # re-calculate attributes
 
 
 ## Visualize
@@ -165,7 +166,7 @@ for obj in objects:
 
 ## Create button for export
 def export_map(event):
-    xml_writer = export.xml.XmlWriter()
+    xml_writer = export.xml.XmlWriter(inverse=True)
 
     ## Add all points. If there are two points, only add one of them 
     for obj in objects:
@@ -243,6 +244,8 @@ def on_click_line(event):
         print(f"    {type(line.parent).__name__}: {line.parent.id}")
         print(f"    x0={round(float(line.parent.x0), 4)}; y0={round(float(line.parent.y0), 4)}")
         print(f"    x1={round(float(line.parent.x1), 4)}; y1={round(float(line.parent.y1), 4)}")
+        print(f"    angle0={round(float(line.parent.angle0), 4)}")
+        print(f"    angle1={round(float(line.parent.angle1), 4)}")
         print()
 
 fig.canvas.mpl_connect('pick_event', on_click_line)

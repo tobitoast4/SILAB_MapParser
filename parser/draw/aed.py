@@ -143,8 +143,8 @@ class HermiteSplineAED:
         self.y0 = y0
         self.x1 = x1
         self.y1 = y1
-        self.angle0 = angle0
-        self.angle1 = angle1
+        self.angle0 = utils.convert_angle(angle0, to="degrees")
+        self.angle1 = utils.convert_angle(angle1, to="degrees")
 
     def translate(self, offset):
         """Translate all points of the Straight by a given offset.
@@ -165,16 +165,15 @@ class HermiteSplineAED:
         """
         self.x0, self.y0 = utils.rotate_around((self.x0, self.y0), center, angle_deg)
         self.x1, self.y1 = utils.rotate_around((self.x1, self.y1), center, angle_deg)
-        angle_rad = utils.convert_angle(angle_deg, to="radians")
-        self.angle0 += angle_rad
-        self.angle1 += angle_rad
+        self.angle0 += angle_deg
+        self.angle1 += angle_deg
         return self
 
     def calculate(self, ax=None):
         tangent_scale=1  # we assume this to be 1 (TODO: maybe clarify if this is correct)
         # Convert angles to radians if not already
-        theta0 = self.angle0
-        theta1 = self.angle1
+        theta0 = utils.convert_angle(self.angle0, to="radians")
+        theta1 = utils.convert_angle(self.angle1, to="radians")
 
         # Compute distance between points
         dx = self.x1 - self.x0
