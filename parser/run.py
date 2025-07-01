@@ -160,63 +160,6 @@ for obj in objects:
     
 
 
-
-
-# fig, ax = plt.subplots()
-
-# TRANSLATION_ROTATION = True
-# if TRANSLATION_ROTATION:
-#     ## Perform Translation and Rotation
-#     # Target point & angle
-#     angle_t = 90; x_t = 0; y_t = 0
-#     x_t, y_t = StraightCourse(100, x0=x_t, y0=y_t, angle=angle_t).calculate(ax=ax)
-
-#     # Current point & angle (of AED)
-#     filtered = [e for e in elements if e['id'] == "l49"]
-#     assert len(filtered) == 1
-#     el = filtered[0]
-#     x0 = el["values"]["x0"]; y0 = el["values"]["y0"]; x1 = el["values"]["x1"]; y1 = el["values"]["y1"]
-#     angle_c = utils.angle_from_vector(utils.vector_from_points((x1, y1), (x0, y0)), degrees=True)
-#     x_c = x1
-#     y_c = y1
-
-#     offset = (x_t - x_c, y_t - y_c)
-#     angle_deg = angle_t - angle_c
-#     angle_rad = utils.convert_angle(angle_deg, to='radians')
-
-
-# names = []
-# objects = []
-# for i, element in enumerate(elements):
-#     if element["type"] == "Course":
-#         continue
-#     v = element["values"]
-#     name = element["id"]
-#     names.append(element["type"] + " " + name)
-
-#     if element["type"] == "Straight":
-#         x0 = v["x0"]; y0 = v["y0"]; x1 = v["x1"]; y1 = v["y1"]
-#         d0 = v["DistToRef0"]; d1 = v["DistToRef1"]  # apparently for Straight, this is the correct offset
-#         line = StraightAED(x0, y0, x1, y1, name).translate(offset).rotate((x_t, y_t), angle_deg).calculate(ax=ax)
-
-#     elif element["type"] == "Bezier":
-#         x0 = v["x0"]; y0 = v["y0"]; x1 = v["x1"]; y1 = v["y1"]
-#         angle0 = v["Angle0"]; angle1 = v["Angle1"]
-#         # d0 = v["DistToMid0"]  # apparently for Bezier, this is the correct offset
-#         # d1 = v["DistToMid1"]
-#         line = HermiteSplineAED(x0, y0, angle0, x1, y1, angle1, name).translate(offset).rotate((x_t, y_t), angle_deg).calculate(ax=ax)
-
-#     elif element["type"] == "CircularArc":
-#         x0 = v["x0"]; y0 = v["y0"]; angle0 = v["Angle0"]; angle1 = v["Angle1"]; r = v["r"]
-#         d0 = v["DistToRef0"]; d1 = v["DistToRef1"]  # apparently for CircularArc, this is the correct offset
-
-#         if d0 != d1:
-#             raise ValueError("This should not happen, I guess??")
-#         line = CircularArcAED(x0, y0, angle0, angle1, r + d0).translate(offset).rotate((x_t, y_t), angle_deg).calculate(ax=ax)
-#     objects.append(line)
-
-
-
 ## Create button for export
 def export_map(event):
     print("TODO: Implement me!")

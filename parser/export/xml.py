@@ -13,6 +13,8 @@ class XmlWriter:
         # Define namespaces if needed
         ET.register_namespace('ots', "http://example.com/ots")  # optional
         self.tree = ET.ElementTree(self.network)
+        # self.node_ids = []
+        # self.node_links = []
 
     def add_node(self, node_id, x, y, angle):
         """ <ots:Node Coordinate="(15.9460,-8.5808)" Direction="417.0623 deg(E)" Id="SB" />
@@ -55,8 +57,6 @@ class XmlWriter:
             "Radius": "19.0000 m"
         })
 
-        
-    
     def write(self, to_file=False):
         ET.indent(self.tree, space="  ")  # 2-space indentation
         if to_file:
@@ -68,9 +68,3 @@ class XmlWriter:
 x = XmlWriter()
 x.add_link()
 x.write()
-
-
-
-# Create the root element
-
-# Generate the XML string

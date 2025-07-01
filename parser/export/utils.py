@@ -10,5 +10,4 @@ def get_point_in_range(objects, x, y, range=0.1):
         if abs(obj.x1 - x) <= range and  abs(obj.y1 - y) <= range:
             points_found.append([obj.x1, obj.y1, obj])
 
-        
     return points_found
