@@ -110,6 +110,7 @@ class StraightCourse:
                 self.add_or_update_lane(lane)
                 line, = ax.plot([x0, x1], [y0, y1], color='green', picker=2)
                 line.parent = lane
+                utils.plot_oriented_triangle((x1, y1), self.angle0, "green", ax=ax)
                 # Optionally: Plot start and end
                 # if self.id == "cp7":
                 #     ax.plot(self.x0, self.y0, marker='o', color='black', markersize=5)
@@ -240,6 +241,7 @@ class CurveCourse:
                 self.add_or_update_lane(lane)
                 ax.plot(cx, cy, marker='o', color='red', markersize=1)
                 line, = ax.plot(arc_x, arc_y, color='red', picker=2)
+                utils.plot_oriented_triangle((arc_x[-1], arc_y[-1]), self.angle1, "red", ax=ax)
                 line.parent = lane
                 if SHOW_LABELS:
                     ax.text(arc_x[len(arc_x)//2], arc_y[len(arc_y)//2], lane.id, color='blue', va='center', fontsize=FONT_SIZE)

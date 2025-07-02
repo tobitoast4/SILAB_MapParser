@@ -162,3 +162,42 @@ def blink_line(fig, line, blinks=9, interval=30):
     timer = fig.canvas.new_timer(interval=interval)
     timer.add_callback(toggle_visibility)
     timer.start()
+
+
+def plot_oriented_triangle(center=(0, 0), angle_deg=0, color="black", size=3.0, ax=None, **kwargs):
+    """
+    Plots a triangle pointing in a given direction.
+
+    Parameters:
+    - center: (x, y) tuple for the triangle's center
+    - size: scaling factor (float)
+    - angle_deg: orientation angle in degrees (0 = pointing up)
+    - ax: matplotlib Axes object (optional)
+    - kwargs: passed to Polygon (e.g., facecolor, edgecolor)
+    """
+    # Define triangle in local coordinates (pointing up)
+    points = np.array([
+        [0, 0],      # top point
+        [-0.5, -1], # bottom left
+        [0.5, -1]   # bottom right
+    ]) * size
+
+    # Rotation matrix
+    theta = np.deg2rad(angle_deg-90)
+    R = np.array([
+        [np.cos(theta), -np.sin(theta)],
+        [np.sin(theta),  np.cos(theta)]
+    ])
+
+    # Rotate and translate points
+    rotated_points = points @ R.T + np.array(center)
+
+    # Create and add polygon
+    from matplotlib.patches import Polygon
+    triangle = Polygon(rotated_points, closed=True, color=color, **kwargs)
+    ax.add_patch(triangle)
+
+    # Auto-scale and show
+    ax.set_aspect('equal')
+    ax.autoscale_view()
+    return ax
