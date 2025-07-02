@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+import export.utils
 
 try:
     from draw import utils
@@ -26,7 +27,7 @@ class Course:
 
 class StraightCourse:
     class Lane:
-        def __init__(self, lane_id, x0, y0, x1, y1, angle0, angle1):
+        def __init__(self, lane_id, x0, y0, x1, y1, angle0, angle1, parent):
             self.lane_id = lane_id
             self.x0 = x0
             self.y0 = y0
@@ -34,6 +35,7 @@ class StraightCourse:
             self.y1 = y1
             self.angle0 = angle0
             self.angle1 = angle1
+            self.parent = parent
 
     def __init__(self, length, x0, y0, angle, id="", parent=None):
         self.id = id
@@ -48,6 +50,7 @@ class StraightCourse:
         self.angle0 = angle  # in degrees
         self.angle1 = angle  # in degrees
         self.lanes = []
+
 
     def add_or_update_lane(self, new_lane: Lane):
         self.lanes = [lane for lane in self.lanes if lane.lane_id != new_lane.lane_id]  # remove old lane
@@ -112,7 +115,7 @@ class StraightCourse:
 
 class CurveCourse:
     class Lane:
-        def __init__(self, lane_id, x0, y0, x1, y1, angle0, angle1):
+        def __init__(self, lane_id, x0, y0, x1, y1, angle0, angle1, parent):
             self.lane_id = lane_id
             self.x0 = x0
             self.y0 = y0
@@ -120,6 +123,7 @@ class CurveCourse:
             self.y1 = y1
             self.angle0 = angle0
             self.angle1 = angle1
+            self.parent = parent
 
     def __init__(self, length, radius, x0=0, y0=0, angle0=0, id="", parent=None):
         self.id = id
