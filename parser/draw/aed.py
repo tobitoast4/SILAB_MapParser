@@ -7,7 +7,7 @@ try:
 except:
     import utils
 
-NUM_POINTS = 10
+NUM_POINTS = 100
 SHOW_LABELS = True
 FONT_SIZE = 7
 
@@ -78,21 +78,23 @@ class StraightAED:
     
 
 class CircularArcAED:
-    def __init__(self, x0, y0, angle0, angle1, r, id="", parent=None):
+    def __init__(self, cx, cy, angle0, angle1, r, id="", parent=None):
         self.id = id 
         self.parent = parent
         self.connection0 = None
         self.connection1 = None
-        self.x0 = x0
-        self.y0 = y0
+        self.cx = cx
+        self.cy = cy
+        self.x0 = None
+        self.y0 = None
         self.x1 = None
         self.y1 = None
-        self.angle0 = angle0
-        self.angle1 = angle1
+        self.angle0 = utils.convert_angle(angle0, to="degrees") 
+        self.angle1 = utils.convert_angle(angle1, to="degrees") 
         self.r = r
         # Normalize angles to ensure correct sweep direction
         if self.angle1 < self.angle0:
-            self.angle1 += 2 * np.pi
+            self.angle1 += 360
 
     def get_points(self):
         pts = [export.utils.Point(self.x0, self.y0, self.angle0, self, 0),
@@ -106,7 +108,7 @@ class CircularArcAED:
             offset: tuple (dx, dy)
         """
         
-        self.x0, self.y0 = utils.translate((self.x0, self.y0), offset)
+        self.cx, self.cy = utils.translate((self.cx, self.cy), offset)
         return self
 
     def rotate(self, center, angle_deg):
@@ -116,25 +118,28 @@ class CircularArcAED:
             center: tuple (x, y)
             angle_deg: angle in degrees
         """
-        self.x0, self.y0 = utils.rotate_around((self.x0, self.y0), center, angle_deg)
-        angle_rad = utils.convert_angle(angle_deg, to="radians")
-        self.angle0 += angle_rad
-        self.angle1 += angle_rad
+        self.cx, self.cy = utils.rotate_around((self.cx, self.cy), center, angle_deg)
+        self.angle0 += angle_deg
+        self.angle1 += angle_deg
         return self
 
     def calculate(self, ax=None):
         # Generate the points (we dont need them now for drwaing, but later)
-        angles = np.linspace(self.angle0, self.angle1, NUM_POINTS)
-        arc_x = self.x0 + self.r * np.cos(angles)
-        arc_y = self.y0 + self.r * np.sin(angles)
+        angle0 = utils.convert_angle(self.angle0, to="radians")
+        angle1 = utils.convert_angle(self.angle1, to="radians")
+        angles = np.linspace(angle0, angle1, NUM_POINTS)
+        arc_x = self.cx + self.r * np.cos(angles)
+        arc_y = self.cy + self.r * np.sin(angles)
 
+        self.x0 = arc_x[0]
+        self.y0 = arc_y[0]
         self.x1 = arc_x[len(arc_x)-1]
         self.y1 = arc_y[len(arc_y)-1]
 
         # Plot the arc
         if ax:
             line, = ax.plot(arc_x, arc_y, 'b-', picker=2)
-            utils.plot_oriented_triangle((arc_x[-1], arc_y[-1]), self.angle1, "blue", ax=ax)
+            utils.plot_oriented_triangle((arc_x[-1], arc_y[-1]), self.angle1+90, "blue", ax=ax)
             line.parent = self
             if SHOW_LABELS:
                 ax.text(arc_x[len(arc_x)//2], arc_y[len(arc_y)//2], self.id, color='blue', va='center', fontsize=FONT_SIZE)
@@ -227,7 +232,7 @@ class HermiteSplineAED:
         # Plotting
         if ax:
             line, = ax.plot(curve[:, 0], curve[:, 1], color='purple', picker=2)
-            # utils.plot_oriented_triangle((arc_x[-1], arc_y[-1]), self.angle1, "blue", ax=ax)
+            utils.plot_oriented_triangle((self.x1, self.y1), self.angle1, "purple", ax=ax)
             line.parent = self
             if SHOW_LABELS:
                 ax.text(curve[len(curve)//2][0], curve[len(curve)//2][1], self.id, color='purple', va='center', fontsize=FONT_SIZE)
