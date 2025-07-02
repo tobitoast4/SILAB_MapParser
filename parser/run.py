@@ -166,7 +166,7 @@ for obj in objects:
 
 ## Create button for export
 def export_map(event):
-    xml_writer = export.xml.XmlWriter(inverse=True)
+    xml_writer = export.xml.XmlWriter(inverse=False)
 
     ## Add all points. If there are two points, only add one of them 
     for obj in objects:
@@ -181,9 +181,19 @@ def export_map(event):
     for obj in objects:
         if isinstance(obj, CircularArcAED):
             continue  # these might be to complicated, esp. in roundabouts (TODO: Implement solution for this)
-        p0 = xml_writer.find_point(obj.x0, obj.y0)
-        p1 = xml_writer.find_point(obj.x1, obj.y1)
-        link = xml_writer.add_link(obj.id, p0, p1)
+        if isinstance(obj, StraightCourse) or isinstance(obj, CurveCourse):
+            for lane in obj.lanes:
+                p0 = xml_writer.find_point(lane.x0, lane.y0)
+                p1 = xml_writer.find_point(lane.x1, lane.y1)
+                link = xml_writer.add_link(lane.id, p0, p1)
+                if isinstance(obj, StraightCourse):
+                    xml_writer.link_type_straight(link)
+                if isinstance(obj, CurveCourse):
+                    xml_writer.link_type_arc(link, lane.radius, obj.direction)
+        else:
+            p0 = xml_writer.find_point(obj.x0, obj.y0)
+            p1 = xml_writer.find_point(obj.x1, obj.y1)
+            link = xml_writer.add_link(obj.id, p0, p1)
 
         if isinstance(obj, StraightCourse):
             xml_writer.link_type_straight(link)

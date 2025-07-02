@@ -21,6 +21,22 @@ def convert_angle(value, to='degrees'):
         raise ValueError("Parameter 'to' must be either 'degrees' or 'radians'.")
 
 
+def euclidean_distance(point1, point2):
+    """
+    Calculate the Euclidean distance between two 2D points.
+
+    Parameters:
+    - point1: tuple of (x1, y1)
+    - point2: tuple of (x2, y2)
+
+    Returns:
+    - float: distance between the points
+    """
+    x1, y1 = point1
+    x2, y2 = point2
+    return math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+
+
 def vector_from_points(p1, p2):
     """
     Returns the vector from point p1 to point p2.

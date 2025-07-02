@@ -12,10 +12,10 @@ NUM_POINTS = 100
 SHOW_LABELS = True
 FONT_SIZE = 7
 
-# Lane#1 will be at 0, LANE_POSITIONS[0], Lane#2 will be LANE_POSITIONS[1] meters from Lane#1, 
-# Lane#3 will be LANE_POSITIONS[2] meters from Lane#1, ...
-LANE_POSITIONS = [0, 3.5]
-
+# Lane#0 will be at 0, LANE_POSITIONS[0], Lane#1 will be LANE_POSITIONS[1] meters from Lane#0, 
+# Lane#2 will be LANE_POSITIONS[2] meters from Lane#0, ...
+LANE_POSITIONS = [0, 3.5] 
+LANE_IDS_TO_EXPORT = [0, 1]  # Only export Lane#0 and Lane#1, not Lane#2, Lane#3, etc.
 
 
 
@@ -27,7 +27,8 @@ class Course:
 
 class StraightCourse:
     class Lane:
-        def __init__(self, id, x0, y0, x1, y1, angle0, angle1, parent):
+        def __init__(self, lane_id, id, x0, y0, x1, y1, angle0, angle1, parent):
+            self.lane_id = lane_id
             self.id = id
             self.x0 = x0
             self.y0 = y0
@@ -54,8 +55,9 @@ class StraightCourse:
     def get_points(self):
         pts = []
         for lane in self.lanes:
-            pts.append(export.utils.Point(lane.x0, lane.y0, lane.angle0, lane, 0))
-            pts.append(export.utils.Point(lane.x1, lane.y1, lane.angle1, lane, 1))
+            if lane.lane_id in LANE_IDS_TO_EXPORT:
+                pts.append(export.utils.Point(lane.x0, lane.y0, lane.angle0, lane, 0))
+                pts.append(export.utils.Point(lane.x1, lane.y1, lane.angle1, lane, 1))
         return pts
 
     def add_or_update_lane(self, new_lane: Lane):
@@ -105,7 +107,7 @@ class StraightCourse:
                 vector = utils.vector_from_points((self.x0, self.y0), (self.x1, self.y1))
                 x0, y0 = utils.translate_perpendicular((self.x0, self.y0), vector, -LANE_POSITIONS[l])
                 x1, y1 = utils.translate_perpendicular((self.x1, self.y1), vector, -LANE_POSITIONS[l])
-                lane = StraightCourse.Lane(f"{self.id}-lane{l}", 
+                lane = StraightCourse.Lane(l, f"{self.id}-lane{l}", 
                             x0, y0, x1, y1, self.angle0, self.angle1, self)
                 self.add_or_update_lane(lane)
                 line, = ax.plot([x0, x1], [y0, y1], color='green', picker=2)
@@ -124,7 +126,8 @@ class StraightCourse:
 
 class CurveCourse:
     class Lane:
-        def __init__(self, id, x0, y0, x1, y1, angle0, angle1, parent):
+        def __init__(self, lane_id, id, x0, y0, x1, y1, angle0, angle1, radius, parent):
+            self.lane_id = lane_id
             self.id = id
             self.x0 = x0
             self.y0 = y0
@@ -132,6 +135,7 @@ class CurveCourse:
             self.y1 = y1
             self.angle0 = angle0
             self.angle1 = angle1
+            self.radius = radius
             self.parent = parent
 
     def __init__(self, length, radius, x0=0, y0=0, angle0=0, id="", parent=None):
@@ -156,8 +160,9 @@ class CurveCourse:
     def get_points(self):
         pts = []
         for lane in self.lanes:
-            pts.append(export.utils.Point(lane.x0, lane.y0, lane.angle0, lane, 0))
-            pts.append(export.utils.Point(lane.x1, lane.y1, lane.angle1, lane, 1))
+            if lane.lane_id in LANE_IDS_TO_EXPORT:
+                pts.append(export.utils.Point(lane.x0, lane.y0, lane.angle0, lane, 0))
+                pts.append(export.utils.Point(lane.x1, lane.y1, lane.angle1, lane, 1))
         return pts
 
     def add_or_update_lane(self, new_lane: Lane):
@@ -236,8 +241,9 @@ class CurveCourse:
                 self.y1 = arc_y[-1]
 
             if ax:
-                lane = CurveCourse.Lane(f"{self.id}-lane{l}", arc_x[0], arc_y[0], arc_x[-1], 
-                                        arc_y[-1], self.angle0, self.angle1, self)
+                current_radius = utils.euclidean_distance((cx, cy), (arc_x[0], arc_y[0]))
+                lane = CurveCourse.Lane(l, f"{self.id}-lane{l}", arc_x[0], arc_y[0], arc_x[-1], 
+                                        arc_y[-1], self.angle0, self.angle1, current_radius, self)
                 self.add_or_update_lane(lane)
                 ax.plot(cx, cy, marker='o', color='red', markersize=1)
                 line, = ax.plot(arc_x, arc_y, color='red', picker=2)
