@@ -26,12 +26,14 @@ class Course:
 
 class StraightCourse:
     class Lane:
-        def __init__(self, lane_id, x0, y0, x1, y1):
+        def __init__(self, lane_id, x0, y0, x1, y1, angle0, angle1):
             self.lane_id = lane_id
             self.x0 = x0
             self.y0 = y0
             self.x1 = x1
             self.y1 = y1
+            self.angle0 = angle0
+            self.angle1 = angle1
 
     def __init__(self, length, x0, y0, angle, id="", parent=None):
         self.id = id
@@ -110,12 +112,14 @@ class StraightCourse:
 
 class CurveCourse:
     class Lane:
-        def __init__(self, lane_id, x0, y0, x1, y1):
+        def __init__(self, lane_id, x0, y0, x1, y1, angle0, angle1):
             self.lane_id = lane_id
             self.x0 = x0
             self.y0 = y0
             self.x1 = x1
             self.y1 = y1
+            self.angle0 = angle0
+            self.angle1 = angle1
 
     def __init__(self, length, radius, x0=0, y0=0, angle0=0, id="", parent=None):
         self.id = id
