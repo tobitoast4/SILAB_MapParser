@@ -16,10 +16,11 @@ def get_points_in_range(objects, x, y, range=0.1):
     for obj in objects:
         if isinstance(obj, draw.aed.CircularArcAED):
             continue  # these might be to complicated, esp. in roundabouts (TODO: Implement solution for this)
-        if abs(obj.x0 - x) <= range and  abs(obj.y0 - y) <= range:
-            points_found.append(Point(obj.x0, obj.y0, obj.angle0, obj, 0))
-        if abs(obj.x1 - x) <= range and  abs(obj.y1 - y) <= range:
-            points_found.append(Point(obj.x1, obj.y1, obj.angle1, obj, 1))
+        else:
+            pts = obj.get_points()
+            for pt in pts:
+                if abs(pt.x - x) <= range and  abs(pt.y - y) <= range:
+                    points_found.append(pt)
     # if len(points_found) > 1:
     #     raise LookupError("More than 1 point found! Maybe decrese the range?")
     return points_found

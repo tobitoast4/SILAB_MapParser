@@ -72,7 +72,10 @@ class XmlWriter:
                 points_found.append(point)
         if len(points_found) > 1:
             raise LookupError("More than 1 point found! Maybe decrese the range?")
-        return points_found[0]
+        elif len(points_found) == 1: 
+            return points_found[0]
+        else:
+            return None
 
     def write(self, to_file=False):
         ET.indent(self.tree, space="  ")  # 2-space indentation

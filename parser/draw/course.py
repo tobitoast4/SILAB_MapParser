@@ -10,7 +10,7 @@ except:
 
 NUM_POINTS = 100
 SHOW_LABELS = True
-FONT_SIZE = 9
+FONT_SIZE = 7
 
 # Lane#1 will be at 0, LANE_POSITIONS[0], Lane#2 will be LANE_POSITIONS[1] meters from Lane#1, 
 # Lane#3 will be LANE_POSITIONS[2] meters from Lane#1, ...
@@ -27,8 +27,8 @@ class Course:
 
 class StraightCourse:
     class Lane:
-        def __init__(self, lane_id, x0, y0, x1, y1, angle0, angle1, parent):
-            self.lane_id = lane_id
+        def __init__(self, id, x0, y0, x1, y1, angle0, angle1, parent):
+            self.id = id
             self.x0 = x0
             self.y0 = y0
             self.x1 = x1
@@ -51,9 +51,15 @@ class StraightCourse:
         self.angle1 = angle  # in degrees
         self.lanes = []
 
+    def get_points(self):
+        pts = []
+        for lane in self.lanes:
+            pts.append(export.utils.Point(lane.x0, lane.y0, lane.angle0, lane, 0))
+            pts.append(export.utils.Point(lane.x1, lane.y1, lane.angle1, lane, 1))
+        return pts
 
     def add_or_update_lane(self, new_lane: Lane):
-        self.lanes = [lane for lane in self.lanes if lane.lane_id != new_lane.lane_id]  # remove old lane
+        self.lanes = [lane for lane in self.lanes if lane.id != new_lane.id]  # remove old lane
         self.lanes.append(new_lane)
 
     def translate(self, offset):
@@ -99,15 +105,17 @@ class StraightCourse:
                 vector = utils.vector_from_points((self.x0, self.y0), (self.x1, self.y1))
                 x0, y0 = utils.translate_perpendicular((self.x0, self.y0), vector, -LANE_POSITIONS[l])
                 x1, y1 = utils.translate_perpendicular((self.x1, self.y1), vector, -LANE_POSITIONS[l])
-                self.add_or_update_lane(StraightCourse.Lane(l, x0, y0, x1, y1))
+                lane = StraightCourse.Lane(f"{self.id}-lane{l}", 
+                            x0, y0, x1, y1, self.angle0, self.angle1, self)
+                self.add_or_update_lane(lane)
                 line, = ax.plot([x0, x1], [y0, y1], color='green', picker=2)
-                line.parent = self
-            # Optionally: Plot start and end
-            # if self.id == "cp7":
-            #     ax.plot(self.x0, self.y0, marker='o', color='black', markersize=5)
-            #     ax.plot(self.x1, self.y1, marker='x', color='red', markersize=5)
-            if SHOW_LABELS:
-                ax.text((self.x0+self.x1)//2, (self.y0+self.y1)//2, self.id, color='blue', va='center', fontsize=FONT_SIZE)
+                line.parent = lane
+                # Optionally: Plot start and end
+                # if self.id == "cp7":
+                #     ax.plot(self.x0, self.y0, marker='o', color='black', markersize=5)
+                #     ax.plot(self.x1, self.y1, marker='x', color='red', markersize=5)
+                if SHOW_LABELS:
+                    ax.text((self.x0+self.x1)//2, (self.y0+self.y1)//2, lane.id, color='blue', va='center', fontsize=FONT_SIZE)
             return line
         else:
             return self.x1, self.y1
@@ -115,8 +123,8 @@ class StraightCourse:
 
 class CurveCourse:
     class Lane:
-        def __init__(self, lane_id, x0, y0, x1, y1, angle0, angle1, parent):
-            self.lane_id = lane_id
+        def __init__(self, id, x0, y0, x1, y1, angle0, angle1, parent):
+            self.id = id
             self.x0 = x0
             self.y0 = y0
             self.x1 = x1
@@ -144,8 +152,15 @@ class CurveCourse:
         self.angle1 = None        # in degrees
         self.lanes = []
 
+    def get_points(self):
+        pts = []
+        for lane in self.lanes:
+            pts.append(export.utils.Point(lane.x0, lane.y0, lane.angle0, lane, 0))
+            pts.append(export.utils.Point(lane.x1, lane.y1, lane.angle1, lane, 1))
+        return pts
+
     def add_or_update_lane(self, new_lane: Lane):
-        self.lanes = [lane for lane in self.lanes if lane.lane_id != new_lane.lane_id]  # remove old lane
+        self.lanes = [lane for lane in self.lanes if lane.id != new_lane.id]  # remove old lane
         self.lanes.append(new_lane)
 
     def translate(self, offset):
@@ -220,12 +235,14 @@ class CurveCourse:
                 self.y1 = arc_y[-1]
 
             if ax:
-                self.add_or_update_lane(CurveCourse.Lane(l, self.x0, self.y0, self.x1, self.y1))
+                lane = CurveCourse.Lane(f"{self.id}-lane{l}", arc_x[0], arc_y[0], arc_x[-1], 
+                                        arc_y[-1], self.angle0, self.angle1, self)
+                self.add_or_update_lane(lane)
                 ax.plot(cx, cy, marker='o', color='red', markersize=1)
                 line, = ax.plot(arc_x, arc_y, color='red', picker=2)
-                line.parent = self
+                line.parent = lane
                 if SHOW_LABELS:
-                    ax.text(arc_x[len(arc_x)//2], arc_y[len(arc_y)//2], self.id, color='blue', va='center', fontsize=FONT_SIZE)
+                    ax.text(arc_x[len(arc_x)//2], arc_y[len(arc_y)//2], lane.id, color='blue', va='center', fontsize=FONT_SIZE)
         if ax:
             return line
         else:

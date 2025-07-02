@@ -1,14 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import export.utils
 
 try:
     from draw import utils
 except:
     import utils
 
-NUM_POINTS = 100
+NUM_POINTS = 10
 SHOW_LABELS = True
-FONT_SIZE = 9
+FONT_SIZE = 7
 
 
 
@@ -32,6 +33,11 @@ class StraightAED:
         angle = utils.angle_from_vector(v1)
         self.angle0 = angle
         self.angle1 = angle
+
+    def get_points(self):
+        pts = [export.utils.Point(self.x0, self.y0, self.angle0, self, 0),
+               export.utils.Point(self.x1, self.y1, self.angle1, self, 1)]
+        return pts
 
     def translate(self, offset):
         """Translate all points of the Straight by a given offset.
@@ -86,6 +92,11 @@ class CircularArcAED:
         # Normalize angles to ensure correct sweep direction
         if self.angle1 < self.angle0:
             self.angle1 += 2 * np.pi
+
+    def get_points(self):
+        pts = [export.utils.Point(self.x0, self.y0, self.angle0, self, 0),
+               export.utils.Point(self.x1, self.y1, self.angle1, self, 1)]
+        return pts
 
     def translate(self, offset):
         """Translate all points of the Straight by a given offset.
@@ -145,6 +156,11 @@ class HermiteSplineAED:
         self.y1 = y1
         self.angle0 = utils.convert_angle(angle0, to="degrees")
         self.angle1 = utils.convert_angle(angle1, to="degrees")
+
+    def get_points(self):
+        pts = [export.utils.Point(self.x0, self.y0, self.angle0, self, 0),
+               export.utils.Point(self.x1, self.y1, self.angle1, self, 1)]
+        return pts
 
     def translate(self, offset):
         """Translate all points of the Straight by a given offset.

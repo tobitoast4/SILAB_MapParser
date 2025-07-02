@@ -172,29 +172,10 @@ def export_map(event):
     for obj in objects:
         if isinstance(obj, CircularArcAED):
             continue  # these might be to complicated, esp. in roundabouts (TODO: Implement solution for this)
-        points0 = export.utils.get_points_in_range(objects, obj.x0, obj.y0)
-        if len(points0) == 1:
-            point = points0[0]
-            xml_writer.add_point(point)
-        elif len(points0) == 2:
-            if not(any([p.pos == 0 for p in points0]) and any([p.pos == 0 for p in points0])):
-                raise LookupError
-            # add point 1
-            point = [p for p in points0 if p.pos == 1][0]
-            xml_writer.add_point(point)
-        else:
-            raise LookupError("Too many")
-        
-        points1 = export.utils.get_points_in_range(objects, obj.x1, obj.y1)
-        if len(points1) == 1:
-            point = points1[0]
-            xml_writer.add_point(point)
-        elif len(points1) == 2:
-            if not(any([p.pos == 0 for p in points1]) and any([p.pos == 0 for p in points1])):
-                raise LookupError
-            # do nothing, the should habe been added already
-        else:
-            raise LookupError("Too many")
+        for pt in obj.get_points():
+            added_point = xml_writer.find_point(pt.x, pt.y)
+            if added_point == None:
+                xml_writer.add_point(pt)
         
     ## Add all links
     for obj in objects:
