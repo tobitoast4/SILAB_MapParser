@@ -131,6 +131,7 @@ class CircularArcAED:
         arc_x = self.cx + self.r * np.cos(angles)
         arc_y = self.cy + self.r * np.sin(angles)
 
+        
         self.x0 = arc_x[0]
         self.y0 = arc_y[0]
         self.x1 = arc_x[len(arc_x)-1]

@@ -11,7 +11,7 @@ import export.utils
 import export.xml
 
 
-with open('parser/full.json', 'r') as f:
+with open('parser/lying_eight2_Area2.json', 'r') as f:
     file_content = f.read()
     map_content = json.loads(file_content)
 
@@ -76,8 +76,13 @@ for element in map_content["elements"]:
             elif c_type == "Bezier":
                 x0 = v["x0"]; y0 = v["y0"]; x1 = v["x1"]; y1 = v["y1"]
                 angle0 = v["Angle0"]; angle1 = v["Angle1"]
+                d0 = v["DistToRef0"]; d1 = v["DistToRef1"]
                 spline = HermiteSplineAED(x0, y0, angle0, x1, y1, angle1, id=c_id, parent=area)
                 spline.calculate()
+                spline.x0, spline.y0 = utils.translate_perpendicular(
+                    (spline.x0, spline.y0), utils.vector_from_angle(angle0), d0)
+                spline.x1, spline.y1 = utils.translate_perpendicular(
+                    (spline.x1, spline.y1), utils.vector_from_angle(angle1), d1)
                 objects.append(spline)
                 area.parts.append(spline)
 
