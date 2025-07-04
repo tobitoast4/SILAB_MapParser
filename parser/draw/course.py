@@ -71,6 +71,7 @@ class StraightCourse:
             offset: tuple (dx, dy)
         """
         self.x0, self.y0 = utils.translate((self.x0, self.y0), offset)
+        self.x1, self.y1 = utils.translate((self.x1, self.y1), offset)
         return self
 
     def rotate(self, center, angle_deg):
@@ -80,8 +81,17 @@ class StraightCourse:
             center: tuple (x, y)
             angle_deg: angle in degrees
         """
+        self.x0, self.y0 = utils.rotate_around((self.x0, self.y0), center, angle_deg)
+        self.x1, self.y1 = utils.rotate_around((self.x1, self.y1), center, angle_deg)
         self.angle0 += angle_deg
         self.angle1 += angle_deg
+        return self
+    
+    def mirror(self):
+        self.y0 = -self.y0
+        self.y1 = -self.y1
+        self.angle0 = -self.angle0
+        self.angle1 = -self.angle1
         return self
 
     def calculate(self, ax=None):
@@ -99,8 +109,9 @@ class StraightCourse:
         """
         angle_rad = np.radians(self.angle0)
         
-        self.x1 = self.x0 + self.length * np.cos(angle_rad)
-        self.y1 = self.y0 + self.length * np.sin(angle_rad)
+        if not self.x1 and not  self.y1:
+            self.x1 = self.x0 + self.length * np.cos(angle_rad)
+            self.y1 = self.y0 + self.length * np.sin(angle_rad)
         
         if ax:
             for l in range(len(LANE_POSITIONS)):
@@ -189,6 +200,17 @@ class CurveCourse:
         self.x0, self.y0 = utils.rotate_around((self.x0, self.y0), center, angle_deg)
         self.angle0 += angle_deg
         self.angle1 += angle_deg
+        return self
+    
+    def mirror(self):
+        self.y0 = -self.y0
+        self.y1 = -self.y1
+        self.angle0 = -self.angle0
+        self.angle1 = -self.angle1
+        if self.direction == "right":
+            self.direction = "left"
+        else: 
+            self.direction = "right"
         return self
 
     def calculate(self, ax=None):

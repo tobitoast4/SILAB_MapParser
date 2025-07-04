@@ -61,6 +61,13 @@ class StraightAED:
         self.angle0 += angle_deg
         self.angle1 += angle_deg
         return self
+    
+    def mirror(self):
+        self.y0 = -self.y0
+        self.y1 = -self.y1
+        self.angle0 = -self.angle0
+        self.angle1 = -self.angle1
+        return self
 
     def calculate(self, ax=None):
         if ax:
@@ -121,6 +128,12 @@ class CircularArcAED:
         self.cx, self.cy = utils.rotate_around((self.cx, self.cy), center, angle_deg)
         self.angle0 += angle_deg
         self.angle1 += angle_deg
+        return self
+    
+    def mirror(self):
+        self.cy = -self.cy
+        self.angle0 = -self.angle0
+        self.angle1 = -self.angle1
         return self
 
     def calculate(self, ax=None):
@@ -191,6 +204,13 @@ class HermiteSplineAED:
         self.x1, self.y1 = utils.rotate_around((self.x1, self.y1), center, angle_deg)
         self.angle0 += angle_deg
         self.angle1 += angle_deg
+        return self
+    
+    def mirror(self):
+        self.y0 = -self.y0
+        self.y1 = -self.y1
+        self.angle0 = -self.angle0
+        self.angle1 = -self.angle1
         return self
 
     def calculate(self, ax=None):
