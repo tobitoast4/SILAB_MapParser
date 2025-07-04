@@ -11,7 +11,7 @@ import export.utils
 import export.xml
 
 
-with open('parser/full.json', 'r') as f:
+with open('parser/lying_eight2_Area2.json', 'r') as f:
     file_content = f.read()
     map_content = json.loads(file_content)
 
