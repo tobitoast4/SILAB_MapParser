@@ -109,7 +109,7 @@ class Parser:
 
 
 if __name__ == "__main__":
-    with open('./parser/res/lying_eight2_Area2.cfg', 'r') as f:
+    with open('./parser/res/MotorwayBegin_27_Area2.cfg', 'r') as f:
         raw_text = f.read()
 
     parser = Parser()
@@ -117,7 +117,7 @@ if __name__ == "__main__":
     nested_lists = parser.parse_to_nested_lists(tokens)
     elements = parser.get_lane_elements(nested_lists)
 
-    with open("./parser/lying_eight2_Area2.json", "w") as json_file:
+    with open("./parser/MotorwayBegin_27_Area2.json", "w") as json_file:
         json.dump({
             "type": "Area2", 
             "id": "aed1",

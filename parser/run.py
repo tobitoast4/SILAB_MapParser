@@ -11,7 +11,7 @@ import export.utils
 import export.xml
 
 
-with open('parser/lying_eight2_Area2.json', 'r') as f:
+with open('parser/MotorwayBegin_27_Area2.json', 'r') as f:
     file_content = f.read()
     map_content = json.loads(file_content)
 
@@ -20,9 +20,9 @@ objects = []  # contains all instances of StraightCourse, CurveCourse, StraightA
               # note that StraightCourse and CurveCourse themselves again can contain multiple lanes 
 
 # initial settings for Course
-angle = 90
+angle = 0
 x = 0
-y = 0
+y = -3.625
 
 
 ## Create objects
