@@ -1,0 +1,719 @@
+<ots:Network>
+  <ots:Node Id="cp1-lane0-0" Coordinate="(0.0, 3.625)" Direction="0.0 deg(E)" />
+  <ots:Node Id="cp1-lane0-1" Coordinate="(10.0, 3.625)" Direction="0.0 deg(E)" />
+  <ots:Node Id="cp1-lane1-0" Coordinate="(0.0, -0.125)" Direction="0.0 deg(E)" />
+  <ots:Node Id="cp1-lane1-1" Coordinate="(10.0, -0.125)" Direction="0.0 deg(E)" />
+  <ots:Node Id="01_l63-0" Coordinate="(555.4874, -0.1253)" Direction="-0.0 deg(E)" />
+  <ots:Node Id="01_l63-1" Coordinate="(590.4903, 0.4997)" Direction="-0.0 deg(E)" />
+  <ots:Node Id="01_l66-0" Coordinate="(555.488, 3.6247)" Direction="0.0 deg(E)" />
+  <ots:Node Id="01_l66-1" Coordinate="(590.49, 3.6247)" Direction="0.0 deg(E)" />
+  <ots:Node Id="01_l67-0" Coordinate="(555.488, 7.3747)" Direction="0.0 deg(E)" />
+  <ots:Node Id="01_l67-1" Coordinate="(590.49, 7.3747)" Direction="0.0 deg(E)" />
+  <ots:Node Id="01_l69-0" Coordinate="(590.49, 14.1247)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l69-1" Coordinate="(555.488, 14.1247)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l70-0" Coordinate="(590.49, 17.8747)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l70-1" Coordinate="(555.488, 17.8747)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l71-0" Coordinate="(590.49, 20.9997)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l71-1" Coordinate="(555.488, 20.9997)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l132-0" Coordinate="(395.3629, -0.1252)" Direction="-0.0 deg(E)" />
+  <ots:Node Id="01_l132-1" Coordinate="(511.871, -0.1253)" Direction="-0.0 deg(E)" />
+  <ots:Node Id="01_l136-0" Coordinate="(395.3629, 3.6248)" Direction="-0.0 deg(E)" />
+  <ots:Node Id="01_l136-1" Coordinate="(511.871, 3.6247)" Direction="-0.0 deg(E)" />
+  <ots:Node Id="01_l137-0" Coordinate="(395.3629, 7.3748)" Direction="-0.0 deg(E)" />
+  <ots:Node Id="01_l137-1" Coordinate="(511.871, 7.3747)" Direction="-0.0 deg(E)" />
+  <ots:Node Id="01_l142-0" Coordinate="(511.871, 20.9997)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l142-1" Coordinate="(395.3629, 20.9998)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l143-0" Coordinate="(511.871, 17.8747)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l143-1" Coordinate="(395.3629, 17.8748)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l144-0" Coordinate="(511.871, 14.1247)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l144-1" Coordinate="(395.3629, 14.1248)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l145-1" Coordinate="(187.073, 14.1249)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l146-1" Coordinate="(187.073, 17.8749)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l147-1" Coordinate="(187.073, 20.9999)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l148-0" Coordinate="(187.073, 7.3749)" Direction="-0.0 deg(E)" />
+  <ots:Node Id="01_l149-0" Coordinate="(187.073, 3.6249)" Direction="-0.0 deg(E)" />
+  <ots:Node Id="01_l150-0" Coordinate="(187.073, -0.1251)" Direction="-0.0 deg(E)" />
+  <ots:Node Id="01_l225-1" Coordinate="(250.2549, -13.3142)" Direction="-13.5803 deg(E)" />
+  <ots:Node Id="01_l151-0" Coordinate="(93.621, -0.125)" Direction="-0.0001 deg(E)" />
+  <ots:Node Id="01_l152-0" Coordinate="(93.621, 3.625)" Direction="-0.0001 deg(E)" />
+  <ots:Node Id="01_l153-0" Coordinate="(93.621, 7.375)" Direction="-0.0001 deg(E)" />
+  <ots:Node Id="01_l161-1" Coordinate="(93.621, 14.125)" Direction="179.9999 deg(E)" />
+  <ots:Node Id="01_l162-1" Coordinate="(93.621, 17.875)" Direction="179.9999 deg(E)" />
+  <ots:Node Id="01_l163-1" Coordinate="(93.621, 21.0)" Direction="179.9999 deg(E)" />
+  <ots:Node Id="01_l154-0" Coordinate="(40.884, 7.375)" Direction="-0.0 deg(E)" />
+  <ots:Node Id="01_l155-0" Coordinate="(40.884, 3.625)" Direction="-0.0 deg(E)" />
+  <ots:Node Id="01_l156-0" Coordinate="(40.8843, 0.5)" Direction="-0.0 deg(E)" />
+  <ots:Node Id="01_l160-1" Coordinate="(40.884, 14.125)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l164-1" Coordinate="(40.884, 21.0)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l165-1" Coordinate="(40.884, 17.875)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l157-0" Coordinate="(10.0, 0.5)" Direction="0.0 deg(E)" />
+  <ots:Node Id="01_l159-0" Coordinate="(10.0, 7.375)" Direction="0.0 deg(E)" />
+  <ots:Node Id="01_l166-1" Coordinate="(10.0, 14.125)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l167-1" Coordinate="(10.0, 17.875)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l168-1" Coordinate="(10.0, 21.0)" Direction="180.0 deg(E)" />
+  <ots:Node Id="01_l226-1" Coordinate="(265.6327, -17.0289)" Direction="-13.5802 deg(E)" />
+  <ots:Node Id="01_l230-1" Coordinate="(264.7522, -20.674)" Direction="-13.5803 deg(E)" />
+  <ots:Node Id="01_l227-1" Coordinate="(332.4536, -16.1636)" Direction="19.7252 deg(E)" />
+  <ots:Node Id="01_l233-0" Coordinate="(298.7578, -25.1587)" Direction="-0.4234 deg(E)" />
+  <ots:Node Id="01_l231-1" Coordinate="(333.7193, -19.6936)" Direction="19.7252 deg(E)" />
+  <ots:Node Id="01_l228-1" Coordinate="(344.0631, -12.001)" Direction="19.7256 deg(E)" />
+  <ots:Node Id="cp2-lane0-1" Coordinate="(1135.8011, -207.2739)" Direction="-42.9718 deg(E)" />
+  <ots:Node Id="cp2-lane1-1" Coordinate="(1133.245, -210.0177)" Direction="-42.9718 deg(E)" />
+  <ots:Node Id="cp3-lane0-1" Coordinate="(1693.2269, -349.6077)" Direction="14.324 deg(E)" />
+  <ots:Node Id="cp3-lane1-1" Coordinate="(1694.1546, -353.2411)" Direction="14.324 deg(E)" />
+  <ots:Node Id="02_l63-0" Coordinate="(2159.7765, -238.2199)" Direction="14.3236 deg(E)" />
+  <ots:Node Id="02_l63-1" Coordinate="(2189.4402, -230.0002)" Direction="14.3236 deg(E)" />
+  <ots:Node Id="02_l66-0" Coordinate="(2158.8496, -234.5864)" Direction="14.3246 deg(E)" />
+  <ots:Node Id="02_l66-1" Coordinate="(2188.6669, -226.9724)" Direction="14.3246 deg(E)" />
+  <ots:Node Id="02_l67-0" Coordinate="(2157.9218, -230.9529)" Direction="14.3246 deg(E)" />
+  <ots:Node Id="02_l67-1" Coordinate="(2187.7391, -223.339)" Direction="14.3246 deg(E)" />
+  <ots:Node Id="02_l69-0" Coordinate="(2186.0691, -216.7989)" Direction="194.3246 deg(E)" />
+  <ots:Node Id="02_l69-1" Coordinate="(2156.2518, -224.4128)" Direction="194.3246 deg(E)" />
+  <ots:Node Id="02_l70-0" Coordinate="(2185.1412, -213.1654)" Direction="194.3246 deg(E)" />
+  <ots:Node Id="02_l70-1" Coordinate="(2155.324, -220.7794)" Direction="194.3246 deg(E)" />
+  <ots:Node Id="02_l71-0" Coordinate="(2184.3681, -210.1376)" Direction="194.3246 deg(E)" />
+  <ots:Node Id="02_l71-1" Coordinate="(2154.5508, -217.7516)" Direction="194.3246 deg(E)" />
+  <ots:Node Id="02_l132-0" Coordinate="(2005.4995, -277.613)" Direction="14.3238 deg(E)" />
+  <ots:Node Id="02_l132-1" Coordinate="(2122.6212, -247.7071)" Direction="14.3238 deg(E)" />
+  <ots:Node Id="02_l136-0" Coordinate="(2004.5717, -273.9796)" Direction="14.3238 deg(E)" />
+  <ots:Node Id="02_l136-1" Coordinate="(2121.6934, -244.0737)" Direction="14.3238 deg(E)" />
+  <ots:Node Id="02_l137-0" Coordinate="(2003.644, -270.3462)" Direction="14.3238 deg(E)" />
+  <ots:Node Id="02_l137-1" Coordinate="(2120.7657, -240.4403)" Direction="14.3238 deg(E)" />
+  <ots:Node Id="02_l142-0" Coordinate="(2117.3948, -227.2389)" Direction="194.3238 deg(E)" />
+  <ots:Node Id="02_l142-1" Coordinate="(2000.2731, -257.1447)" Direction="194.3238 deg(E)" />
+  <ots:Node Id="02_l143-0" Coordinate="(2118.168, -230.2667)" Direction="194.3238 deg(E)" />
+  <ots:Node Id="02_l143-1" Coordinate="(2001.0462, -260.1726)" Direction="194.3238 deg(E)" />
+  <ots:Node Id="02_l144-0" Coordinate="(2119.0957, -233.9001)" Direction="194.3238 deg(E)" />
+  <ots:Node Id="02_l144-1" Coordinate="(2001.974, -263.806)" Direction="194.3238 deg(E)" />
+  <ots:Node Id="02_l145-1" Coordinate="(1882.1954, -294.3901)" Direction="194.3237 deg(E)" />
+  <ots:Node Id="02_l146-1" Coordinate="(1881.2676, -290.7566)" Direction="194.3237 deg(E)" />
+  <ots:Node Id="02_l147-1" Coordinate="(1880.4945, -287.7288)" Direction="194.3237 deg(E)" />
+  <ots:Node Id="02_l148-0" Coordinate="(1883.8653, -300.9302)" Direction="14.3237 deg(E)" />
+  <ots:Node Id="02_l149-0" Coordinate="(1884.7931, -304.5636)" Direction="14.3237 deg(E)" />
+  <ots:Node Id="02_l150-0" Coordinate="(1885.7208, -308.1971)" Direction="14.3237 deg(E)" />
+  <ots:Node Id="02_l170-1" Coordinate="(1969.1739, -347.9954)" Direction="-73.0977 deg(E)" />
+  <ots:Node Id="02_l171-0" Coordinate="(1973.0011, -346.8324)" Direction="-253.0975 deg(E)" />
+  <ots:Node Id="02_l152-0" Coordinate="(1765.3903, -335.0518)" Direction="14.3238 deg(E)" />
+  <ots:Node Id="02_l153-0" Coordinate="(1764.4625, -331.4184)" Direction="14.3238 deg(E)" />
+  <ots:Node Id="02_l161-1" Coordinate="(1762.7926, -324.8782)" Direction="194.3238 deg(E)" />
+  <ots:Node Id="02_l162-1" Coordinate="(1761.8648, -321.2448)" Direction="194.3238 deg(E)" />
+  <ots:Node Id="02_l163-1" Coordinate="(1761.0917, -318.2169)" Direction="194.3238 deg(E)" />
+  <ots:Node Id="02_l151-0" Coordinate="(1766.318, -338.6852)" Direction="14.3238 deg(E)" />
+  <ots:Node Id="02_l154-0" Coordinate="(1719.5364, -342.8898)" Direction="14.3238 deg(E)" />
+  <ots:Node Id="02_l156-0" Coordinate="(1721.2376, -349.5511)" Direction="14.3236 deg(E)" />
+  <ots:Node Id="02_l160-1" Coordinate="(1717.8665, -336.3496)" Direction="194.3238 deg(E)" />
+  <ots:Node Id="02_l164-1" Coordinate="(1716.1656, -329.6883)" Direction="194.3238 deg(E)" />
+  <ots:Node Id="02_l165-1" Coordinate="(1716.9387, -332.7162)" Direction="194.3238 deg(E)" />
+  <ots:Node Id="02_l169-0" Coordinate="(1720.4646, -346.5232)" Direction="14.3236 deg(E)" />
+  <ots:Node Id="02_l157-0" Coordinate="(1694.9278, -356.269)" Direction="14.324 deg(E)" />
+  <ots:Node Id="02_l166-1" Coordinate="(1691.5569, -343.0676)" Direction="194.324 deg(E)" />
+  <ots:Node Id="02_l167-1" Coordinate="(1690.6291, -339.4341)" Direction="194.324 deg(E)" />
+  <ots:Node Id="02_l168-1" Coordinate="(1689.856, -336.4063)" Direction="194.324 deg(E)" />
+  <ots:Node Id="02_l172-1" Coordinate="(1994.9763, -432.9094)" Direction="-73.0978 deg(E)" />
+  <ots:Node Id="02_l173-0" Coordinate="(1998.8035, -431.7465)" Direction="106.9022 deg(E)" />
+  <ots:Node Id="02_l181-0" Coordinate="(2013.9564, -440.6365)" Direction="-164.1882 deg(E)" />
+  <ots:Node Id="02_l213-0" Coordinate="(2001.7529, -442.3125)" Direction="-253.0975 deg(E)" />
+  <ots:Node Id="02_l212-1" Coordinate="(1998.4041, -443.3301)" Direction="-73.0977 deg(E)" />
+  <ots:Node Id="02_l195-1" Coordinate="(1986.8625, -448.3093)" Direction="-164.1882 deg(E)" />
+  <ots:Node Id="02_l221-0" Coordinate="(1993.2744, -446.4935)" Direction="195.8122 deg(E)" />
+  <ots:Node Id="02_l216-0" Coordinate="(1994.16, -449.6205)" Direction="15.8116 deg(E)" />
+  <ots:Node Id="02_l217-0" Coordinate="(1988.6336, -454.5634)" Direction="15.8122 deg(E)" />
+  <ots:Node Id="02_l217-1" Coordinate="(1995.0456, -452.7475)" Direction="15.8122 deg(E)" />
+  <ots:Node Id="02_l218-1" Coordinate="(2007.5284, -449.2125)" Direction="15.8117 deg(E)" />
+  <ots:Node Id="02_l219-1" Coordinate="(2015.7274, -446.8905)" Direction="15.8123 deg(E)" />
+  <ots:Node Id="02_l220-0" Coordinate="(1987.748, -451.4364)" Direction="15.8122 deg(E)" />
+  <ots:Node Id="02_l222-1" Coordinate="(2005.7572, -442.9584)" Direction="195.8123 deg(E)" />
+  <ots:Node Id="02_l184-0" Coordinate="(2079.4995, -439.0797)" Direction="-204.9433 deg(E)" />
+  <ots:Node Id="02_l184-1" Coordinate="(2048.6653, -433.9251)" Direction="-164.1882 deg(E)" />
+  <ots:Node Id="02_l185-0" Coordinate="(2049.619, -437.2926)" Direction="15.8116 deg(E)" />
+  <ots:Node Id="02_l185-1" Coordinate="(2078.0234, -442.2532)" Direction="-24.9435 deg(E)" />
+  <ots:Node Id="02_l186-1" Coordinate="(2128.3219, -465.6469)" Direction="-24.9431 deg(E)" />
+  <ots:Node Id="02_l187-0" Coordinate="(2129.798, -462.4734)" Direction="155.0569 deg(E)" />
+  <ots:Node Id="02_l188-0" Coordinate="(1939.5994, -477.3911)" Direction="63.4641 deg(E)" />
+  <ots:Node Id="02_l188-1" Coordinate="(1951.1778, -465.1707)" Direction="15.8116 deg(E)" />
+  <ots:Node Id="02_l189-0" Coordinate="(1950.2241, -461.8031)" Direction="-164.1882 deg(E)" />
+  <ots:Node Id="02_l189-1" Coordinate="(1936.4681, -475.8274)" Direction="-116.5359 deg(E)" />
+  <ots:Node Id="02_l190-1" Coordinate="(1912.3129, -524.1987)" Direction="243.4638 deg(E)" />
+  <ots:Node Id="02_l191-0" Coordinate="(1915.4442, -525.7624)" Direction="63.4638 deg(E)" />
+  <ots:Node Id="02_l196-1" Coordinate="(1978.2622, -450.7449)" Direction="195.8118 deg(E)" />
+  <ots:Node Id="02_l197-0" Coordinate="(1979.1477, -453.8719)" Direction="15.8118 deg(E)" />
+  <ots:Node Id="02_l200-0" Coordinate="(1980.0333, -456.9989)" Direction="15.8118 deg(E)" />
+  <ots:Node Id="02_l202-1" Coordinate="(2028.5761, -436.4963)" Direction="-164.1882 deg(E)" />
+  <ots:Node Id="02_l205-0" Coordinate="(2030.3472, -442.7503)" Direction="15.8117 deg(E)" />
+  <ots:Node Id="02_l206-1" Coordinate="(1964.0243, -461.5326)" Direction="15.8118 deg(E)" />
+  <ots:Node Id="02_l207-0" Coordinate="(1962.2532, -455.2786)" Direction="-164.1882 deg(E)" />
+  <ots:Node Id="cp4-lane0-1" Coordinate="(2901.5965, 1021.1716)" Direction="105.9978 deg(E)" />
+  <ots:Node Id="cp4-lane1-1" Coordinate="(2905.2013, 1022.2051)" Direction="105.9978 deg(E)" />
+  <ots:Link Id="cp1-lane0" NodeStart="cp1-lane0-0" NodeEnd="cp1-lane0-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="cp1-lane1" NodeStart="cp1-lane1-0" NodeEnd="cp1-lane1-1" Type="URBAN">
+    <ots:Straight />
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l63" NodeStart="01_l63-0" NodeEnd="01_l63-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l66" NodeStart="01_l66-0" NodeEnd="01_l66-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l67" NodeStart="01_l67-0" NodeEnd="01_l67-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l69" NodeStart="01_l69-0" NodeEnd="01_l69-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l70" NodeStart="01_l70-0" NodeEnd="01_l70-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l71" NodeStart="01_l71-0" NodeEnd="01_l71-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l132" NodeStart="01_l132-0" NodeEnd="01_l132-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l136" NodeStart="01_l136-0" NodeEnd="01_l136-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l137" NodeStart="01_l137-0" NodeEnd="01_l137-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l142" NodeStart="01_l142-0" NodeEnd="01_l142-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l143" NodeStart="01_l143-0" NodeEnd="01_l143-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l144" NodeStart="01_l144-0" NodeEnd="01_l144-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l133" NodeStart="01_l132-1" NodeEnd="01_l63-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l134" NodeStart="01_l132-1" NodeEnd="01_l66-0" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l135" NodeStart="01_l136-1" NodeEnd="01_l66-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l138" NodeStart="01_l137-1" NodeEnd="01_l67-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l139" NodeStart="01_l69-1" NodeEnd="01_l144-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l140" NodeStart="01_l70-1" NodeEnd="01_l143-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l141" NodeStart="01_l71-1" NodeEnd="01_l142-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l145" NodeStart="01_l144-1" NodeEnd="01_l145-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l146" NodeStart="01_l143-1" NodeEnd="01_l146-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l147" NodeStart="01_l142-1" NodeEnd="01_l147-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l148" NodeStart="01_l148-0" NodeEnd="01_l137-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l149" NodeStart="01_l149-0" NodeEnd="01_l136-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l150" NodeStart="01_l150-0" NodeEnd="01_l132-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l225" NodeStart="01_l150-0" NodeEnd="01_l225-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l151" NodeStart="01_l151-0" NodeEnd="01_l150-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l152" NodeStart="01_l152-0" NodeEnd="01_l149-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l153" NodeStart="01_l153-0" NodeEnd="01_l148-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l161" NodeStart="01_l145-1" NodeEnd="01_l161-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l162" NodeStart="01_l146-1" NodeEnd="01_l162-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l163" NodeStart="01_l147-1" NodeEnd="01_l163-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l154" NodeStart="01_l154-0" NodeEnd="01_l153-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l155" NodeStart="01_l155-0" NodeEnd="01_l152-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l156" NodeStart="01_l156-0" NodeEnd="01_l151-0" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l160" NodeStart="01_l161-1" NodeEnd="01_l160-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l164" NodeStart="01_l163-1" NodeEnd="01_l164-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l165" NodeStart="01_l162-1" NodeEnd="01_l165-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l169" NodeStart="01_l155-0" NodeEnd="01_l151-0" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l157" NodeStart="01_l157-0" NodeEnd="01_l156-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l158" NodeStart="cp1-lane0-1" NodeEnd="01_l155-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l159" NodeStart="01_l159-0" NodeEnd="01_l154-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l166" NodeStart="01_l160-1" NodeEnd="01_l166-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l167" NodeStart="01_l165-1" NodeEnd="01_l167-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l168" NodeStart="01_l164-1" NodeEnd="01_l168-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l226" NodeStart="01_l225-1" NodeEnd="01_l226-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l230" NodeStart="01_l225-1" NodeEnd="01_l230-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l227" NodeStart="01_l226-1" NodeEnd="01_l227-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l233" NodeStart="01_l233-0" NodeEnd="01_l227-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l231" NodeStart="01_l230-1" NodeEnd="01_l231-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l228" NodeStart="01_l227-1" NodeEnd="01_l228-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l232" NodeStart="01_l231-1" NodeEnd="01_l228-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="01_l229" NodeStart="01_l228-1" NodeEnd="01_l132-0" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="cp2-lane0" NodeStart="01_l67-1" NodeEnd="cp2-lane0-1" Type="URBAN">
+    <ots:Arc Direction="R" Radius="800.0 m" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="cp2-lane1" NodeStart="01_l66-1" NodeEnd="cp2-lane1-1" Type="URBAN">
+    <ots:Arc Direction="R" Radius="800.0 m" />
+    <ots:Arc Direction="R" Radius="796.25 m" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="cp3-lane0" NodeStart="cp2-lane0-1" NodeEnd="cp3-lane0-1" Type="URBAN">
+    <ots:Arc Direction="L" Radius="600.0 m" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="cp3-lane1" NodeStart="cp2-lane1-1" NodeEnd="cp3-lane1-1" Type="URBAN">
+    <ots:Arc Direction="L" Radius="600.0 m" />
+    <ots:Arc Direction="L" Radius="603.75 m" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l63" NodeStart="02_l63-0" NodeEnd="02_l63-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l66" NodeStart="02_l66-0" NodeEnd="02_l66-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l67" NodeStart="02_l67-0" NodeEnd="02_l67-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l69" NodeStart="02_l69-0" NodeEnd="02_l69-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l70" NodeStart="02_l70-0" NodeEnd="02_l70-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l71" NodeStart="02_l71-0" NodeEnd="02_l71-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l132" NodeStart="02_l132-0" NodeEnd="02_l132-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l136" NodeStart="02_l136-0" NodeEnd="02_l136-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l137" NodeStart="02_l137-0" NodeEnd="02_l137-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l142" NodeStart="02_l142-0" NodeEnd="02_l142-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l143" NodeStart="02_l143-0" NodeEnd="02_l143-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l144" NodeStart="02_l144-0" NodeEnd="02_l144-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l133" NodeStart="02_l132-1" NodeEnd="02_l63-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l134" NodeStart="02_l132-1" NodeEnd="02_l66-0" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l135" NodeStart="02_l136-1" NodeEnd="02_l66-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l138" NodeStart="02_l137-1" NodeEnd="02_l67-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l139" NodeStart="02_l69-1" NodeEnd="02_l144-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l140" NodeStart="02_l70-1" NodeEnd="02_l143-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l141" NodeStart="02_l71-1" NodeEnd="02_l142-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l145" NodeStart="02_l144-1" NodeEnd="02_l145-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l146" NodeStart="02_l143-1" NodeEnd="02_l146-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l147" NodeStart="02_l142-1" NodeEnd="02_l147-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l148" NodeStart="02_l148-0" NodeEnd="02_l137-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l149" NodeStart="02_l149-0" NodeEnd="02_l136-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l150" NodeStart="02_l150-0" NodeEnd="02_l132-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l170" NodeStart="02_l150-0" NodeEnd="02_l170-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l171" NodeStart="02_l171-0" NodeEnd="02_l132-0" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l152" NodeStart="02_l152-0" NodeEnd="02_l149-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l153" NodeStart="02_l153-0" NodeEnd="02_l148-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l161" NodeStart="02_l145-1" NodeEnd="02_l161-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l162" NodeStart="02_l146-1" NodeEnd="02_l162-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l163" NodeStart="02_l147-1" NodeEnd="02_l163-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l151" NodeStart="02_l151-0" NodeEnd="02_l150-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l154" NodeStart="02_l154-0" NodeEnd="02_l153-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l156" NodeStart="02_l156-0" NodeEnd="02_l151-0" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l160" NodeStart="02_l161-1" NodeEnd="02_l160-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l164" NodeStart="02_l163-1" NodeEnd="02_l164-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l165" NodeStart="02_l162-1" NodeEnd="02_l165-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l169" NodeStart="02_l169-0" NodeEnd="02_l151-0" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l155" NodeStart="02_l169-0" NodeEnd="02_l152-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l157" NodeStart="02_l157-0" NodeEnd="02_l156-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l159" NodeStart="cp3-lane0-1" NodeEnd="02_l154-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l166" NodeStart="02_l160-1" NodeEnd="02_l166-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l167" NodeStart="02_l165-1" NodeEnd="02_l167-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l168" NodeStart="02_l164-1" NodeEnd="02_l168-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l158" NodeStart="cp3-lane1-1" NodeEnd="02_l169-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l172" NodeStart="02_l170-1" NodeEnd="02_l172-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l173" NodeStart="02_l173-0" NodeEnd="02_l171-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l181" NodeStart="02_l181-0" NodeEnd="02_l173-0" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l213" NodeStart="02_l213-0" NodeEnd="02_l173-0" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l212" NodeStart="02_l172-1" NodeEnd="02_l212-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l195" NodeStart="02_l172-1" NodeEnd="02_l195-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l221" NodeStart="02_l221-0" NodeEnd="02_l195-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l216" NodeStart="02_l216-0" NodeEnd="02_l213-0" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l217" NodeStart="02_l217-0" NodeEnd="02_l217-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l218" NodeStart="02_l217-1" NodeEnd="02_l218-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l224" NodeStart="02_l212-1" NodeEnd="02_l218-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l219" NodeStart="02_l218-1" NodeEnd="02_l219-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l220" NodeStart="02_l220-0" NodeEnd="02_l216-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l222" NodeStart="02_l181-0" NodeEnd="02_l222-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l223" NodeStart="02_l222-1" NodeEnd="02_l221-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l184" NodeStart="02_l184-0" NodeEnd="02_l184-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l185" NodeStart="02_l185-0" NodeEnd="02_l185-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l186" NodeStart="02_l185-1" NodeEnd="02_l186-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l187" NodeStart="02_l187-0" NodeEnd="02_l184-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l188" NodeStart="02_l188-0" NodeEnd="02_l188-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l189" NodeStart="02_l189-0" NodeEnd="02_l189-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l190" NodeStart="02_l189-1" NodeEnd="02_l190-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l191" NodeStart="02_l191-0" NodeEnd="02_l188-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l196" NodeStart="02_l195-1" NodeEnd="02_l196-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l197" NodeStart="02_l197-0" NodeEnd="02_l220-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l200" NodeStart="02_l200-0" NodeEnd="02_l217-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l202" NodeStart="02_l184-1" NodeEnd="02_l202-1" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l205" NodeStart="02_l205-0" NodeEnd="02_l185-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l203" NodeStart="02_l202-1" NodeEnd="02_l181-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l204" NodeStart="02_l219-1" NodeEnd="02_l205-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l206" NodeStart="02_l188-1" NodeEnd="02_l206-1" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l207" NodeStart="02_l207-0" NodeEnd="02_l189-0" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l208" NodeStart="02_l206-1" NodeEnd="02_l197-0" Type="URBAN">
+    <ots:Bezier Shape="0.66" Weighted="false" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l209" NodeStart="02_l206-1" NodeEnd="02_l200-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="02_l210" NodeStart="02_l196-1" NodeEnd="02_l207-0" Type="URBAN">
+    <ots:Straight />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="cp4-lane0" NodeStart="02_l67-1" NodeEnd="cp4-lane0-1" Type="URBAN">
+    <ots:Arc Direction="L" Radius="1000.0 m" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+  <ots:Link Id="cp4-lane1" NodeStart="02_l66-1" NodeEnd="cp4-lane1-1" Type="URBAN">
+    <ots:Arc Direction="L" Radius="1000.0 m" />
+    <ots:Arc Direction="L" Radius="1003.7499 m" />
+    <ots:DefinedLayout>RIGHT</ots:DefinedLayout>
+  </ots:Link>
+</ots:Network>
