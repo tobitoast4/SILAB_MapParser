@@ -100,16 +100,18 @@ class Parser:
                             except: pass
                         self.elements.append({
                             "type": element_split[0],
-                            "id": element_split[1],
+                            "id": f"{AED_ID}_{element_split[1]}",
                             "parent": last_lane,
                             "values": values_dict
                         })
                 self.get_lane_elements(element, last_lane)
         return self.elements
 
+AED_ID = "02"  # when using multiple AEDs in one map, these should all be different
+FILE_NAME = "MotorwayExit_7722_Area2"
 
 if __name__ == "__main__":
-    with open('./parser/res/MotorwayExit_7722_Area2.cfg', 'r') as f:
+    with open(f'./parser/res//cfg/{FILE_NAME}.cfg', 'r') as f:
         raw_text = f.read()
 
     parser = Parser()
@@ -117,7 +119,7 @@ if __name__ == "__main__":
     nested_lists = parser.parse_to_nested_lists(tokens)
     elements = parser.get_lane_elements(nested_lists)
 
-    with open("./parser/MotorwayExit_7722_Area2.json", "w") as json_file:
+    with open(f"./parser/res/json/{FILE_NAME}.json", "w") as json_file:
         json.dump({
             "type": "Area2", 
             "id": "aed1",
