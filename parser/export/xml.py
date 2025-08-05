@@ -77,9 +77,9 @@ class XmlWriter:
         else:
             return None
 
-    def write(self, to_file=False):
+    def write(self, to_file_path=None):
         ET.indent(self.tree, space="  ")  # 2-space indentation
-        if to_file:
-            self.tree.write("output.xml", encoding="utf-8", xml_declaration=False)
+        if to_file_path:
+            self.tree.write(to_file_path, encoding="utf-8", xml_declaration=False)
         else:
             ET.dump(self.tree)

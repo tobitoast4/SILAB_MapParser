@@ -10,8 +10,9 @@ import draw.utils
 import export.utils
 import export.xml
 
+FILE_NAME = "Scenario01"
 
-with open('parser/res/Scenario01.json', 'r') as f:
+with open(f'parser/res/json/{FILE_NAME}.json', 'r') as f:
     file_content = f.read()
     map_content = json.loads(file_content)
 
@@ -210,7 +211,7 @@ def export_map(event):
             xml_writer.link_type_straight(link)
         if isinstance(obj, HermiteSplineAED):
             xml_writer.link_type_bezier(link)
-    xml_writer.write(to_file=True)
+    xml_writer.write(to_file_path=f"res/xml/{FILE_NAME}.xml")
 
 button_ax = plt.axes([0.85, 0.9, 0.1, 0.05])
 button = Button(button_ax, 'Export Map')

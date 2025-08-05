@@ -111,7 +111,7 @@ AED_ID = "02"  # when using multiple AEDs in one map, these should all be differ
 FILE_NAME = "MotorwayExit_7722_Area2"
 
 if __name__ == "__main__":
-    with open(f'./parser/res//cfg/{FILE_NAME}.cfg', 'r') as f:
+    with open(f'./parser/res/cfg/{FILE_NAME}.cfg', 'r') as f:
         raw_text = f.read()
 
     parser = Parser()
@@ -119,7 +119,7 @@ if __name__ == "__main__":
     nested_lists = parser.parse_to_nested_lists(tokens)
     elements = parser.get_lane_elements(nested_lists)
 
-    with open(f"./parser/res/json/{FILE_NAME}.json", "w") as json_file:
+    with open(f"./parser/res/json/parts/{FILE_NAME}.json", "w") as json_file:
         json.dump({
             "type": "Area2", 
             "id": "aed1",
