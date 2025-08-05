@@ -46,7 +46,11 @@ class XmlWriter:
         parent.insert(0, ET.Element("ots:Straight"))  # insert at the top
 
     def link_type_bezier(self, parent):
-        parent.insert(0, ET.Element("ots:Bezier"))  # insert at the top
+        element = ET.Element("ots:Bezier", {
+            "Shape": "0.66",
+            "Weighted": "false"
+        })
+        parent.insert(0, element)  # insert at the top
 
     def link_type_arc(self, parent, radius, direction):
         if direction == "right":
