@@ -11,7 +11,7 @@ import export.utils
 import export.xml
 
 
-with open('parser/MotorwayExit_7722_Area2.json', 'r') as f:
+with open('parser/res/Scenario01.json', 'r') as f:
     file_content = f.read()
     map_content = json.loads(file_content)
 
