@@ -13,7 +13,7 @@ SHOW_LABELS = True
 FONT_SIZE = 7
 
 EXCLUDE_FILE = "parser/res/json/exclude.json"
-LANES_TO_EXCLUDE = misc.read_json(EXCLUDE_FILE)
+LINES_TO_EXCLUDE = misc.read_json(EXCLUDE_FILE)
 
 
 class Area2:
@@ -74,7 +74,7 @@ class StraightAED:
 
     def calculate(self, ax=None):
         if ax:
-            if self.id in LANES_TO_EXCLUDE: 
+            if self.id in LINES_TO_EXCLUDE: 
                 linestyle = ":"
             else:
                 linestyle = "-"
@@ -159,7 +159,7 @@ class CircularArcAED:
 
         # Plot the arc
         if ax:
-            if self.id in LANES_TO_EXCLUDE: 
+            if self.id in LINES_TO_EXCLUDE: 
                 linestyle = ":"
             else:
                 linestyle = "-"
@@ -263,7 +263,7 @@ class HermiteSplineAED:
 
         # Plotting
         if ax:
-            if self.id in LANES_TO_EXCLUDE: 
+            if self.id in LINES_TO_EXCLUDE: 
                 linestyle = ":"
             else:
                 linestyle = "-"

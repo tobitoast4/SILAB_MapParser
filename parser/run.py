@@ -16,7 +16,7 @@ FILE_NAME = "Scenario01"
 
 # the following lanes (and its points!!!) will be excluded from XML export
 EXCLUDE_FILE = "parser/res/json/exclude.json"
-LANES_TO_EXCLUDE = misc.read_json(EXCLUDE_FILE)
+LINES_TO_EXCLUDE = misc.read_json(EXCLUDE_FILE)
 
 with open(f'parser/res/json/{FILE_NAME}.json', 'r') as f:
     file_content = f.read()

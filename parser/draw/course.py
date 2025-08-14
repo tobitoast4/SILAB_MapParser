@@ -14,7 +14,7 @@ SHOW_LABELS = True
 FONT_SIZE = 7
 
 EXCLUDE_FILE = "parser/res/json/exclude.json"
-LANES_TO_EXCLUDE = misc.read_json(EXCLUDE_FILE)
+LINES_TO_EXCLUDE = misc.read_json(EXCLUDE_FILE)
 
 # Lane#0 will be at 0, LANE_POSITIONS[0], Lane#1 will be LANE_POSITIONS[1] meters from Lane#0, 
 # Lane#2 will be LANE_POSITIONS[2] meters from Lane#0, ...
@@ -124,7 +124,7 @@ class StraightCourse:
                 self.add_or_update_lane(lane)
                 line, = ax.plot([x0, x1], [y0, y1], color='green', picker=2)
                 line.parent = lane
-                if lane_id in LANES_TO_EXCLUDE: 
+                if lane_id in LINES_TO_EXCLUDE: 
                     linestyle = ":"
                 else:
                     linestyle = "-"
@@ -176,7 +176,7 @@ class CurveCourse:
     def get_points(self):
         pts = []
         for lane in self.lanes:
-            if lane.lane_id in LANES_TO_EXCLUDE:
+            if lane.lane_id in LINES_TO_EXCLUDE:
                 continue
             pts.append(export.utils.Point(lane.x0, lane.y0, lane.angle0, lane, 0))
             pts.append(export.utils.Point(lane.x1, lane.y1, lane.angle1, lane, 1))
@@ -275,7 +275,7 @@ class CurveCourse:
                                         arc_y[-1], self.angle0, self.angle1, current_radius, self)
                 self.add_or_update_lane(lane)
                 ax.plot(cx, cy, marker='o', color='red', markersize=1)
-                if lane_id in LANES_TO_EXCLUDE: 
+                if lane_id in LINES_TO_EXCLUDE: 
                     linestyle = ":"
                 else:
                     linestyle = "-"
