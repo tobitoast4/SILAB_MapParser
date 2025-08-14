@@ -188,6 +188,8 @@ def export_map(event):
             continue  # these might be to complicated, esp. in roundabouts (TODO: Implement solution for this)
         for pt in obj.get_points():
             added_point = xml_writer.find_point(pt.x, pt.y)
+            if pt.id[:-2] in LINES_TO_EXCLUDE:
+                continue
             if added_point == None:
                 xml_writer.add_point(pt)
         
@@ -197,6 +199,8 @@ def export_map(event):
             continue  # these might be to complicated, esp. in roundabouts (TODO: Implement solution for this)
         if isinstance(obj, StraightCourse) or isinstance(obj, CurveCourse):
             for lane in obj.lanes:
+                if lane.id in LINES_TO_EXCLUDE:
+                    continue
                 p0 = xml_writer.find_point(lane.x0, lane.y0)
                 p1 = xml_writer.find_point(lane.x1, lane.y1)
                 link = xml_writer.add_link(lane.id, p0, p1)
@@ -205,6 +209,8 @@ def export_map(event):
                 if isinstance(obj, CurveCourse):
                     xml_writer.link_type_arc(link, lane.radius, obj.direction)
         else:
+            if obj.id in LINES_TO_EXCLUDE:
+                continue
             p0 = xml_writer.find_point(obj.x0, obj.y0)
             p1 = xml_writer.find_point(obj.x1, obj.y1)
             link = xml_writer.add_link(obj.id, p0, p1)
@@ -245,7 +251,7 @@ if SHOW_LEGEND:
 def on_click_line(event):
     line = event.artist
     if line.get_visible():
-        draw.utils.blink_line(fig, line)
+        draw.utils.blink_line(fig, line, blinks=4)
         # YOu may use the following lines for debugging
         # print(f'Line clicked at: {event.mouseevent.xdata:.2f}, {event.mouseevent.ydata:.2f}')
         # print(f"    {type(line.parent).__name__}: {line.parent.id}")
@@ -255,6 +261,7 @@ def on_click_line(event):
         # print(f"    angle1={round(float(line.parent.angle1), 4)}")
         # print()
         excludes = misc.read_json(EXCLUDE_FILE)
+        excludes = list(set(excludes))  # remove duplicates
         excludes.append(line.parent.id)
         misc.write_json(EXCLUDE_FILE, excludes)
         
