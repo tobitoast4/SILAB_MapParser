@@ -9,8 +9,14 @@ from parse import *
 import draw.utils
 import export.utils
 import export.xml
+import misc
 
+SHOW_LEGEND = False
 FILE_NAME = "Scenario01"
+
+# the following lanes (and its points!!!) will be excluded from XML export
+EXCLUDE_FILE = "parser/res/json/exclude.json"
+LANES_TO_EXCLUDE = misc.read_json(EXCLUDE_FILE)
 
 with open(f'parser/res/json/{FILE_NAME}.json', 'r') as f:
     file_content = f.read()
@@ -229,9 +235,10 @@ def toggle_visibility(label):
     plt.draw()
 
 # Make lines dynamically hidden / visible
-check_ax = plt.axes([0.05, 0.2, 0.2, 0.65])
-check = CheckButtons(check_ax, names, [True for _ in range(len(names))])
-check.on_clicked(toggle_visibility)
+if SHOW_LEGEND:
+    check_ax = plt.axes([0.05, 0.2, 0.2, 0.65])
+    check = CheckButtons(check_ax, names, [True for _ in range(len(names))])
+    check.on_clicked(toggle_visibility)
 
 
 # Make lines clickable
@@ -239,13 +246,18 @@ def on_click_line(event):
     line = event.artist
     if line.get_visible():
         draw.utils.blink_line(fig, line)
-        print(f'Line clicked at: {event.mouseevent.xdata:.2f}, {event.mouseevent.ydata:.2f}')
-        print(f"    {type(line.parent).__name__}: {line.parent.id}")
-        print(f"    x0={round(float(line.parent.x0), 4)}; y0={round(float(line.parent.y0), 4)}")
-        print(f"    x1={round(float(line.parent.x1), 4)}; y1={round(float(line.parent.y1), 4)}")
-        print(f"    angle0={round(float(line.parent.angle0), 4)}")
-        print(f"    angle1={round(float(line.parent.angle1), 4)}")
-        print()
+        # YOu may use the following lines for debugging
+        # print(f'Line clicked at: {event.mouseevent.xdata:.2f}, {event.mouseevent.ydata:.2f}')
+        # print(f"    {type(line.parent).__name__}: {line.parent.id}")
+        # print(f"    x0={round(float(line.parent.x0), 4)}; y0={round(float(line.parent.y0), 4)}")
+        # print(f"    x1={round(float(line.parent.x1), 4)}; y1={round(float(line.parent.y1), 4)}")
+        # print(f"    angle0={round(float(line.parent.angle0), 4)}")
+        # print(f"    angle1={round(float(line.parent.angle1), 4)}")
+        # print()
+        excludes = misc.read_json(EXCLUDE_FILE)
+        excludes.append(line.parent.id)
+        misc.write_json(EXCLUDE_FILE, excludes)
+        
 
 fig.canvas.mpl_connect('pick_event', on_click_line)
 

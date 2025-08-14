@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import export.utils
+import misc
 
 try:
     from draw import utils
@@ -11,6 +12,8 @@ NUM_POINTS = 100
 SHOW_LABELS = True
 FONT_SIZE = 7
 
+EXCLUDE_FILE = "parser/res/json/exclude.json"
+LANES_TO_EXCLUDE = misc.read_json(EXCLUDE_FILE)
 
 
 class Area2:
@@ -71,7 +74,11 @@ class StraightAED:
 
     def calculate(self, ax=None):
         if ax:
-            line, = ax.plot([self.x0, self.x1], [self.y0, self.y1], color='blue', picker=2)
+            if self.id in LANES_TO_EXCLUDE: 
+                linestyle = ":"
+            else:
+                linestyle = "-"
+            line, = ax.plot([self.x0, self.x1], [self.y0, self.y1], color='blue', picker=2, linestyle=linestyle)
             utils.plot_oriented_triangle((self.x1, self.y1), self.angle1, "blue", ax=ax)
             line.parent = self
             
@@ -152,7 +159,11 @@ class CircularArcAED:
 
         # Plot the arc
         if ax:
-            line, = ax.plot(arc_x, arc_y, 'b-', picker=2)
+            if self.id in LANES_TO_EXCLUDE: 
+                linestyle = ":"
+            else:
+                linestyle = "-"
+            line, = ax.plot(arc_x, arc_y, 'b-', picker=2, linestyle=linestyle)
             utils.plot_oriented_triangle((arc_x[-1], arc_y[-1]), self.angle1+90, "blue", ax=ax)
             line.parent = self
             if SHOW_LABELS:
@@ -252,7 +263,11 @@ class HermiteSplineAED:
 
         # Plotting
         if ax:
-            line, = ax.plot(curve[:, 0], curve[:, 1], color='purple', picker=2)
+            if self.id in LANES_TO_EXCLUDE: 
+                linestyle = ":"
+            else:
+                linestyle = "-"
+            line, = ax.plot(curve[:, 0], curve[:, 1], color='purple', picker=2, linestyle=linestyle)
             utils.plot_oriented_triangle((self.x1, self.y1), self.angle1, "purple", ax=ax)
             line.parent = self
             if SHOW_LABELS:
