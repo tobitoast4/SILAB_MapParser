@@ -14,8 +14,8 @@ FONT_SIZE = 7
 
 # Lane#0 will be at 0, LANE_POSITIONS[0], Lane#1 will be LANE_POSITIONS[1] meters from Lane#0, 
 # Lane#2 will be LANE_POSITIONS[2] meters from Lane#0, ...
-LANE_POSITIONS = [0, 3.75] 
-LANE_IDS_TO_EXPORT = [0, 1]  # Only export Lane#0 and Lane#1, not Lane#2, Lane#3, etc.
+LANE_POSITIONS = [0] 
+LANE_IDS_TO_EXPORT = [0]  # Only export Lane#0 and Lane#1, not Lane#2, Lane#3, etc.
 
 
 
