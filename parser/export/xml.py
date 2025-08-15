@@ -27,7 +27,7 @@ class XmlWriter:
         return node
 
     def add_link(self, link_id, point0: export.utils.Point, point1: export.utils.Point, lane_layout="RIGHT"):
-        """ <ots:Link Id="EEP" NodeEnd="EP" NodeStart="E" OffsetEnd="-5.25m" OffsetStart="-5.25m" Type="URBAN">
+        """ <ots:Link Id="EEP" NodeEnd="EP" NodeStart="E" OffsetEnd="-5.25m" OffsetStart="-5.25m" Type="HIGHWAY">
                 <ots:DefinedLayout>1RIGHT</ots:DefinedLayout>
             </ots:Link>
         """
@@ -35,7 +35,7 @@ class XmlWriter:
             "Id": link_id,
             "NodeStart": point1.id if self.inverse else point0.id,
             "NodeEnd": point0.id if self.inverse else point1.id,
-            "Type": "URBAN"
+            "Type": "HIGHWAY"
         })
         # Add child elements
         def_layout = ET.SubElement(link, "ots:DefinedLayout")
