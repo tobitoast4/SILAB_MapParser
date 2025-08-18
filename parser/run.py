@@ -64,6 +64,16 @@ for element in map_content["elements"]:
                 objects.append(curve)
                 course.parts.append(curve)
 
+            elif c_type == "Bezier":
+                x1 = road[2]
+                y1 = road[3]
+                angle1 = road[4]  # expects angle in degrees
+                bezier = BezierCourse(x0=x, y0=y, angle0=angle, x1=x1, y1=y1, angle1=angle1, 
+                                      id=c_id, parent=course)
+                x, y, angle = bezier.calculate()
+                objects.append(bezier)
+                course.parts.append(bezier)
+
             else:
                 raise ValueError("Road type not valid")
     elif e_type == "Area2":

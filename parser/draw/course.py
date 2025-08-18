@@ -290,6 +290,116 @@ class CurveCourse:
             return self.x1, self.y1, self.angle1
 
 
+class BezierCourse:
+    def __init__(self, x0, y0, angle0, x1, y1, angle1, id="", parent=None):
+        self.id = id 
+        self.parent = parent
+        self.connection0 = None
+        self.connection1 = None
+        self.x0 = x0
+        self.y0 = y0
+        endpoint_offset = utils.vector_from_angle(utils.convert_angle(angle0, to="radians"), distance=x1)
+        direction = utils.vector_from_angle(utils.convert_angle(angle0, to="radians"))
+        endpoint_offset = utils.translate_perpendicular(endpoint_offset, direction, y1)
+        self.x1 = x0 + endpoint_offset[0]
+        self.y1 = y0 + endpoint_offset[1]
+        self.angle0 = angle0
+        self.angle1 = angle0 + angle1
+
+    def get_points(self):
+        pts = [export.utils.Point(self.x0, self.y0, self.angle0, self, 0),
+               export.utils.Point(self.x1, self.y1, self.angle1, self, 1)]
+        return pts
+
+    def translate(self, offset):
+        """Translate all points of the Bezier by a given offset.
+
+        Parameters:
+            offset: tuple (dx, dy)
+        """
+        self.x0, self.y0 = utils.translate((self.x0, self.y0), offset)
+        self.x1, self.y1 = utils.translate((self.x1, self.y1), offset)
+        return self
+
+    def rotate(self, center, angle_deg):
+        """Rotate all points of the Bezier around a given center by given angle.
+
+        Parameters:
+            center: tuple (x, y)
+            angle_deg: angle in degrees
+        """
+        self.x0, self.y0 = utils.rotate_around((self.x0, self.y0), center, angle_deg)
+        self.x1, self.y1 = utils.rotate_around((self.x1, self.y1), center, angle_deg)
+        self.angle0 += angle_deg
+        self.angle1 += angle_deg
+        return self
+    
+    def mirror(self):
+        self.y0 = -self.y0
+        self.y1 = -self.y1
+        self.angle0 = -self.angle0
+        self.angle1 = -self.angle1
+        return self
+
+    def calculate(self, ax=None):
+        tangent_scale=1  # we assume this to be 1 (TODO: maybe clarify if this is correct)
+        # Convert angles to radians if not already
+        theta0 = utils.convert_angle(self.angle0, to="radians")
+        theta1 = utils.convert_angle(self.angle1, to="radians")
+
+        # Compute distance between points
+        dx = self.x1 - self.x0
+        dy = self.y1 - self.y0
+        distance = np.hypot(dx, dy)
+        tangent_length = tangent_scale * distance
+
+        # Compute tangent vectors from angles and scaled magnitude
+        T0 = tangent_length * np.array([np.cos(theta0), np.sin(theta0)])
+        T1 = tangent_length * np.array([np.cos(theta1), np.sin(theta1)])
+
+        # Hermite basis functions
+        def hermite(t):
+            h00 = 2*t**3 - 3*t**2 + 1
+            h10 = t**3 - 2*t**2 + t
+            h01 = -2*t**3 + 3*t**2
+            h11 = t**3 - t**2
+            return h00, h10, h01, h11
+
+        # Generate the spline points
+        t_values = np.linspace(0, 1, NUM_POINTS)
+        curve = []
+        for t in t_values:
+            h00, h10, h01, h11 = hermite(t)
+            point = (h00 * np.array([self.x0, self.y0]) +
+                    h10 * T0 +
+                    h01 * np.array([self.x1, self.y1]) +
+                    h11 * T1)
+            curve.append(point)
+
+        curve = np.array(curve)
+
+        # Plotting
+        # TODO: Impement LANE_POSITIONS 
+        if ax:
+            if self.id in LINES_TO_EXCLUDE: 
+                linestyle = ":"
+            else:
+                linestyle = "-"
+            line, = ax.plot(curve[:, 0], curve[:, 1], color='black', picker=2, linestyle=linestyle)
+            utils.plot_oriented_triangle((self.x1, self.y1), self.angle1, "purple", ax=ax)
+            line.parent = self
+            if SHOW_LABELS:
+                ax.text(curve[len(curve)//2][0], curve[len(curve)//2][1], self.id, color='purple', va='center', fontsize=FONT_SIZE)
+            # ax.plot([x0, x1], [y0, y1], 'ro--', label='Endpoints')
+            # ax.quiver(x0, y0, T0[0], T0[1], angles='xy', scale_units='xy', scale=1, color='green')  # label='Start Tangent'
+            # ax.quiver(x1, y1, T1[0], T1[1], angles='xy', scale_units='xy', scale=1, color='purple') # label='End Tangent'
+            return line
+        else:
+            return self.x1, self.y1, self.angle1
+
+
+
+
 if __name__ == "__main__":
     roads = [
         # id   # type  # parameters from silab
