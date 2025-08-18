@@ -233,6 +233,8 @@ def export_map(event):
             p1 = xml_writer.find_point(obj.x1, obj.y1)
             link = xml_writer.add_link(obj.id, p0, p1)
 
+        if isinstance(obj, BezierCourse):  # Currently this has no Lanes (maybe we want to remove them anyway)
+            xml_writer.link_type_bezier(link)
         if isinstance(obj, StraightCourse):
             xml_writer.link_type_straight(link)
         if isinstance(obj, CurveCourse):
