@@ -9930,15 +9930,89 @@
         }
     ],
     "CustomConnections": [
-        ["cp1.End", "01_l159.Begin"],
-        ["01_l67.End", "cp2.Begin"],
-        ["cp3.End", "02_l159.Begin"],
-        ["02_l67.End", "cp4.Begin"],
-        ["cp4.End", "03_l159.Begin"],
-        ["03_l67.End", "cp5.Begin"],
-        ["cp5.End", "04_l159.Begin"],
-        ["04_l67.End", "cp6.Begin"],
-        ["cp6.End", "05_l159.Begin"],
-        ["05_l67.End", "cp7.Begin"]
+        [{
+
+
+          "angle" : "cp1.End",
+          "position": ["cp1.End"]
+          },
+          {
+          "angle" : "01_l159.Begin",
+          "position": ["01_l159.Begin", "01_l166.End"]
+          }],[{
+
+
+          "angle" : "01_l67.End",
+          "position": ["01_l67.End","01_l69.Begin"]
+          },
+          {
+          "angle" : "cp2.Begin",
+          "position": ["cp2.Begin"]
+          }],[{
+
+
+          "angle" : "cp3.End",
+          "position": ["cp3.End"]
+          },{
+          "angle" : "02_l159.Begin",
+          "position": ["02_l159.Begin", "02_l166.End"]
+          }],[{
+
+
+          "angle" : "02_l67.End",
+          "position": ["02_l67.End", "02_l69.Begin"]
+          },{
+          "angle" : "cp4.Begin",
+          "position": ["cp4.Begin"]
+          }],[{
+
+
+          "angle" : "cp4.End",
+          "position": ["cp4.End"]
+          },{
+          "angle" : "03_l159.Begin",
+          "position": ["03_l159.Begin", "03_l166.End"]
+          }],[{
+
+
+          "angle" : "03_l67.End",
+          "position": ["03_l67.End", "03_l69.Begin"]
+          },{
+          "angle" : "cp5.Begin",
+          "position": ["cp5.Begin"]
+          }],[{
+
+
+          "angle" : "cp5.End",
+          "position": ["cp5.End"]
+          },{
+          "angle" : "04_l159.Begin",
+          "position": ["04_l159.Begin", "04_l166.End"]
+          }],[{
+
+
+          "angle" : "04_l67.End",
+          "position": ["04_l67.End", "04_l69.Begin"]
+          },{
+          "angle" : "cp6.Begin",
+          "position": ["cp6.Begin"]
+          }],[{
+
+          "angle" : "cp6.End",
+          "position": ["cp6.End"]
+          },{
+          "angle" : "05_l159.Begin",
+          "position": ["05_l159.Begin", "05_l166.End"]
+          }],[{
+
+
+          "angle" : "05_l67.End",
+          "position": ["05_l67.End", "05_l69.Begin"]
+          },{
+          "angle" : "cp7.Begin",
+          "position": ["cp7.Begin"]
+          }]
+
+
     ]
 }
