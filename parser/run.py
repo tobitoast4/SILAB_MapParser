@@ -15,7 +15,7 @@ SHOW_LEGEND = False
 FILE_NAME = "Scenario01"
 
 # Enter the inverted values of a Node to ensure this one is (0, 0, 0 deg(E)) 
-GLOBAL_TRANSLATION = (-289.9635-8.9997+0.1891+0.0163, 26.7667-0.0666+2.21-0.0013-0.0001)
+GLOBAL_TRANSLATION = [-298.7578, 32.2837]
 GLOBAL_ROTATION = 0.4234
 
 # the following lanes (and its points!!!) will be excluded from XML export
