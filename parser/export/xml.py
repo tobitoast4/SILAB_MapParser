@@ -47,7 +47,7 @@ class XmlWriter:
 
     def link_type_bezier(self, parent):
         element = ET.Element("ots:Bezier", {
-            "Shape": "0.66",
+            "Shape": "0.666666666666666666",
             "Weighted": "false"
         })
         parent.insert(0, element)  # insert at the top

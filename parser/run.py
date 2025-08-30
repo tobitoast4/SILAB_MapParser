@@ -12,14 +12,14 @@ import export.xml
 import misc
 
 SHOW_LEGEND = False
-FILE_NAME = "Scenario01"
+FILE_NAME = "Scenario02"  # without .json ending
 
 # Enter the inverted values of a Node to ensure this one is (0, 0, 0 deg(E)) 
 GLOBAL_TRANSLATION = [-298.7578, 32.2837]
 GLOBAL_ROTATION = 0.4234
 
 # the following lanes (and its points!!!) will be excluded from XML export
-EXCLUDE_FILE = "parser/res/json/exclude.json"
+EXCLUDE_FILE = "parser/res/json/exclude01.json"
 LINES_TO_EXCLUDE = misc.read_json(EXCLUDE_FILE)
 
 with open(f'parser/res/json/{FILE_NAME}.json', 'r') as f:
@@ -333,6 +333,7 @@ def on_click_line(event):
         print(f"    angle0={round(float(line.parent.angle0), 4)}")
         print(f"    angle1={round(float(line.parent.angle1), 4)}")
         print()
+
         # excludes = misc.read_json(EXCLUDE_FILE)
         # excludes = list(set(excludes))  # remove duplicates
         # excludes.append(line.parent.id)
