@@ -15,7 +15,7 @@ SHOW_LEGEND = False
 FILE_NAME = "Scenario01"
 
 # Enter the inverted values of a Node to ensure this one is (0, 0, 0 deg(E)) 
-GLOBAL_TRANSLATION = (-289.9635-8.9997+0.1891+0.0163, 26.7667-0.0666+2.21-0.0013-0.0001)
+GLOBAL_TRANSLATION = [-298.7578, 32.2837]
 GLOBAL_ROTATION = 0.4234
 
 # the following lanes (and its points!!!) will be excluded from XML export
@@ -28,7 +28,7 @@ with open(f'parser/res/json/{FILE_NAME}.json', 'r') as f:
 
 
 objects = []  # contains all instances of StraightCourse, CurveCourse, StraightAED, HermiteSplineAED, CircularArcAED
-              # note that StraightCourse and CurveCourse themselves again can contain multiple lanes 
+              # note that StraightCourse and CurveCourse themselves again can contain multiple lanes
 
 # initial settings for Course
 angle = 0
@@ -49,7 +49,7 @@ for element in map_content["elements"]:
 
             if c_type == "Straight":
                 length = road[2]
-                straight = StraightCourse(length, x0=x, y0=y, angle=angle, 
+                straight = StraightCourse(length, x0=x, y0=y, angle=angle,
                                       id=c_id, parent=course)
                 x, y = straight.calculate()
                 objects.append(straight)
@@ -58,7 +58,7 @@ for element in map_content["elements"]:
             elif c_type == "Bend":
                 length = road[2]
                 radius = road[3]
-                curve = CurveCourse(length=length, radius=radius, x0=x, y0=y, angle0=angle, 
+                curve = CurveCourse(length=length, radius=radius, x0=x, y0=y, angle0=angle,
                                           id=c_id, parent=course)
                 x, y, angle = curve.calculate()
                 objects.append(curve)
@@ -68,7 +68,7 @@ for element in map_content["elements"]:
                 x1 = road[2]
                 y1 = road[3]
                 angle1 = road[4]  # expects angle in degrees
-                bezier = BezierCourse(x0=x, y0=y, angle0=angle, x1=x1, y1=y1, angle1=angle1, 
+                bezier = BezierCourse(x0=x, y0=y, angle0=angle, x1=x1, y1=y1, angle1=angle1,
                                       id=c_id, parent=course)
                 x, y, angle = bezier.calculate()
                 objects.append(bezier)
@@ -93,7 +93,7 @@ for element in map_content["elements"]:
                 line.calculate()
                 objects.append(line)
                 area.parts.append(line)
-        
+
             elif c_type == "Bezier":
                 x0 = v["x0"]; y0 = v["y0"]; x1 = v["x1"]; y1 = v["y1"]
                 angle0 = v["Angle0"]; angle1 = v["Angle1"]
@@ -117,10 +117,10 @@ for element in map_content["elements"]:
                 arc.calculate()
                 objects.append(arc)
                 area.parts.append(arc)
-                
+
             else:
                 raise ValueError("Road type not valid")
-    else: 
+    else:
         raise ValueError("Type not valid")
 
 for obj in objects:
@@ -150,34 +150,87 @@ def create_connection(objX, anchorX, objY, anchorY):
 #     create_connection(obj0, conn0_split[2], obj1, conn1_split[2])
 #     create_connection(obj1, conn1_split[2], obj0, conn1_split[2])
 
-    
+
 ## Transform elements  appling the CustomConnections
 # Order of CustomConnections should match order of how objects appear !!!  TODO: Change that
 if "CustomConnections" in map_content:
     for connection in map_content["CustomConnections"]:
-        conn0_split = connection[0].split(".")
-        conn1_split = connection[1].split(".")
-        conn0_id = conn0_split[0]
-        conn1_id = conn1_split[0]
-        obj0 = [obj for obj in objects if obj.id == conn0_id][0]
-        obj1 = [obj for obj in objects if obj.id == conn1_id][0]
-        create_connection(obj0, conn0_split[1], obj1, conn1_split[1])
-        create_connection(obj1, conn1_split[1], obj0, conn0_split[1])
+        # First, find the angles of the connection
+        # Note: connection is a list of two dictionaries [target, current], each containing an "angle" key
+        angle_t = connection[0]["angle"]
+        angle_c = connection[1]["angle"]
 
-        # Target point & angle (of obj0)
-        if conn0_split[1] == "Begin":
-            angle_t = obj0.angle0; x_t = obj0.x0; y_t = obj0.y0
+        angle_t_split = angle_t.split(".")
+        angle_c_split = angle_c.split(".")
+
+        angle_t_id = angle_t_split[0]
+        angle_c_id = angle_c_split[0]
+
+        obj_angle_t = [obj for obj in objects if obj.id == angle_t_id][0]
+        obj_angle_c = [obj for obj in objects if obj.id == angle_c_id][0]
+
+        if angle_t_split[1] == "Begin":
+            angle_t = obj_angle_t.angle0
         else:  # "End"
-            angle_t = obj0.angle1; x_t = obj0.x1; y_t = obj0.y1
-        # Current point & angle (of obj1)
-        if conn1_split[1] == "Begin":
-            angle_c = obj1.angle0; x_c = obj1.x0; y_c = obj1.y0
+            angle_t = obj_angle_t.angle1
+
+        if angle_c_split[1] == "Begin":
+            angle_c = obj_angle_c.angle0
         else:  # "End"
-            angle_c = obj1.angle1; x_c = obj1.x1; y_c = obj1.y1
+            angle_c = obj_angle_c.angle1
+
+        # Now, calculate the coordinate of connections (ports in SILAB)
+        # Note: position is an array of either one or two elements, in case of two, take the average of coordinates of both points, but the code does it as of right now different it copies the first if there is only one point
+        conn00 = connection[0]["position"][0]
+        conn01 = connection[0]["position"][1] if len(connection[0]["position"]) > 1 else connection[0]["position"][0]
+        conn10 = connection[1]["position"][0]
+        conn11 = connection[1]["position"][1] if len(connection[1]["position"]) > 1 else connection[1]["position"][0]
+
+        conn00_split = conn00.split(".")
+        conn01_split = conn01.split(".")
+        conn10_split = conn10.split(".")
+        conn11_split = conn11.split(".")
+
+        conn00_id = conn00_split[0]
+        conn01_id = conn01_split[0]
+        conn10_id = conn10_split[0]
+        conn11_id = conn11_split[0]
+
+        obj00 = [obj for obj in objects if obj.id == conn00_id][0]
+        obj01 = [obj for obj in objects if obj.id == conn01_id][0]
+        obj10 = [obj for obj in objects if obj.id == conn10_id][0]
+        obj11 = [obj for obj in objects if obj.id == conn11_id][0]
+
+        if conn00_split[1] == "Begin":
+            x00, y00 = obj00.x0, obj00.y0
+        else:  # "End"
+            x00, y00 = obj00.x1, obj00.y1
+
+        if conn01_split[1] == "Begin":
+            x01, y01 = obj01.x0, obj01.y0
+        else:  # "End"
+            x01, y01 = obj01.x1, obj01.y1
+
+        if conn10_split[1] == "Begin":
+            x10, y10 = obj10.x0, obj10.y0
+        else:  # "End"
+            x10, y10 = obj10.x1, obj10.y1
+
+        if conn11_split[1] == "Begin":
+            x11, y11 = obj11.x0, obj11.y0
+        else:  # "End"
+            x11, y11 = obj11.x1, obj11.y1
+
+        # calculate the average of the coordinates
+        x_t = (x00 + x01) / 2
+        y_t = (y00 + y01) / 2
+        x_c = (x10 + x11) / 2
+        y_c = (y10 + y11) / 2
+
         #Calculate difference
         offset = (x_t - x_c, y_t - y_c)
         angle_difference = angle_t - angle_c
-        for other_obj in obj1.parent.parts:
+        for other_obj in obj10.parent.parts:
             other_obj.translate(offset).rotate((x_t, y_t), angle_difference)
             other_obj.calculate()  # re-calculate attributes
 
@@ -190,10 +243,10 @@ if GLOBAL_TRANSLATION and GLOBAL_ROTATION:
 fig, ax = plt.subplots()
 names = []
 lines = []
-for obj in objects: 
+for obj in objects:
     lines.append(obj.calculate(ax=ax))
     names.append(f"{obj.id} {type(obj).__name__[:5]}")
-    
+
 
 
 ## Create button for export
@@ -210,7 +263,7 @@ def export_map(event):
                 continue
             if added_point == None:
                 xml_writer.add_point(pt)
-        
+
     ## Add all links
     for obj in objects:
         if isinstance(obj, CircularArcAED):
@@ -284,7 +337,7 @@ def on_click_line(event):
         # excludes = list(set(excludes))  # remove duplicates
         # excludes.append(line.parent.id)
         # misc.write_json(EXCLUDE_FILE, excludes)
-        
+
 
 fig.canvas.mpl_connect('pick_event', on_click_line)
 
