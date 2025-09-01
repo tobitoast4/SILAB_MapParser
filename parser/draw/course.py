@@ -13,7 +13,7 @@ NUM_POINTS = 100
 SHOW_LABELS = True
 FONT_SIZE = 7
 
-EXCLUDE_FILE = "parser/res/json/exclude01.json"
+EXCLUDE_FILE = "parser/res/json/exclude03.json"
 LINES_TO_EXCLUDE = misc.read_json(EXCLUDE_FILE)
 
 # Lane#0 will be at 0, LANE_POSITIONS[0], Lane#1 will be LANE_POSITIONS[1] meters from Lane#0, 

@@ -107,8 +107,8 @@ class Parser:
                 self.get_lane_elements(element, last_lane)
         return self.elements
 
-AED_ID = "05"  # when using multiple AEDs in one map, these should all be different
-FILE_NAME = "MotorwayStop_771_Area2"
+AED_ID = "03"  # when using multiple AEDs in one map, these should all be different
+FILE_NAME = "MotorwayWeavingSection_Area2"
 
 if __name__ == "__main__":
     with open(f'./parser/res/cfg/{FILE_NAME}.cfg', 'r') as f:

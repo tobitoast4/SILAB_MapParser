@@ -12,14 +12,14 @@ import export.xml
 import misc
 
 SHOW_LEGEND = False
-FILE_NAME = "Scenario01"  # without .json ending
+FILE_NAME = "Scenario03"  # without .json ending
 
 # Enter the inverted values of a Node to ensure this one is (0, 0, 0 deg(E)) 
 GLOBAL_TRANSLATION = [-298.7578, 32.2837]
 GLOBAL_ROTATION = 0.4234
 
 # the following lanes (and its points!!!) will be excluded from XML export
-EXCLUDE_FILE = "parser/res/json/exclude01.json"
+EXCLUDE_FILE = "parser/res/json/exclude03.json"
 LINES_TO_EXCLUDE = misc.read_json(EXCLUDE_FILE)
 
 with open(f'parser/res/json/{FILE_NAME}.json', 'r') as f:
@@ -326,18 +326,18 @@ def on_click_line(event):
     if line.get_visible():
         draw.utils.blink_line(fig, line, blinks=4)
         # YOu may use the following lines for debugging
-        print(f'Line clicked at: {event.mouseevent.xdata:.2f}, {event.mouseevent.ydata:.2f}')
-        print(f"    {type(line.parent).__name__}: {line.parent.id}")
-        print(f"    x0={round(float(line.parent.x0), 4)}; y0={round(float(line.parent.y0), 4)}")
-        print(f"    x1={round(float(line.parent.x1), 4)}; y1={round(float(line.parent.y1), 4)}")
-        print(f"    angle0={round(float(line.parent.angle0), 4)}")
-        print(f"    angle1={round(float(line.parent.angle1), 4)}")
-        print()
+        # print(f'Line clicked at: {event.mouseevent.xdata:.2f}, {event.mouseevent.ydata:.2f}')
+        # print(f"    {type(line.parent).__name__}: {line.parent.id}")
+        # print(f"    x0={round(float(line.parent.x0), 4)}; y0={round(float(line.parent.y0), 4)}")
+        # print(f"    x1={round(float(line.parent.x1), 4)}; y1={round(float(line.parent.y1), 4)}")
+        # print(f"    angle0={round(float(line.parent.angle0), 4)}")
+        # print(f"    angle1={round(float(line.parent.angle1), 4)}")
+        # print()
 
-        # excludes = misc.read_json(EXCLUDE_FILE)
-        # excludes = list(set(excludes))  # remove duplicates
-        # excludes.append(line.parent.id)
-        # misc.write_json(EXCLUDE_FILE, excludes)
+        excludes = misc.read_json(EXCLUDE_FILE)
+        excludes = list(set(excludes))  # remove duplicates
+        excludes.append(line.parent.id)
+        misc.write_json(EXCLUDE_FILE, excludes)
 
 
 fig.canvas.mpl_connect('pick_event', on_click_line)

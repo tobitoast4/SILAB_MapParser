@@ -12,7 +12,7 @@ NUM_POINTS = 100
 SHOW_LABELS = True
 FONT_SIZE = 7
 
-EXCLUDE_FILE = "parser/res/json/exclude01.json"
+EXCLUDE_FILE = "parser/res/json/exclude03.json"
 LINES_TO_EXCLUDE = misc.read_json(EXCLUDE_FILE)
 
 
