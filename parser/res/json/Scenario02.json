@@ -1365,7 +1365,7 @@
             "id": "MinimalCurve",
             "elements": [
                 ["cp1", "Bezier", 100, -1, 0.4234],
-                ["cp2", "Bezier", 1000, 1000, 90]
+                ["cp2", "Bezier", 707, 293, 45]
             ]
         },
         {
@@ -2566,7 +2566,7 @@
             "type": "Course",
             "id": "ScenarioStraight1",
             "elements": [
-                ["cp3", "Straight", 1200]
+                ["cp3", "Straight", 1800]
             ]
         },
         {
@@ -3497,7 +3497,7 @@
             "type": "Course",
             "id": "LongLeftCurve1",
             "elements": [
-                ["cp4", "Bezier", 1000, 1000, 90]
+                ["cp4", "Bezier", 707, 293, 45]
             ]
         },        
         {
@@ -4698,7 +4698,7 @@
             "type": "Course",
             "id": "ScenarioStraight2",
             "elements": [
-                ["cp5", "Straight", 1200]
+                ["cp5", "Straight", 1800]
             ]
         },
         {
@@ -5629,7 +5629,7 @@
             "type": "Course",
             "id": "LongLeftCurve2",
             "elements": [
-                ["cp6", "Bezier", 1000, 1000, 90]
+                ["cp6", "Bezier", 707, 293, 45]
             ]
         },
         {
@@ -6830,7 +6830,7 @@
             "type": "Course",
             "id": "ScenarioStraight3",
             "elements": [
-                ["cp7", "Straight", 1200]
+                ["cp7", "Straight", 1800]
             ]
         },
         {

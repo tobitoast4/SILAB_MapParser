@@ -12,7 +12,7 @@ import export.xml
 import misc
 
 SHOW_LEGEND = False
-FILE_NAME = "Scenario02"  # without .json ending
+FILE_NAME = "Scenario01"  # without .json ending
 
 # Enter the inverted values of a Node to ensure this one is (0, 0, 0 deg(E)) 
 GLOBAL_TRANSLATION = [-298.7578, 32.2837]

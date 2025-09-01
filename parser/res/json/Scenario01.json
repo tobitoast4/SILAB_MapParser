@@ -3497,7 +3497,7 @@
             "type": "Course",
             "id": "LongLeftCurve1",
             "elements": [
-                ["cp4", "Bezier", 1000, -1000, -90]
+                ["cp4", "Bezier", 707, -293, -45]
             ]
         },        
         {
@@ -5629,7 +5629,7 @@
             "type": "Course",
             "id": "LongLeftCurve2",
             "elements": [
-                ["cp6", "Bezier", 1000, -1000, -90]
+                ["cp6", "Bezier", 707, -293, -45]
             ]
         },
         {
