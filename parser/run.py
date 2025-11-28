@@ -12,14 +12,14 @@ import export.xml
 import misc
 
 SHOW_LEGEND = False
-FILE_NAME = "Scenario03"  # without .json ending
+FILE_NAME = "_demo"  # without .json ending
 
 # Enter the inverted values of a Node to ensure this one is (0, 0, 0 deg(E)) 
-GLOBAL_TRANSLATION = [-298.7578, 32.2837]
-GLOBAL_ROTATION = 0.4234
+GLOBAL_TRANSLATION = [100, 10]
+GLOBAL_ROTATION = 0
 
 # the following lanes (and its points!!!) will be excluded from XML export
-EXCLUDE_FILE = "parser/res/json/exclude03.json"
+EXCLUDE_FILE = "parser/res/json/_demo_exclude.json"
 LINES_TO_EXCLUDE = misc.read_json(EXCLUDE_FILE)
 
 with open(f'parser/res/json/{FILE_NAME}.json', 'r') as f:
@@ -234,10 +234,13 @@ if "CustomConnections" in map_content:
             other_obj.translate(offset).rotate((x_t, y_t), angle_difference)
             other_obj.calculate()  # re-calculate attributes
 
-if GLOBAL_TRANSLATION and GLOBAL_ROTATION:
+if GLOBAL_ROTATION:
+    for obj in objects:
+        obj.rotate((0, 0), GLOBAL_ROTATION)
+
+if GLOBAL_TRANSLATION:
     for obj in objects:
         obj.translate(GLOBAL_TRANSLATION)
-        obj.rotate((0, 0), GLOBAL_ROTATION)
 
 ## Visualize
 fig, ax = plt.subplots()
