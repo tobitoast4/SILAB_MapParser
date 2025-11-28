@@ -1,0 +1,62 @@
+{
+    "elements": [
+        {
+            "type": "Course",
+            "id": "START",
+            "elements": [
+                ["cp0", "Bezier", 70, -29, -45],
+                ["cp1", "Straight", 30]
+            ]
+        },
+        {
+            "type": "Area2",
+            "id": "aed1",
+            "elements": [
+                {
+                    "type": "Straight",
+                    "id": "P0_l69",
+                    "parent": "LaneCell lc1",
+                    "values": {
+                        "x0": 12.7316,
+                        "y0": 290.245,
+                        "x1": 12.7394,
+                        "y1": 255.243,
+                        "DistToRef0": 3.375,
+                        "DistToRef1": 3.375
+                    }
+                },
+                {
+                    "type": "Straight",
+                    "id": "P0_l67",
+                    "parent": "LaneCell lc1",
+                    "values": {
+                        "x0": 12.7394,
+                        "y0": 255.243,
+                        "x1": 12.7316,
+                        "y1": 290.245,
+                        "DistToRef0": 3.375,
+                        "DistToRef1": 3.375
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Course",
+            "id": "S_Curve",
+            "elements": [
+                ["cp3", "Bezier", 50, 20, 35],
+                ["cp4", "Bezier", 60, -20, -34.5766]
+            ]
+        }
+    ],
+    "CustomConnections": [
+        [
+            {"angle" : "cp1.End", "position": ["cp1.End"]},
+            {"angle" : "P0_l67.Begin", "position": ["P0_l69.End", "P0_l67.Begin"]}
+        ],
+        [
+            {"angle" : "P0_l67.End", "position": ["P0_l69.Begin", "P0_l67.End"]},
+            {"angle" : "cp3.Begin", "position": ["cp3.Begin"]}
+        ]
+    ]
+}
